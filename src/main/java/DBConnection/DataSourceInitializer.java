@@ -11,7 +11,7 @@ import javax.sql.DataSource;
 import com.mysql.cj.jdbc.Driver;
 
 @WebListener
-public class DataSourceInizializer implements ServletContextListener {
+public class DataSourceInitializer implements ServletContextListener {
 	
 	@Override
 	public void contextInitialized(ServletContextEvent sce) {

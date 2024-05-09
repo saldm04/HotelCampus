@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.sql.DataSource;
@@ -20,7 +21,7 @@ public class UtenteDAO implements BeanDAO<Utente, String> {
 	}
 	
 	@Override
-	public void doSave(Utente data) throws SQLException {
+	public synchronized void doSave(Utente data) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
@@ -53,7 +54,7 @@ public class UtenteDAO implements BeanDAO<Utente, String> {
 	}
 	
 	@Override
-	public boolean doDelete(String code) throws SQLException {
+	public synchronized boolean doDelete(String code) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
@@ -80,7 +81,7 @@ public class UtenteDAO implements BeanDAO<Utente, String> {
 	}
 	
 	@Override
-	public Utente doRetrieveByKey(String code) throws SQLException {
+	public synchronized Utente doRetrieveByKey(String code) throws SQLException {
 		
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -92,7 +93,6 @@ public class UtenteDAO implements BeanDAO<Utente, String> {
 		try {
 		
 			connection = dataSource.getConnection();
-			System.out.println("connection"+ connection);
 			preparedStatement = connection.prepareStatement(selectSQL);
 			preparedStatement.setString(1, code);
 
@@ -108,15 +108,14 @@ public class UtenteDAO implements BeanDAO<Utente, String> {
 				bean.setAdmin(rs.getBoolean("isAdmin"));
 			}
 
-		}catch(SQLException e) {
-			e.printStackTrace();
 		}finally {
 		
 			try {
 				if (preparedStatement != null)
 					preparedStatement.close();
 			} finally {
-				connection.close();
+				if(connection != null)
+					connection.close();
 			}
 		} 
 		return bean;
@@ -124,9 +123,47 @@ public class UtenteDAO implements BeanDAO<Utente, String> {
 	}
 	
 	@Override
-	public Collection<Utente> doRetrieveAll(String order) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+	/*
+	 * String order - da fare WHITE LIST nel caso di ordinamento degli utenti
+	 */
+	public synchronized Collection<Utente> doRetrieveAll(String order) throws SQLException {
+		Connection connection=null;
+		PreparedStatement preparedStatement = null;
+		Collection<Utente> utenti = new ArrayList<Utente>();
+		String selectSQL = "SELECT * FROM" + UtenteDAO.NOME_TABELLA;
+		if(order != null && !order.equals("")){
+			selectSQL += "ORDER BY "+order;
+		}
+		try{
+			connection = dataSource.getConnection();
+			preparedStatement = connection.prepareStatement(selectSQL);
+			
+			ResultSet rs = preparedStatement.executeQuery();
+			
+			while(rs.next()) {
+				Utente bean = new Utente();
+				
+				bean.setEmail(rs.getString("email"));
+				bean.setNome(rs.getString("nome"));
+				bean.setCognome(rs.getString("cognome"));
+				bean.setNazionalità(rs.getString("nazionalità"));
+				bean.setDataNascita(rs.getDate("dataDiNascita"));
+				bean.setPassword(rs.getString("password"));
+				bean.setAdmin(rs.getBoolean("isAdmin"));
+				
+				utenti.add(bean);
+			}
+		}finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if(connection != null)
+					connection.close();
+			}
+		}
+		
+		return utenti;
 	}
 
 }
