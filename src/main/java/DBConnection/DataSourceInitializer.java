@@ -8,7 +8,6 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 import javax.sql.DataSource;
-import com.mysql.cj.jdbc.Driver;
 
 @WebListener
 public class DataSourceInitializer implements ServletContextListener {
