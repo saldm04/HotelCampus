@@ -26,7 +26,7 @@ public class UtenteDAO implements BeanDAO<Utente, String> {
 		PreparedStatement preparedStatement = null;
 
 		String insertSQL = "INSERT INTO " + UtenteDAO.NOME_TABELLA
-				+ " (email, nome, cognome, nazionalità, dataDiNascita, password, isAdmin) VALUES (?, ?, ?, ?,?, ?, ?)";
+				+ " (email, nome, cognome, nazionalità, dataDiNascita, password, isAdmin) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
 		try {
 			connection = dataSource.getConnection();
@@ -130,10 +130,11 @@ public class UtenteDAO implements BeanDAO<Utente, String> {
 		Connection connection=null;
 		PreparedStatement preparedStatement = null;
 		Collection<Utente> utenti = new ArrayList<Utente>();
-		String selectSQL = "SELECT * FROM" + UtenteDAO.NOME_TABELLA;
+		String selectSQL = "SELECT * FROM " + UtenteDAO.NOME_TABELLA;
 		if(order != null && !order.equals("")){
 			selectSQL += "ORDER BY "+order;
 		}
+		Utente bean = null;
 		try{
 			connection = dataSource.getConnection();
 			preparedStatement = connection.prepareStatement(selectSQL);
@@ -141,7 +142,7 @@ public class UtenteDAO implements BeanDAO<Utente, String> {
 			ResultSet rs = preparedStatement.executeQuery();
 			
 			while(rs.next()) {
-				Utente bean = new Utente();
+				bean = new Utente();
 				
 				bean.setEmail(rs.getString("email"));
 				bean.setNome(rs.getString("nome"));
