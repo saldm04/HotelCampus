@@ -1,6 +1,7 @@
 package control;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -44,7 +45,7 @@ public class Login extends HttpServlet {
         }
         
         username = username.trim();
-        password = password.trim();
+        password = toHash(password.trim());
 		
         UtenteDAO account = new UtenteDAO((DataSource) getServletContext().getAttribute("DataSource"));
         Utente user = null;
@@ -55,9 +56,7 @@ public class Login extends HttpServlet {
 			e.printStackTrace();
 		}
         
-        /*
-         * AGGIUNGERE CRITTOGRAFIA SHA-512 PASSWORD
-         */
+       
 		
 		if(password.equals(user.getPassword()) && user.isAdmin() && user.getEmail()!=""){
         	request.getSession().setAttribute("utente", user);
@@ -71,4 +70,26 @@ public class Login extends HttpServlet {
 			dispatcherToLoginPage.forward(request, response);
 		}
 	}
+	
+	
+	private static String toHash(String password) {
+		String hashString = null;
+		
+		try {
+			
+			java.security.MessageDigest digest = java.security.MessageDigest.getInstance("SHA-512");
+			byte[] hash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
+			
+			hashString = "";
+			
+			for (int i = 0; i < hash.length; i++) {
+				hashString += Integer.toHexString((hash[i] & 0xFF) | 0x100).substring(1, 3);
+			}
+			
+		} catch (java.security.NoSuchAlgorithmException e) {
+			System.out.println(e);
+		}
+		return hashString;
+	}
+	
 }
