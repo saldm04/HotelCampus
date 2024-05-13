@@ -45,7 +45,8 @@ public class Login extends HttpServlet {
         }
         
         username = username.trim();
-        password = toHash(password.trim());
+        //password = toHash(password.trim());
+        password =password.trim();
 		
         UtenteDAO account = new UtenteDAO((DataSource) getServletContext().getAttribute("DataSource"));
         Utente user = null;
@@ -60,10 +61,10 @@ public class Login extends HttpServlet {
 		
 		if(password.equals(user.getPassword()) && user.isAdmin() && user.getEmail()!=""){
         	request.getSession().setAttribute("utente", user);
-			response.sendRedirect("admin/protected.jsp");
+			response.sendRedirect("homepage.jsp");
 		} else if (password.equals(user.getPassword()) && !user.isAdmin() && user.getEmail()!=""){
 			request.getSession().setAttribute("utente", user);
-			response.sendRedirect("common/protected.jsp");
+			response.sendRedirect("homepage.jsp");
 		}else{
 			errors.add("Username o password non validi!");
 			request.setAttribute("errors", errors);

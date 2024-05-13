@@ -1,0 +1,36 @@
+@charset "UTF-8";
+
+nav{
+	width: 95%;
+	margin: auto;
+	height: 100px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background-color: #EEEEEE;
+}
+
+.logo img{
+	height: 90px;
+}
+
+.menu ul{
+	margin: 0px;
+	padding: 0px;
+	list-style-type: none;
+}
+
+.menu ul li{
+	display: inline;
+	padding: 0px 15px 0px 15px;
+}
+
+.login{
+	display: flex;
+	align-items: center;
+}
+
+.login img{
+	padding-right: 30px;
+	height: 40px;
+}
