@@ -10,11 +10,13 @@ public class Servizio implements Serializable{
 	private String nome;
 	private String descrizione;
 	private int costo;
+	private Boolean disponibile;
 	
 	public Servizio() {
 		this.nome = "";
 		this.descrizione = "";
 		this.costo = 0;
+		this.disponibile = false;
 	}
 	
 	//-=======================SETTER=======================-
@@ -31,6 +33,10 @@ public class Servizio implements Serializable{
 		this.costo = costo;
 	}
 	
+	public void setDisponibile(Boolean disponibile) {
+		this.disponibile = disponibile;
+	}
+	
 	//-=======================GETTER=======================-
 	
 	public String getNome() {
@@ -43,5 +49,9 @@ public class Servizio implements Serializable{
 	
 	public int getCosto() {
 		return costo;
+	}
+	
+	public Boolean isDisponibile() {
+		return disponibile;
 	}
 }

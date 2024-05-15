@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `hotel` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `hotel`;
 -- MySQL dump 10.13  Distrib 8.0.36, for Win64 (x86_64)
 --
 -- Host: localhost    Database: hotel
@@ -35,45 +33,30 @@ CREATE TABLE `camera` (
   `img2` mediumblob,
   `img3` mediumblob,
   `img4` mediumblob,
+  `disponibile` tinyint NOT NULL,
   PRIMARY KEY (`numero`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `camera`
+-- Table structure for table `camera_prenotata`
 --
 
-LOCK TABLES `camera` WRITE;
-/*!40000 ALTER TABLE `camera` DISABLE KEYS */;
-/*!40000 ALTER TABLE `camera` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `datecamera`
---
-
-DROP TABLE IF EXISTS `datecamera`;
+DROP TABLE IF EXISTS `camera_prenotata`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `datecamera` (
-  `codDateCamera` int NOT NULL AUTO_INCREMENT,
-  `dataInizio` date NOT NULL,
-  `dataFine` date NOT NULL,
+CREATE TABLE `camera_prenotata` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `costo` int NOT NULL,
   `camera` int NOT NULL,
-  PRIMARY KEY (`codDateCamera`),
+  `prenotazione` int NOT NULL,
+  PRIMARY KEY (`id`),
   KEY `camera` (`camera`),
-  CONSTRAINT `datecamera_ibfk_1` FOREIGN KEY (`camera`) REFERENCES `camera` (`numero`)
+  KEY `prenotazione` (`prenotazione`),
+  CONSTRAINT `camera_prenotata_ibfk_1` FOREIGN KEY (`camera`) REFERENCES `camera` (`numero`),
+  CONSTRAINT `camera_prenotata_ibfk_2` FOREIGN KEY (`prenotazione`) REFERENCES `prenotazioni` (`idPrenotazione`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `datecamera`
---
-
-LOCK TABLES `datecamera` WRITE;
-/*!40000 ALTER TABLE `datecamera` DISABLE KEYS */;
-/*!40000 ALTER TABLE `datecamera` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `prenotazioni`
@@ -85,23 +68,15 @@ DROP TABLE IF EXISTS `prenotazioni`;
 CREATE TABLE `prenotazioni` (
   `idPrenotazione` int NOT NULL AUTO_INCREMENT,
   `dataPrenotazione` datetime NOT NULL,
+  `dataInizio` date NOT NULL,
+  `dataFine` date NOT NULL,
   `importo` int NOT NULL,
-  `ordine` mediumblob NOT NULL,
   `utente` varchar(40) NOT NULL,
   PRIMARY KEY (`idPrenotazione`),
   KEY `utente` (`utente`),
   CONSTRAINT `prenotazioni_ibfk_1` FOREIGN KEY (`utente`) REFERENCES `utente` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `prenotazioni`
---
-
-LOCK TABLES `prenotazioni` WRITE;
-/*!40000 ALTER TABLE `prenotazioni` DISABLE KEYS */;
-/*!40000 ALTER TABLE `prenotazioni` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `recensione`
@@ -122,15 +97,6 @@ CREATE TABLE `recensione` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `recensione`
---
-
-LOCK TABLES `recensione` WRITE;
-/*!40000 ALTER TABLE `recensione` DISABLE KEYS */;
-/*!40000 ALTER TABLE `recensione` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `servizio`
 --
 
@@ -141,18 +107,30 @@ CREATE TABLE `servizio` (
   `nome` varchar(30) NOT NULL,
   `descrizione` varchar(50) NOT NULL,
   `costo` int NOT NULL,
+  `disponibile` tinyint NOT NULL,
   PRIMARY KEY (`nome`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `servizio`
+-- Table structure for table `servizio_prenotato`
 --
 
-LOCK TABLES `servizio` WRITE;
-/*!40000 ALTER TABLE `servizio` DISABLE KEYS */;
-/*!40000 ALTER TABLE `servizio` ENABLE KEYS */;
-UNLOCK TABLES;
+DROP TABLE IF EXISTS `servizio_prenotato`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `servizio_prenotato` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `costo` int NOT NULL,
+  `servizio` varchar(30) NOT NULL,
+  `prenotazione` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `servizio` (`servizio`),
+  KEY `prenotazione` (`prenotazione`),
+  CONSTRAINT `servizio_prenotato_ibfk_1` FOREIGN KEY (`servizio`) REFERENCES `servizio` (`nome`),
+  CONSTRAINT `servizio_prenotato_ibfk_2` FOREIGN KEY (`prenotazione`) REFERENCES `prenotazioni` (`idPrenotazione`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `utente`
@@ -172,15 +150,6 @@ CREATE TABLE `utente` (
   PRIMARY KEY (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `utente`
---
-
-LOCK TABLES `utente` WRITE;
-/*!40000 ALTER TABLE `utente` DISABLE KEYS */;
-/*!40000 ALTER TABLE `utente` ENABLE KEYS */;
-UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -191,4 +160,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-05-04 15:57:02
+-- Dump completed on 2024-05-15 11:22:43

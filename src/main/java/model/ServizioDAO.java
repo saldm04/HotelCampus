@@ -20,12 +20,12 @@ public class ServizioDAO implements BeanDAO<Servizio, String>{
 	}
 
 	@Override
-	public void doSave(Servizio data) throws SQLException {
+	public synchronized void doSave(Servizio data) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
 		String insertSQL = "INSERT INTO " + ServizioDAO.NOME_TABELLA
-				+ " (nome, descrizione, costo) VALUES (?, ?, ? )";
+				+ " (nome, descrizione, costo, disponibile) VALUES (?, ?, ?, ?)";
 
 		try {
 			connection = dataSource.getConnection();
@@ -33,6 +33,7 @@ public class ServizioDAO implements BeanDAO<Servizio, String>{
 			preparedStatement.setString(1, data.getNome());
 			preparedStatement.setString(2, data.getDescrizione());
 			preparedStatement.setInt(3, data.getCosto());
+			preparedStatement.setBoolean(4, data.isDisponibile());
 
 			preparedStatement.executeUpdate();
 
@@ -49,7 +50,7 @@ public class ServizioDAO implements BeanDAO<Servizio, String>{
 	}
 
 	@Override
-	public boolean doDelete(String code) throws SQLException {
+	public synchronized boolean doDelete(String code) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
@@ -76,7 +77,7 @@ public class ServizioDAO implements BeanDAO<Servizio, String>{
 	}
 
 	@Override
-	public Servizio doRetrieveByKey(String code) throws SQLException {
+	public synchronized Servizio doRetrieveByKey(String code) throws SQLException {
 		
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -97,6 +98,7 @@ public class ServizioDAO implements BeanDAO<Servizio, String>{
 				bean.setNome(rs.getString("nome"));
 				bean.setDescrizione(rs.getString("descrizione"));
 				bean.setCosto(rs.getInt("costo"));
+				bean.setDisponibile(rs.getBoolean("disponibile"));
 			}
 
 		}finally {
@@ -113,7 +115,7 @@ public class ServizioDAO implements BeanDAO<Servizio, String>{
 	}
 
 	@Override
-	public Collection<Servizio> doRetrieveAll(String order) throws SQLException {
+	public synchronized Collection<Servizio> doRetrieveAll(String order) throws SQLException {
 		
 		Connection connection=null;
 		PreparedStatement preparedStatement = null;
@@ -139,6 +141,7 @@ public class ServizioDAO implements BeanDAO<Servizio, String>{
 				bean.setNome(rs.getString("nome"));
 				bean.setDescrizione(rs.getString("descrizione"));
 				bean.setCosto(rs.getInt("costo"));
+				bean.setDisponibile(rs.getBoolean("disponibile"));
 				
 				servizi.add(bean);
 			}
@@ -154,5 +157,33 @@ public class ServizioDAO implements BeanDAO<Servizio, String>{
 		
 		return servizi;
 	}
+	
+	public synchronized boolean setDisponibile(String nome, Boolean disponibilita) throws SQLException{
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
 
+		String alterSQL = "UPDATE " + ServizioDAO.NOME_TABELLA
+				+ " SET disponibile = ? WHERE nome = ?";
+		
+		int result = 0;
+		
+		try {
+			connection = dataSource.getConnection();
+			preparedStatement = connection.prepareStatement(alterSQL);
+			preparedStatement.setBoolean(0, disponibilita);
+			preparedStatement.setString(1, nome);
+			
+			result = preparedStatement.executeUpdate();
+		}finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if(connection != null)
+					connection.close();
+			}
+		}
+		
+		return (result != 0);
+	}
 }
