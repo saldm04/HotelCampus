@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -29,7 +28,7 @@ public class Login extends HttpServlet {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		List<String> errors = new ArrayList<>();
-    	RequestDispatcher dispatcherToLoginPage = request.getRequestDispatcher("loginProva.jsp");
+    	RequestDispatcher dispatcherToLoginPage = request.getRequestDispatcher("login.jsp");
 
 		
 		if(username == null || username.trim().isEmpty()) {
@@ -45,8 +44,8 @@ public class Login extends HttpServlet {
         }
         
         username = username.trim();
-        //password = toHash(password.trim());
-        password =password.trim();
+        password = toHash(password.trim());
+       
 		
         UtenteDAO account = new UtenteDAO((DataSource) getServletContext().getAttribute("DataSource"));
         Utente user = null;
