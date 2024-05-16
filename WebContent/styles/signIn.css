@@ -1,0 +1,144 @@
+@charset "UTF-8";
+
+body {
+    margin: 0;
+    padding: 0;
+  background-image: url("../images/sfondoLogin.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+section {
+    display: flex;
+    align-items: first baseline;
+    justify-content: center;
+    width: 100%;
+    height: 80vh;
+    padding: 5% 0px;
+}
+
+.center {
+    justify-content: space-between;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    border-radius: 15px;
+    margin: auto;
+    width: clamp(350px, 55%, 2000px);
+    height: max-content;
+    padding: 20px;
+    row-gap: 15px;
+}
+
+.center img {
+    height: 10rem;
+    width: auto;
+}
+
+.center span {
+    font-size: 1.3rem;
+    font-weight: blod;
+}
+
+.center a {
+    font-weight: 100;
+    color: rgb(118, 118, 118);
+}
+
+form {
+    width: clamp(350px, 90%, 90%);
+    padding: 10px 0px;
+    display: flex;
+
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+form input {
+    margin-top: 20px;
+    width: clamp(200px, 40%, 50%);
+    height: 2rem;
+    border-radius: 15px;
+    border: 0px;
+    font-size: 1rem;
+    background-color: rgb(37, 121, 255);
+    color: white;
+}
+
+fieldset {
+    border: 1px solid rgb(37, 121, 255);
+    border-radius: 15px;
+    width: 80%;
+    display: flex;
+
+    flex-wrap: wrap;
+}
+
+fieldset input {
+    color: grey;
+    background-color: rgb(255, 255, 255);
+    border: 2px solid rgb(88, 88, 88);
+    border-radius: 15px;
+    text-align: center;
+    font-size: 1rem;
+    height: 2rem;
+    flex: 1 1 250px;
+}
+
+input[type="date"] {
+    display: flex;
+    justify-content: center;
+}
+
+.warning {
+    border: 1px solid rgb(195, 193, 138);
+    background-color: rgb(246, 244, 181);
+    width: clamp(300px, 40%, 50%);
+    border-radius: 15px;
+    height: fit-content;
+    padding: 1rem 3%;
+    display: flex;
+    align-items: safe;
+    justify-content: space-between;
+}
+
+.warning img {
+    height: 2rem;
+}
+
+.warning span h4 {
+    margin: 0px;
+    font-size: 1.2rem;
+    color: rgb(178, 176, 126);
+    font-weight: bold;
+}
+
+.warning span {
+    padding-left: 20px;
+    height: min-content;
+}
+
+.warning span p {
+    margin-top: 0.4rem;
+    font-size: 1rem;
+    color: rgb(195, 193, 138);
+}
+
+.error {
+    border: 2px solid blue;
+    width: clamp(315px, 45%, 50%);
+    border-radius: 15px;
+    height: fit-content;
+    padding: 1rem 3;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.error span {
+    color: green;
+    font-size: 1rem;
+}

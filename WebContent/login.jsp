@@ -13,13 +13,19 @@
   	<%@ include file="navigationBar.jsp"%>
   	
   	<% 
+  		if(request.getSession().getAttribute("utente") != null){
+  			response.sendRedirect("homepage.jsp");
+  			return;
+  		}
+  	
 		List<String> errors = (List<String>) request.getAttribute("errors");
+  
 		
 	%>
     <section>
      <div class="center">
      	<img src="images/logo.png" alt="logo" />
-      <span>Accedi <a href="#">/ Registrati</a></span>
+      <span>Accedi <a href="signIn.jsp">/ Registrati</a></span>
      	
       <form action="Login" method="post">
         <input

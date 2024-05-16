@@ -6,7 +6,7 @@ body{
 
 .banner{
 	max-width: 95%;
-	background-color: #EEEEEE;
+
 	margin: auto;
 	display: flex;
 	flex-direction: column;

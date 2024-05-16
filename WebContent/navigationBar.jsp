@@ -27,11 +27,19 @@
 			<a href="#"><img alt="Cart" src="images/cart.png"></a>
 			
 			<%if(user==null){%>
-				<a href="loginProva.jsp">Login</a>
+				<a href="login.jsp">Login</a>
 			<%}else{%>
-				<a href="#">Benvenuto</a>
+				<p>utente</p>
+		
+					<a href="<%=request.getContextPath()%>/common/Logout">logout</a>
+				
+		
+			
 			<%} %>
+			
+			
 		</div>
+		
 	</nav>
 </body>
 </html>
