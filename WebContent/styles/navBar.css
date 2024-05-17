@@ -7,8 +7,12 @@ nav{
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	background-color: red;
+	background-color: white;
 	
+}
+
+.logo{
+	margin: 0 0 0 1%;
 }
 
 .logo img{
@@ -29,9 +33,17 @@ nav{
 .login{
 	display: flex;
 	align-items: center;
+	margin: 0 1% 0 0;
 }
 
 .login img{
 	padding-right: 30px;
 	height: 40px;
 }
+
+@media screen and (max-width: 700px){
+	.menu ul li{
+		padding: 0 12.5%;
+	}
+}
+

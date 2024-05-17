@@ -25,7 +25,7 @@ public class ServizioDAO implements BeanDAO<Servizio, String>{
 		PreparedStatement preparedStatement = null;
 
 		String insertSQL = "INSERT INTO " + ServizioDAO.NOME_TABELLA
-				+ " (nome, descrizione, costo, disponibile) VALUES (?, ?, ?, ?)";
+				+ " (nome, descrizione, costo, disponibile, img1, img2) VALUES (?, ?, ?, ?, ?, ?)";
 
 		try {
 			connection = dataSource.getConnection();
@@ -34,6 +34,8 @@ public class ServizioDAO implements BeanDAO<Servizio, String>{
 			preparedStatement.setString(2, data.getDescrizione());
 			preparedStatement.setInt(3, data.getCosto());
 			preparedStatement.setBoolean(4, data.isDisponibile());
+			preparedStatement.setBytes(5, data.getImg1());
+			preparedStatement.setBytes(6, data.getImg2());
 
 			preparedStatement.executeUpdate();
 
@@ -99,6 +101,8 @@ public class ServizioDAO implements BeanDAO<Servizio, String>{
 				bean.setDescrizione(rs.getString("descrizione"));
 				bean.setCosto(rs.getInt("costo"));
 				bean.setDisponibile(rs.getBoolean("disponibile"));
+				bean.setImg1(rs.getBytes("img1"));
+				bean.setImg2(rs.getBytes("img2"));
 			}
 
 		}finally {
@@ -142,6 +146,8 @@ public class ServizioDAO implements BeanDAO<Servizio, String>{
 				bean.setDescrizione(rs.getString("descrizione"));
 				bean.setCosto(rs.getInt("costo"));
 				bean.setDisponibile(rs.getBoolean("disponibile"));
+				bean.setImg1(rs.getBytes("img1"));
+				bean.setImg2(rs.getBytes("img2"));
 				
 				servizi.add(bean);
 			}

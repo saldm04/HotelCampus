@@ -17,9 +17,9 @@
 		<div class="logo"><img src="images/logo.png" alt="Logo"></div>
 		<div class="menu">
 			<ul>
-				<li><a href="#">Home</a></li>
+				<li><a href="homepage.jsp">Home</a></li>
 				<li><a href="#">Prenota ora</a></li>
-				<li><a href="#">Servizi</a></li>
+				<li><a href="servizi.jsp">Servizi</a></li>
 				<li><a href="#">Recensioni</a></li>
 			</ul>
 		</div>
@@ -30,14 +30,8 @@
 				<a href="login.jsp">Login</a>
 			<%}else{%>
 				<p>utente</p>
-		
-					<a href="<%=request.getContextPath()%>/common/Logout">logout</a>
-				
-		
-			
+				<a href="<%=request.getContextPath()%>/common/Logout">logout</a>
 			<%} %>
-			
-			
 		</div>
 		
 	</nav>

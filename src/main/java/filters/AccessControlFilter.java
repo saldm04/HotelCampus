@@ -30,10 +30,10 @@ public class AccessControlFilter extends HttpFilter implements Filter {
 		Utente utente = (Utente) httpServletRequest.getSession().getAttribute("utente");
 		String path = httpServletRequest.getServletPath();
 		if (path.contains("/common/") && utente==null) {
-			httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + "/loginProva.jsp");
+			httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + "/homepage.jsp");
 			return;
 		} else if (path.contains("/admin/") && (utente==null || !utente.isAdmin())) {
-			httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + "/loginProva.jsp");
+			httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + "/homepage.jsp");
 			return;
 		}
 		

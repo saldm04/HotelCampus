@@ -11,12 +11,16 @@ public class Servizio implements Serializable{
 	private String descrizione;
 	private int costo;
 	private Boolean disponibile;
+	private byte[] img1;
+	private byte[] img2;
 	
 	public Servizio() {
 		this.nome = "";
 		this.descrizione = "";
 		this.costo = 0;
 		this.disponibile = false;
+		this.img1=null;
+		this.img2=null;
 	}
 	
 	//-=======================SETTER=======================-
@@ -37,6 +41,14 @@ public class Servizio implements Serializable{
 		this.disponibile = disponibile;
 	}
 	
+	public void setImg1(byte[] img1) {
+		this.img1 = img1;
+	}
+	
+	public void setImg2(byte[] img2) {
+		this.img2 = img2;
+	}
+	
 	//-=======================GETTER=======================-
 	
 	public String getNome() {
@@ -53,5 +65,13 @@ public class Servizio implements Serializable{
 	
 	public Boolean isDisponibile() {
 		return disponibile;
+	}
+	
+	public byte[] getImg1(){
+		return img1;
+	}
+	
+	public byte[] getImg2(){
+		return img2;
 	}
 }
