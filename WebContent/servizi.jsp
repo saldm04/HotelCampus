@@ -12,6 +12,15 @@
 <body>
 	<%@ include file="navigationBar.jsp"%>
 	
+	<section class="testoIniziale">
+      <h1>
+        Benvenuti all'Hotel Campus, dove l'ospitalità incontra il comfort e
+        l'eleganza. <br />
+        <br />Qui offriamo una gamma completa di servizi per rendere il vostro
+        soggiorno indimenticabile:
+      </h1>
+    </section>
+	
 	<% 
 		Collection<?> servizi = (Collection<?>) request.getAttribute("servizi");
 		if(servizi == null){
@@ -19,24 +28,24 @@
 			return;
 		}
 	%>
-	<h1>I nostri servizi</h1>
+	<section class="servizi">
 	<%
 		if(servizi != null && servizi.size()!=0){
 			Iterator<?> it = servizi.iterator();
 			while(it.hasNext()){
 				Servizio bean = (Servizio) it.next();
 	%>
-	<section class="service">
-		<h2><%= bean.getNome()%></h2>
+	<div class="card">
+		<img alt="Immagine servizio 1" src="./GetPicture?beanType=servizio&id=<%=bean.getNome()%>&numberImg=1">
+		<h1><%= bean.getNome()%></h1>
 		<p><%= bean.getDescrizione()%></p>
-		<p>Costo per persona: <%= bean.getCosto()%> €</p>
-		<div class="images">
-			<img alt="Immagine servizio 1" src="./GetPicture?beanType=servizio&id=<%=bean.getNome()%>&numberImg=1">
-			<img alt="Immagine servizio 2" src="./GetPicture?beanType=servizio&id=<%=bean.getNome()%>&numberImg=2">
-		</div>
-	</section>
+		<span>Costo per persona: <%= bean.getCosto()%> €</span>
+	</div>	
+	
 	
 		<%}%>
 	<%}%>
+	</section>
+	
 </body>
 </html>
