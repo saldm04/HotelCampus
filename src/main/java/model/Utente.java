@@ -3,6 +3,8 @@ package model;
 import java.io.Serializable;
 import java.sql.Date;
 
+import com.mysql.cj.result.SqlDateValueFactory;
+
 public class Utente implements Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -30,6 +32,7 @@ public class Utente implements Serializable{
 	
 	public void setNome(String nome) {
 		this.nome = nome;
+	
 	}
 	
 	public void setPassword(String password) {

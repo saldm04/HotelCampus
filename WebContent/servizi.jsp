@@ -10,6 +10,7 @@
 	<meta name="viewport" content="initial-scale=1, width=device-width">
 </head>
 <body>
+	<% request.setAttribute("in", "servizi"); %>
 	<%@ include file="navigationBar.jsp"%>
 	
 	<section class="testoIniziale">

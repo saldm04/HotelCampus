@@ -24,7 +24,7 @@
     <section>
       <div class="center">
         <img src="images/logo.png" alt="logo" />
-        <span>Accedi <a href="#">/ Registrati</a></span>
+        <span><a href="login.jsp">Accedi /</a> Registrati </span>
 
         <form action="SignIn" method="post">
           <fieldset>
@@ -50,12 +50,14 @@
               text-align="center"
             />
             <br />
-            <input
+            <!-- <input
               id="nazionalita"
               type="text"
               name="nazionalita"
               placeholder="Inserisci nazionalità"
-            />
+            />-->
+            
+   
             <br />
           </fieldset>
           <br />
@@ -77,15 +79,8 @@
             />
             <br />
           </fieldset>
-          <input type="submit" value="Login" />
+          <input type="submit" value="SignIn" />
         </form>
-        <div class="warning">
-          <img src="images/warning.png" alt="" />
-          <span
-            ><h4>Attenzione</h4>
-            <p>email e password non possono essere vuoti</p>
-          </span>
-        </div>
       </div>
     </section>
   </body>

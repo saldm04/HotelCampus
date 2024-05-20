@@ -3,7 +3,7 @@
 body {
     margin: 0;
     padding: 0;
-  background-image: url("../images/sfondoLogin.png");
+    background-image: url("../images/sfondoLogin.png");
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
@@ -32,19 +32,27 @@ section {
     row-gap: 15px;
 }
 
-.center img {
-    height: 10rem;
-    width: auto;
-}
-
 .center span {
-    font-size: 1.3rem;
-    font-weight: blod;
+    color: #8dc2e3;
+    font-size: 1rem;
+    font-weight: bold;
 }
 
 .center a {
+    text-decoration: none;
     font-weight: 100;
     color: rgb(118, 118, 118);
+}
+
+.center a:hover {
+    text-decoration: none;
+    font-weight: 100;
+    color: #8dc2e3;
+}
+
+.center img {
+    height: 10rem;
+    width: auto;
 }
 
 form {

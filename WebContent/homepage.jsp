@@ -9,7 +9,9 @@
 	<meta name="viewport" content="initial-scale=1, width=device-width">
 </head>
 <body>
+	<% request.setAttribute("in", "home"); %>
 	<%@ include file="navigationBar.jsp"%>
+	
 	<section class="banner">
 		<img class="bannerImage" alt="Immagine Campus Unisa" src="images/bannerFotoAereaCampus.jpg">
 	</section>
