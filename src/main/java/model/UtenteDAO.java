@@ -132,7 +132,7 @@ public class UtenteDAO implements BeanDAO<Utente, String> {
 		Collection<Utente> utenti = new ArrayList<Utente>();
 		String selectSQL = "SELECT * FROM " + UtenteDAO.NOME_TABELLA;
 		if(order != null && !order.equals("")){
-			selectSQL += "ORDER BY "+order;
+			selectSQL += " ORDER BY "+order;
 		}
 		Utente bean = null;
 		try{

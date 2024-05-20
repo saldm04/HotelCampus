@@ -11,7 +11,6 @@ import javax.sql.DataSource;
 
 public class ServizioDAO implements BeanDAO<Servizio, String>{
 	
-	
 	private static String NOME_TABELLA = "servizio";
 	private DataSource dataSource = null;
 
@@ -126,7 +125,7 @@ public class ServizioDAO implements BeanDAO<Servizio, String>{
 		
 		Collection<Servizio> servizi = new ArrayList<Servizio>();
 		
-		String selectSQL = "SELECT * FROM " + ServizioDAO.NOME_TABELLA;
+		String selectSQL = " SELECT * FROM " + ServizioDAO.NOME_TABELLA;
 		
 		if(order != null && !order.equals("")){
 			selectSQL += "ORDER BY "+order;

@@ -65,6 +65,7 @@
  .card span {
    color: #50731d;
    padding-left: 10px;
+   margin-top: auto;
    padding-bottom: 20px;
    font-size: clamp(14.5px, 1.3vw, 200px);
  }

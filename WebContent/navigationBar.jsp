@@ -10,19 +10,38 @@
 
 <%
 	Utente user = (Utente) request.getSession().getAttribute("utente");
+	String x = (String) request.getAttribute("in");
 %>
 
-<body>
+<body onload="switchElement('<%=x%>')">
 	<nav>
 		<div class="logo"><img src="images/logo.png" alt="Logo"></div>
 		<div class="menu">
-			<ul>
-				<li><a href="homepage.jsp">Home</a></li>
-				<li><a href="#">Prenota ora</a></li>
-				<li><a href="servizi.jsp">Servizi</a></li>
-				<li><a href="#">Recensioni</a></li>
+			<ul >	
+				<li class="underlineAnimation" id="home"><a href="homepage.jsp" >Home</a></li>
+				<li class="underlineAnimation" id="prenotaOra"><a href="#">Prenota ora</a></li>
+				<li class="underlineAnimation" id="servizi"><a href="servizi.jsp" >Servizi</a></li>
+				<li class="underlineAnimation" id="recensioni"><a href="#" >Recensioni</a></li>
 			</ul>
 		</div>
+		
+		<script>
+			function switchElement(element){
+				
+				switch(element){
+				case "home":
+					var x = document.getElementById("home");
+					x.className = "underline";
+					break;
+				case "servizi":
+					var x = document.getElementById("servizi");
+					x.className = "underline";
+					break;
+				}
+				
+			}
+		</script>
+		
 		<div class="login">
 			<a href="#"><img alt="Cart" src="images/cart.png"></a>
 			
