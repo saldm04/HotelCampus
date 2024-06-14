@@ -7,6 +7,7 @@ body{
 
 nav{
 	position: fixed;
+	top: 0;
 	width: 100%;
 	margin: auto;
 	height: 70px;
@@ -17,50 +18,50 @@ nav{
 	box-shadow: 0px 4px 2px -2px #D0E5F2;
 }
 
-a{
+nav a{
 	text-decoration: none;
 	color: #A26F5C;
 }
 
-.logo{
+nav .logo{
 	margin: 0 0 0 2.5%;
 }
 
-.logo img{
+nav .logo img{
 	height: 70px;
 }
 
-.menu ul{
+nav .menu ul{
 	margin: 0px;
 	padding: 0px;
 	list-style-type: none;
 }
 
-.menu ul li{
+nav .menu ul li{
     font-size: clamp(16px,1.25vw,200px);
 	display: inline;
 	margin: 0px 10px
 }
 
-.login{
+nav .login{
     font-size: clamp(16px,1.25vw,200px);
 	display: flex;
 	align-items: center;
 	margin: 0 2.5% 0 0;
 }
 
-.login img{
+nav .login img{
 	padding-right: 30px;
 	height: 28px;
 }
 
-.underline{
+nav .underline{
 	text-decoration: none;
     display: inline-block;
     position: relative;
 }
 
-.underline:after{	
+nav .underline:after{	
 	background: none repeat scroll 0 0 transparent;
     bottom: 0;
     content: "";
@@ -72,12 +73,12 @@ a{
     background: #BBBF45;
 }
 
-  .underlineAnimation {
+nav .underlineAnimation {
     text-decoration: none;
     display: inline-block;
     position: relative;
   }
-  .underlineAnimation:after {
+nav .underlineAnimation:after {
     background: none repeat scroll 0 0 transparent;
     bottom: 0;
     content: "";
@@ -90,7 +91,7 @@ a{
     width: 0;
   }
 
-  .underlineAnimation:hover:after {
+nav .underlineAnimation:hover:after {
     width: 100%;
     left: 0;
   }
@@ -98,7 +99,7 @@ a{
 
 
 @media screen and (max-width: 700px){
-	.menu ul li{
+	nav .menu ul li{
 		padding: 0 12.5%;
 	}
 }

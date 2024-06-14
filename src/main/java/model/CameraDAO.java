@@ -5,7 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
 import javax.sql.DataSource;
 
@@ -132,9 +134,13 @@ public class CameraDAO implements BeanDAO<Camera, Integer>{
 		
 		Collection<Camera> camere = new ArrayList<Camera>();
 		
+		List<String> validOrders = Arrays.asList(
+				"NUMERO","NUMEROMAXOSPITI","QUADRATURA","COSTO","TIPO","DESCRIZIONE","IMG1","IMG2","IMG3","IMG4","DISPONIBILE"
+		);
+		
 		String selectSQL = "SELECT * FROM " + CameraDAO.NOME_TABELLA;
 		
-		if(order != null && !order.equals("")){
+		if(order != null && validOrders.contains(order.toUpperCase())){
 			selectSQL += " ORDER BY "+order;
 		}
 		

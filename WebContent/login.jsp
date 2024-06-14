@@ -18,8 +18,6 @@
   		}
   	
 		List<String> errors = (List<String>) request.getAttribute("errors");
-  
-		
 	%>
     <section>
      <div class="center">

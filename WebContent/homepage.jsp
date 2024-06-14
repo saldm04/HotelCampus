@@ -27,5 +27,7 @@
 		 rendere la vostra esperienza a Salerno memorabile.
 		 </p>
 	</section>
+	
+	<%@ include file="footer.jsp"%>
 </body>
 </html>

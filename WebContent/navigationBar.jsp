@@ -6,6 +6,7 @@
 <head>
 	<link rel="stylesheet" href="styles/navBar.css" type="text/css">
 	<meta name="viewport" content="initial-scale=1, width=device-width">
+	<script type="text/javascript" src="scripts/navBarScript.js"></script>
 </head>
 
 <%
@@ -25,30 +26,13 @@
 			</ul>
 		</div>
 		
-		<script>
-			function switchElement(element){
-				
-				switch(element){
-				case "home":
-					var x = document.getElementById("home");
-					x.className = "underline";
-					break;
-				case "servizi":
-					var x = document.getElementById("servizi");
-					x.className = "underline";
-					break;
-				}
-				
-			}
-		</script>
-		
 		<div class="login">
 			<a href="#"><img alt="Cart" src="images/cart.png"></a>
 			
 			<%if(user==null){%>
 				<a href="login.jsp">Login</a>
 			<%}else{%>
-				<p>utente</p>
+				<p>utente </p>
 				<a href="<%=request.getContextPath()%>/common/Logout">logout</a>
 			<%} %>
 		</div>

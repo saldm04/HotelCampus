@@ -5,7 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
 import javax.sql.DataSource;
 
@@ -129,9 +131,16 @@ public class UtenteDAO implements BeanDAO<Utente, String> {
 	public synchronized Collection<Utente> doRetrieveAll(String order) throws SQLException {
 		Connection connection=null;
 		PreparedStatement preparedStatement = null;
+		
 		Collection<Utente> utenti = new ArrayList<Utente>();
+		
 		String selectSQL = "SELECT * FROM " + UtenteDAO.NOME_TABELLA;
-		if(order != null && !order.equals("")){
+		
+		List<String> validOrders = Arrays.asList(
+				"EMAIL","NOME","COGNOME","NAZIONALITÀ","DATADINASCITA","PASSWORD","ISADMIN"
+		);
+		
+		if(order != null && validOrders.contains(order.toUpperCase())){
 			selectSQL += " ORDER BY "+order;
 		}
 		Utente bean = null;

@@ -1,5 +1,4 @@
 body {
-
     margin: 0;
     padding: 0;
     background-image: url("../images/sfondoLogin.png");
@@ -9,6 +8,7 @@ body {
 }
 
 section {
+	margin-top: 70px;
     display: flex;
     justify-content: center;
     width: 100%;

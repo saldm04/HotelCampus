@@ -5,7 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
 import javax.sql.DataSource;
 
@@ -19,7 +21,7 @@ public class RecensioneDAO implements BeanDAO<Recensione, Integer>{
 	}
 	
 	@Override
-	public void doSave(Recensione data) throws SQLException {
+	public synchronized void doSave(Recensione data) throws SQLException {
 		
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -49,7 +51,7 @@ public class RecensioneDAO implements BeanDAO<Recensione, Integer>{
 	}
 	
 	@Override
-	public boolean doDelete(Integer code) throws SQLException {
+	public synchronized boolean doDelete(Integer code) throws SQLException {
 		
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -78,7 +80,7 @@ public class RecensioneDAO implements BeanDAO<Recensione, Integer>{
 	}
 	
 	@Override
-	public Recensione doRetrieveByKey(Integer code) throws SQLException {
+	public synchronized Recensione doRetrieveByKey(Integer code) throws SQLException {
 		
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -116,17 +118,21 @@ public class RecensioneDAO implements BeanDAO<Recensione, Integer>{
 	}
 	
 	@Override
-	public Collection<Recensione> doRetrieveAll(String order) throws SQLException {
+	public synchronized Collection<Recensione> doRetrieveAll(String order) throws SQLException {
 		
 		Connection connection=null;
 		PreparedStatement preparedStatement = null;
 		
 		Collection<Recensione> recensioni = new ArrayList<Recensione>();
 		
+		List<String> validOrders = Arrays.asList(
+				"CODRECENSIONE","DESCRIZIONE","VOTO","UTENTE"
+		);
+		
 		String selectSQL = "SELECT * FROM " + RecensioneDAO.NOME_TABELLA;
 		
-		if(order != null && !order.equals("")){
-			selectSQL += "ORDER BY " + order;
+		if(order != null && validOrders.contains(order.toUpperCase())){
+			selectSQL += " ORDER BY " + order;
 		}
 		
 		Recensione bean = null;
