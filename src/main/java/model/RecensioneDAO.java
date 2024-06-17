@@ -126,7 +126,7 @@ public class RecensioneDAO implements BeanDAO<Recensione, Integer>{
 		String selectSQL = "SELECT * FROM " + RecensioneDAO.NOME_TABELLA;
 		
 		if(order != null && !order.equals("")){
-			selectSQL += "ORDER BY " + order;
+			selectSQL += " ORDER BY " + order;
 		}
 		
 		Recensione bean = null;
