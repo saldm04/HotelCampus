@@ -68,11 +68,15 @@
               name="nazionalita"
               placeholder="Inserisci nazionalità"
               required
+              oninput="cercaNazionalita()"
               onchange="validateFormElem(this, nomeCognomeNazionalitaPattern, document.getElementById('errorNazionalita'), nazionalitaErrorMessage)"
             />
-            
+            <br/>
+            <div class="suggerimentiNazione">
+         	</div>
             <br />
           </fieldset>
+          
           <br />
           <fieldset>
             <legend>Credenziali</legend>

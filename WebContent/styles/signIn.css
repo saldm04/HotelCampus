@@ -118,3 +118,20 @@ input[type="date"] {
 .divErrorSpan{
 	margin: 10px 0px;
 }
+
+.suggerimentiNazione {
+    max-height: 100px;
+    overflow-y: scroll;
+    background: white;
+    width: 100%;
+    position: relative;
+}
+
+.suggerimento {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.suggerimento:hover {
+    background-color: #f0f0f0;
+}
