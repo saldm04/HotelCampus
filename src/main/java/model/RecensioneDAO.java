@@ -131,6 +131,7 @@ public class RecensioneDAO implements BeanDAO<Recensione, Integer>{
 		
 		String selectSQL = "SELECT * FROM " + RecensioneDAO.NOME_TABELLA;
 		
+		
 		if(order != null && validOrders.contains(order.toUpperCase())){
 			selectSQL += " ORDER BY " + order;
 		}

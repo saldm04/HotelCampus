@@ -134,7 +134,7 @@ public class ServizioDAO implements BeanDAO<Servizio, String>{
 		String selectSQL = " SELECT * FROM " + ServizioDAO.NOME_TABELLA;
 		
 		if(order != null && validOrders.contains(order.toUpperCase())){
-			selectSQL += "ORDER BY "+order;
+			selectSQL += " ORDER BY "+order;
 		}
 		
 		try{

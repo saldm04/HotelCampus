@@ -11,3 +11,28 @@ function switchElement(element){
 	}
 	
 }
+
+
+let burgerMenuIsClick = false;
+
+
+function showMenu(){
+	
+	const burgerMenu = document.getElementById("burger__menu");
+	const menuContent = document.getElementById("menu__content");
+	
+	if(burgerMenuIsClick){
+		burgerMenuIsClick = false;
+		burgerMenu.className = "burger_menu__close__active";
+		menuContent.className = "showMenu";		
+			
+	
+	}else{
+		burgerMenuIsClick = true;
+		menuContent.className = "menustandard";	
+		burgerMenu.className = "";	
+	}
+	
+}
+
+
