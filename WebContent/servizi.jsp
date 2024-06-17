@@ -13,40 +13,43 @@
 	<% request.setAttribute("in", "servizi"); %>
 	<%@ include file="navigationBar.jsp"%>
 	
-	<section class="testoIniziale">
-      <h1>
-        Benvenuti all'Hotel Campus, dove l'ospitalità incontra il comfort e
-        l'eleganza. <br />
-        <br />Qui offriamo una gamma completa di servizi per rendere il vostro
-        soggiorno indimenticabile:
-      </h1>
-    </section>
-	
-	<% 
-		Collection<?> servizi = (Collection<?>) request.getAttribute("servizi");
+	<% Collection<?> servizi = (Collection<?>) request.getAttribute("servizi");
 		if(servizi == null){
 			response.sendRedirect("Servizi");
 			return;
 		}
 	%>
-	<section class="servizi">
-	<%
-		if(servizi != null && servizi.size()!=0){
-			Iterator<?> it = servizi.iterator();
-			while(it.hasNext()){
-				Servizio bean = (Servizio) it.next();
-	%>
-	<div class="card">
-		<img alt="Immagine servizio 1" src="./GetPicture?beanType=servizio&id=<%=bean.getNome()%>&numberImg=1">
-		<h1><%= bean.getNome()%></h1>
-		<p><%= bean.getDescrizione()%></p>
-		<span>Costo per persona: <%= bean.getCosto()%> €</span>
-	</div>	
 	
-	
+	<div class=containerServizi>
+		<section class="testoIniziale">
+	      <h1>
+	        Benvenuti all'Hotel Campus, dove l'ospitalità incontra il comfort e
+	        l'eleganza. <br />
+	        <br />Qui offriamo una gamma completa di servizi per rendere il vostro
+	        soggiorno indimenticabile:
+	      </h1>
+	    </section>
+		
+		<section class="servizi">
+		<%
+			if(servizi != null && servizi.size()!=0){
+				Iterator<?> it = servizi.iterator();
+				while(it.hasNext()){
+					Servizio bean = (Servizio) it.next();
+		%>
+		<div class="card">
+			<img alt="Immagine servizio 1" src="./GetPicture?beanType=servizio&id=<%=bean.getNome()%>&numberImg=1">
+			<h1><%= bean.getNome()%></h1>
+			<p><%= bean.getDescrizione()%></p>
+			<span>Costo per persona: <%= bean.getCosto()%> €</span>
+		</div>	
+		
+		
+			<%}%>
 		<%}%>
-	<%}%>
-	</section>
+		</section>
+	</div>
 	
+	<%@ include file="footer.jsp"%>
 </body>
 </html>

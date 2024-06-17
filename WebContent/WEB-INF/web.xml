@@ -5,6 +5,11 @@
     <welcome-file>homepage.jsp</welcome-file>
   </welcome-file-list>
   
+  <context-param>
+  	<param-name>footer.year</param-name>
+  	<param-value>2024</param-value>
+  </context-param>
+  
   <resource-ref>
     <description>JNDI reference to a data source</description>
     <res-ref-name>jdbc/hotel</res-ref-name>

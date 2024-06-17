@@ -11,28 +11,31 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
-public class ServizioPrenotatoDAO implements BeanDAO<ServizioPrenotato, Integer>{
+public class PrenotazioneDAO implements BeanDAO<Prenotazione, Integer>{
 
-	public static String NOME_TABELLA = "servizio_prenotato";
+	public static String NOME_TABELLA = "prenotazioni";
 	private DataSource dataSource = null;
 	
-	public ServizioPrenotatoDAO(DataSource dataSource) {
+	public PrenotazioneDAO(DataSource dataSource){
 		this.dataSource=dataSource;
 	}
 	
 	@Override
-	public void doSave(ServizioPrenotato data) throws SQLException {
+	public synchronized void doSave(Prenotazione data) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		
-		String insertSQL = "INSERT INTO "+ ServizioPrenotatoDAO.NOME_TABELLA +
-				" (costo, servizio, prenotazione) VALUES (?,?,?)";
+		String insertSQL = "INSERT INTO "+ PrenotazioneDAO.NOME_TABELLA +
+				"dataPrenotazione, dataInizio, dataFine, importo, utente"
+				+ "VALUES (?,?,?,?,?)";
 		try{
 			connection = dataSource.getConnection();
 			preparedStatement = connection.prepareStatement(insertSQL);
-			preparedStatement.setInt(1, data.getCosto());
-			preparedStatement.setString(2, data.getServizio());
-			preparedStatement.setInt(3, data.getPrenotazione());
+			preparedStatement.setDate(1, data.getDataPrenotazione());
+			preparedStatement.setDate(2, data.getDataInizio());
+			preparedStatement.setDate(3, data.getDataFine());
+			preparedStatement.setInt(4, data.getImporto());
+			preparedStatement.setString(5, data.getUtente());
 			
 			preparedStatement.executeUpdate();
 		} finally {
@@ -47,13 +50,13 @@ public class ServizioPrenotatoDAO implements BeanDAO<ServizioPrenotato, Integer>
 	}
 
 	@Override
-	public boolean doDelete(Integer code) throws SQLException {
+	public synchronized boolean doDelete(Integer code) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
 		int result = 0;
 
-		String deleteSQL = "DELETE FROM " + ServizioPrenotatoDAO.NOME_TABELLA + " WHERE id = ?";
+		String deleteSQL = "DELETE FROM " + PrenotazioneDAO.NOME_TABELLA + " WHERE id = ?";
 		
 		try{
 			connection = dataSource.getConnection();
@@ -74,29 +77,33 @@ public class ServizioPrenotatoDAO implements BeanDAO<ServizioPrenotato, Integer>
 	}
 
 	@Override
-	public ServizioPrenotato doRetrieveByKey(Integer code) throws SQLException {
+	public synchronized Prenotazione doRetrieveByKey(Integer code) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
-		ServizioPrenotato bean = new ServizioPrenotato();
+		Prenotazione bean = new Prenotazione();
 
-		String selectSQL = "SELECT * FROM " + ServizioPrenotatoDAO.NOME_TABELLA + " WHERE id = ?";
+		String selectSQL = "SELECT * FROM " + PrenotazioneDAO.NOME_TABELLA + " WHERE id = ?";
 
 		try {
+		
 			connection = dataSource.getConnection();
 			preparedStatement = connection.prepareStatement(selectSQL);
 			preparedStatement.setInt(1, code);
 
 			ResultSet rs = preparedStatement.executeQuery();
-
-			while(rs.next()) {
-				bean.setId(rs.getInt("id"));
-				bean.setCosto(rs.getInt("costo"));
-				bean.setServizio(rs.getString("servizio"));
-				bean.setPrenotazione(rs.getInt("prenotazione"));
+			
+			while (rs.next()) {
+				bean.setId(rs.getInt("idPrenotazione"));
+				bean.setDataPrenotazione(rs.getDate("dataPrenotazione"));
+				bean.setDataInizio(rs.getDate("dataInizio"));
+				bean.setDataFine(rs.getDate("dataFine"));
+				bean.setImporto(rs.getInt("importo"));
+				bean.setUtente(rs.getString("utente"));
 			}
 
 		}finally {
+		
 			try {
 				if (preparedStatement != null)
 					preparedStatement.close();
@@ -109,17 +116,17 @@ public class ServizioPrenotatoDAO implements BeanDAO<ServizioPrenotato, Integer>
 	}
 
 	@Override
-	public Collection<ServizioPrenotato> doRetrieveAll(String order) throws SQLException {
+	public synchronized Collection<Prenotazione> doRetrieveAll(String order) throws SQLException {
 		Connection connection=null;
 		PreparedStatement preparedStatement = null;
 		
-		Collection<ServizioPrenotato> servizi = new ArrayList<ServizioPrenotato>();
+		Collection<Prenotazione> prenotazioni = new ArrayList<Prenotazione>();
 		
 		List<String> validOrders = Arrays.asList(
-				"ID","COSTO","SERVIZIO","PRENOTAZIONE"
+				"IDPRENOTAZIONE","DATAPRENOTAZIONE","DATAINIZIO","DATAFINE","IMPORTO","UTENTE"
 		);
 		
-		String selectSQL = "SELECT * FROM " + ServizioPrenotatoDAO.NOME_TABELLA;
+		String selectSQL = "SELECT * FROM " + PrenotazioneDAO.NOME_TABELLA;
 		
 		if(order != null && validOrders.contains(order.toUpperCase())){
 			selectSQL += " ORDER BY "+order;
@@ -132,14 +139,16 @@ public class ServizioPrenotatoDAO implements BeanDAO<ServizioPrenotato, Integer>
 			ResultSet rs = preparedStatement.executeQuery();
 			
 			while(rs.next()) {
-				ServizioPrenotato bean = new ServizioPrenotato();
+				Prenotazione bean = new Prenotazione();
 				
-				bean.setId(rs.getInt("id"));
-				bean.setCosto(rs.getInt("costo"));
-				bean.setServizio(rs.getString("servizio"));
-				bean.setPrenotazione(rs.getInt("prenotazione"));
+				bean.setId(rs.getInt("idPrenotazione"));
+				bean.setDataPrenotazione(rs.getDate("dataPrenotazione"));
+				bean.setDataInizio(rs.getDate("dataInizio"));
+				bean.setDataFine(rs.getDate("dataFine"));
+				bean.setImporto(rs.getInt("importo"));
+				bean.setUtente(rs.getString("utente"));
 				
-				servizi.add(bean);
+				prenotazioni.add(bean);
 			}
 		}finally {
 			try {
@@ -151,7 +160,7 @@ public class ServizioPrenotatoDAO implements BeanDAO<ServizioPrenotato, Integer>
 			}
 		}
 		
-		return servizi;
+		return prenotazioni;
 	}
 	
 }

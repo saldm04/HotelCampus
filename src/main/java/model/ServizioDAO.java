@@ -5,7 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
 import javax.sql.DataSource;
 
@@ -125,9 +127,13 @@ public class ServizioDAO implements BeanDAO<Servizio, String>{
 		
 		Collection<Servizio> servizi = new ArrayList<Servizio>();
 		
+		List<String> validOrders = Arrays.asList(
+				"NOME","DESCRIZIONE","COSTO","DISPONIBILE","IMG1","IMG2"
+		);
+		
 		String selectSQL = " SELECT * FROM " + ServizioDAO.NOME_TABELLA;
 		
-		if(order != null && !order.equals("")){
+		if(order != null && validOrders.contains(order.toUpperCase())){
 			selectSQL += " ORDER BY "+order;
 		}
 		

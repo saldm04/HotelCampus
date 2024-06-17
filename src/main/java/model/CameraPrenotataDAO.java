@@ -5,7 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
 import javax.sql.DataSource;
 
@@ -113,6 +115,10 @@ public class CameraPrenotataDAO implements BeanDAO<CameraPrenotata, Integer>{
 		PreparedStatement preparedStatement = null;
 		
 		Collection<CameraPrenotata> camere = new ArrayList<CameraPrenotata>();
+		
+		List<String> validOrders = Arrays.asList(
+				"ID","COSTO","CAMERA","PRENOTAZIONE"
+		);
 		
 		String selectSQL = "SELECT * FROM " + CameraPrenotataDAO.NOME_TABELLA;
 		
