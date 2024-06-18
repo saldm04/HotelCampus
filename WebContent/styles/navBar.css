@@ -66,8 +66,8 @@ nav .login img {
 	height: 28px;
 }
 
-nav .login a {
-	padding-right: 30px;
+nav .login{
+	column-gap: 20px ;
 }
 
 nav .underline {

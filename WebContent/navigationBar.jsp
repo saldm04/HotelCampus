@@ -4,6 +4,7 @@
 
 <html>
 <head>
+	<base href="<%=request.getContextPath()%>/" />
 	<link rel="stylesheet" href="styles/navBar.css" type="text/css">
 	<link
       href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css"
@@ -35,9 +36,13 @@
 			<a href="#"><img alt="Cart" src="images/cart.png"></a>
 			
 			<%if(user==null){%>
-				<a href="login.jsp">Login</a>
+				<a href="login.jsp">login</a>
 			<%}else{%>
-				<p>utente </p>
+				<%if(user.isAdmin()){%>			
+					<a href="<%=request.getContextPath()%>/admin/areaRiservata.jsp"><img alt="" src="images/user.png"></a>
+				<%}else{%>
+					<a href="<%=request.getContextPath()%>/common/areaRiservata.jsp"><img alt="" src="images/user.png"></a>
+				<%} %>	
 				<a href="<%=request.getContextPath()%>/common/Logout">logout</a>
 			<%} %>
 			<div id="burger__menu" onclick="showMenu()" class="">

@@ -1,0 +1,36 @@
+@charset "UTF-8";
+
+
+.vUtenti {
+    width: 100%;
+    height: 100%;
+
+}
+
+.vUtenti .delete {
+	margin-left:20px;
+    width: clamp(20px, 2vw, 200px);
+    height: clamp(20px, 2vw, 200px);
+    background-image: url("https://img.icons8.com/?size=100&id=99055&format=png&color=FF0202");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+
+    padding: 0;
+    
+}
+
+
+.vUtenti table{
+	
+    margin-top: 40px;
+	width: clamp(800px,100%,100%);
+	text-align: center;
+	overflow-x: scroll; 
+}
+
+
