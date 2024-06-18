@@ -28,11 +28,8 @@ CREATE TABLE `camera` (
   `quadratura` int NOT NULL,
   `costo` int NOT NULL,
   `tipo` enum('standard','luxury','deluxe','exclusive') NOT NULL,
-  `descrizione` varchar(250) NOT NULL,
   `img1` mediumblob,
   `img2` mediumblob,
-  `img3` mediumblob,
-  `img4` mediumblob,
   `disponibile` tinyint NOT NULL,
   PRIMARY KEY (`numero`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -105,9 +102,11 @@ DROP TABLE IF EXISTS `servizio`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `servizio` (
   `nome` varchar(30) NOT NULL,
-  `descrizione` varchar(50) NOT NULL,
+  `descrizione` varchar(600) NOT NULL,
   `costo` int NOT NULL,
   `disponibile` tinyint NOT NULL,
+  `img1` mediumblob,
+  `img2` mediumblob,
   PRIMARY KEY (`nome`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -160,4 +159,4 @@ CREATE TABLE `utente` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-05-15 11:22:43
+-- Dump completed on 2024-06-18 15:14:29

@@ -25,7 +25,7 @@
 		<div class="menu">
 			<ul id="menu__content" class="menustandard">	
 				<li class="underlineAnimation" id="home"><a href="homepage.jsp" >Home</a></li>
-				<li class="underlineAnimation" id="prenotaOra"><a href="#">Prenota ora</a></li>
+				<li class="underlineAnimation" id="prenotaOra"><a href="prenotazione.jsp">Prenota ora</a></li>
 				<li class="underlineAnimation" id="servizi"><a href="servizi.jsp" >Servizi</a></li>
 				<li class="underlineAnimation" id="recensioni"><a href="#" >Recensioni</a></li>
 			</ul>

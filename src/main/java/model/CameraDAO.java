@@ -27,7 +27,7 @@ public class CameraDAO implements BeanDAO<Camera, Integer>{
 		
 		String insertSQL = "INSERT INTO "+ CameraDAO.NOME_TABELLA + 
 				" (numero, numeroMaxOspiti, quadratura, costo, tipo, "
-				+ "descrizione, img1, img2, img3, img4, disponibile) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+				+ "img1, img2, disponibile) VALUES (?,?,?,?,?,?,?,?)";
 		try{
 			connection = dataSource.getConnection();
 			preparedStatement = connection.prepareStatement(insertSQL);
@@ -36,11 +36,8 @@ public class CameraDAO implements BeanDAO<Camera, Integer>{
 			preparedStatement.setInt(3, data.getQuadratura());
 			preparedStatement.setInt(4, data.getCosto());
 			preparedStatement.setString(5, data.getTipo());
-			preparedStatement.setString(6, data.getDescrizione());
 			preparedStatement.setBytes(6, data.getImg1());
 			preparedStatement.setBytes(7, data.getImg2());
-			preparedStatement.setBytes(8, data.getImg3());
-			preparedStatement.setBytes(9, data.getImg4());
 			preparedStatement.setBoolean(10, data.isDisponibile());
 			
 			preparedStatement.executeUpdate();
@@ -106,11 +103,8 @@ public class CameraDAO implements BeanDAO<Camera, Integer>{
 				bean.setQuadratura(rs.getInt("quadratura"));
 				bean.setCosto(rs.getInt("costo"));
 				bean.setTipo(rs.getString("tipo"));
-				bean.setDescrizione(rs.getString("descrizione"));
 				bean.setImg1(rs.getBytes("img1"));
 				bean.setImg2(rs.getBytes("img2"));
-				bean.setImg3(rs.getBytes("img3"));
-				bean.setImg4(rs.getBytes("img4"));
 				bean.setDisponibile(rs.getBoolean("disponibile"));
 			}
 
@@ -135,7 +129,7 @@ public class CameraDAO implements BeanDAO<Camera, Integer>{
 		Collection<Camera> camere = new ArrayList<Camera>();
 		
 		List<String> validOrders = Arrays.asList(
-				"NUMERO","NUMEROMAXOSPITI","QUADRATURA","COSTO","TIPO","DESCRIZIONE","IMG1","IMG2","IMG3","IMG4","DISPONIBILE"
+				"NUMERO","NUMEROMAXOSPITI","QUADRATURA","COSTO","TIPO","IMG1","IMG2","DISPONIBILE"
 		);
 		
 		String selectSQL = "SELECT * FROM " + CameraDAO.NOME_TABELLA;
@@ -158,11 +152,8 @@ public class CameraDAO implements BeanDAO<Camera, Integer>{
 				bean.setQuadratura(rs.getInt("quadratura"));
 				bean.setCosto(rs.getInt("costo"));
 				bean.setTipo(rs.getString("tipo"));
-				bean.setDescrizione(rs.getString("descrizione"));
 				bean.setImg1(rs.getBytes("img1"));
 				bean.setImg2(rs.getBytes("img2"));
-				bean.setImg3(rs.getBytes("img3"));
-				bean.setImg4(rs.getBytes("img4"));
 				bean.setDisponibile(rs.getBoolean("disponibile"));
 				
 				camere.add(bean);
