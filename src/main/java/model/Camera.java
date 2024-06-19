@@ -11,12 +11,9 @@ public class Camera implements Serializable{
 	private int quadratura;
 	private int costo;
 	private String tipo;
-	private String descrizione;
 	private Boolean disponibile;
 	private byte[] img1;
 	private byte[] img2;
-	private byte[] img3;
-	private byte[] img4;
 	
 	public Camera(){
 		this.numero = 0;
@@ -24,12 +21,9 @@ public class Camera implements Serializable{
 		this.quadratura = 0;
 		this.costo = 0;
 		this.tipo = "";
-		this.descrizione = "";
 		this.disponibile = true;
 		this.img1 = null;
 		this.img2 = null;
-		this.img3 = null;
-		this.img4 = null;
 	}
 
 	//-=======================SETTER=======================-
@@ -53,10 +47,6 @@ public class Camera implements Serializable{
 		this.tipo = tipo;
 	}
 	
-	public void setDescrizione(String descrizione) {
-		this.descrizione = descrizione;
-	}
-	
 	public void setDisponibile(Boolean disponibile) {
 		this.disponibile = disponibile;
 	}
@@ -67,14 +57,6 @@ public class Camera implements Serializable{
 	
 	public void setImg2(byte[] img2) {
 		this.img2 = img2;
-	}
-	
-	public void setImg3(byte[] img3) {
-		this.img3 = img3;
-	}
-	
-	public void setImg4(byte[] img4) {
-		this.img4 = img4;
 	}
 	
 	
@@ -99,10 +81,6 @@ public class Camera implements Serializable{
 		return tipo;
 	}
 
-	public String getDescrizione() {
-		return descrizione;
-	}
-
 	public Boolean isDisponibile() {
 		return disponibile;
 	}
@@ -114,13 +92,4 @@ public class Camera implements Serializable{
 	public byte[] getImg2() {
 		return img2;
 	}
-
-	public byte[] getImg3() {
-		return img3;
-	}
-
-	public byte[] getImg4() {
-		return img4;
-	}
-	
 }

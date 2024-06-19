@@ -8,8 +8,11 @@ function switchElement(element){
 		var x = document.getElementById("servizi");
 		x.className = "underline";
 		break;
+	case "prenotaOra":
+		var x = document.getElementById("prenotaOra");
+		x.className = "underline";
+		break;
 	}
-	
 }
 
 

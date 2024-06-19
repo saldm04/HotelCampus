@@ -1,5 +1,6 @@
 package control;
 
+import model.CameraDAO;
 import model.ServizioDAO;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -32,6 +33,13 @@ public class GetPicture extends HttpServlet {
 						img = servizio.doRetrieveByKey(id).getImg1();
 					}else if(numberImg==2){
 						img = servizio.doRetrieveByKey(id).getImg2();
+					}
+				}else if(beanType.equals("camera")){
+					CameraDAO camera = new CameraDAO((DataSource) getServletContext().getAttribute("DataSource"));
+					if(numberImg==1){
+						img = camera.doRetrieveByKey(Integer.parseInt(id)).getImg1();
+					}else if(numberImg==2){
+						img = camera.doRetrieveByKey(Integer.parseInt(id)).getImg2();
 					}
 				}
 			}
