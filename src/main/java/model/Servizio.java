@@ -18,7 +18,7 @@ public class Servizio implements Serializable{
 		this.nome = "";
 		this.descrizione = "";
 		this.costo = 0;
-		this.disponibile = false;
+		this.disponibile = true;
 		this.img1=null;
 		this.img2=null;
 	}

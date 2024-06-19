@@ -193,8 +193,8 @@ public class CameraDAO implements BeanDAO<Camera, Integer>{
 			connection = dataSource.getConnection();
 			preparedStatement = connection.prepareStatement(alterSQL);
 			
-			preparedStatement.setBoolean(0, disponibilita);
-			preparedStatement.setInt(1, numero);
+			preparedStatement.setBoolean(1, disponibilita);
+			preparedStatement.setInt(2, numero);
 			
 			result = preparedStatement.executeUpdate();
 		}finally {

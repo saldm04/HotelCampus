@@ -1,0 +1,222 @@
+@charset "UTF-8";
+
+.editServizi {
+    width: 100%;
+    height: 100%;
+    overflow-x: scroll;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: left;
+}
+
+
+.aggiungiServizio {
+    margin-top: 40px;
+    width: 80%;
+    height: max-content;
+    border: solid 1px blue;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.aggiungiServizio .serviziForm{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+	height:0px;
+	width:0px;
+	opacity: 0;
+}
+
+.formAnimation .information{
+    display: none;
+}
+
+.formAnimation .serviziForm{
+	height: fit-content;
+	width:100%;
+	opacity: 1;
+}
+
+
+.information {
+	color: grey;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    border-radius: 14px;
+    justify-content: space-between;
+    font-size: clamp(16px, 1.25vw, 200px);
+    padding: 0px 20px;
+}
+
+.information:hover {
+    background-color: #dffbff;
+}
+
+.editServizi .aggiungiServizio .information:hover {
+   
+    cursor: pointer;
+}
+
+.editServizi .aggiungiServizio .information img {
+    display: flex;
+    width: clamp(16px, 2vw, 200px);
+    height: clamp(16px, 2vw, 200px);
+
+}
+
+.editServizi .card {
+  display: flex;
+  flex-direction: row;
+  width: clamp(400px, 100%, 100%);
+  border: 1px solid #214001;
+  border-radius: 15px;
+}
+
+.editServizi .eliminaServizi{
+	display: flex;
+	flex-wrap:wrap;
+	width: 80%;
+	height: max-content;
+    align-items: center ;
+	margin-top: 40px;
+	row-gap: 40px;
+	margin-bottom: 40px;
+}
+
+.editServizi .eliminaServizi form{
+	width: 15%;
+}
+
+.editServizi .card{
+    width: clamp(550px,100%,100%);
+    height: clamp(200px, 15vw, 200px);
+}
+
+.editServizi .card img{
+    width: clamp(200px, 15vw, 200px);
+    height: clamp(200px, 15vw, 200px);
+    display: block;
+    object-fit: cover;
+    border-radius: 15px 0px 0px 15px;
+}
+
+.editServizi .card .alignItem{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    width: 100%;
+    
+}
+
+.editServizi .card .alignItem p{
+    border: solid 1px blue;
+    height: 50%;
+    width: 93%;
+    margin: 0px 2.5%;
+    padding: 1%;
+    background-color: white;
+    overflow-x: scroll;
+    
+}
+
+
+.editServizi .card .alignItem span{
+    width: 95%;
+    margin: 5px 2.5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.editServizi .eliminaServizi button{
+	margin-left:20px;
+    width: clamp(20px, 1.6vw, 200px);
+    height: clamp(20px, 1.6vw, 200px);
+    background-image: url("https://img.icons8.com/?size=100&id=99055&format=png&color=FF0202");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 0;   
+}
+
+form {
+    padding: 20px 0px;
+    width: 90%;
+    display: flex;
+    align-items: center;
+	column-gap: 10px;
+    row-gap: 10px;
+    flex-wrap: wrap;
+}
+
+form input[type="file"] {
+    margin-top: 20px;
+    color: grey;
+    text-align: center;
+    font-size: 0.9rem;
+    height: 2rem;
+    flex: auto;
+}
+
+form input[type="text"] {
+    
+    margin-top: 20px;
+    color: grey;
+    margin-top: 20px;
+    background-color: rgb(255, 255, 255);
+    border: 2px solid rgb(88, 88, 88);
+    border-radius: 15px;
+    text-align: center;
+    font-size: 0.9rem;
+    height: 1.7rem;
+    flex: auto;
+}
+
+form input[type="number"] {
+    width: 30%;
+
+    color: grey;
+
+    background-color: rgb(255, 255, 255);
+    border: 2px solid rgb(88, 88, 88);
+    border-radius: 15px;
+    text-align: center;
+    font-size: 0.9rem;
+    height: 1.7rem;
+    flex: auto;
+}
+
+form input[type="submit"], input[type="reset"] {
+    width: 30%;
+    color: grey;
+    background-color: rgb(255, 255, 255);
+    border: 2px solid rgb(88, 88, 88);
+    border-radius: 15px;
+    text-align: center;
+    font-size: 0.9rem;
+    height: 1.9rem;
+    flex: auto;
+}
+
+
+form textarea{
+    font-size: 0.9rem;
+    width: 100%;
+    resize: none;
+    background-color: rgb(255, 255, 255);
+    border: 2px solid rgb(88, 88, 88);
+    border-radius: 4px;
+}

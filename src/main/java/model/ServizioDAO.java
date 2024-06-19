@@ -24,31 +24,60 @@ public class ServizioDAO implements BeanDAO<Servizio, String>{
 	public synchronized void doSave(Servizio data) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
+		
+		
+		if(doRetrieveByKey(data.getNome()).getNome().equals("") ){
+			String insertSQL = "INSERT INTO " + ServizioDAO.NOME_TABELLA
+					+ " (nome, descrizione, costo, disponibile, img1, img2) VALUES (?, ?, ?, ?, ?, ?)";
 
-		String insertSQL = "INSERT INTO " + ServizioDAO.NOME_TABELLA
-				+ " (nome, descrizione, costo, disponibile, img1, img2) VALUES (?, ?, ?, ?, ?, ?)";
-
-		try {
-			connection = dataSource.getConnection();
-			preparedStatement = connection.prepareStatement(insertSQL);
-			preparedStatement.setString(1, data.getNome());
-			preparedStatement.setString(2, data.getDescrizione());
-			preparedStatement.setInt(3, data.getCosto());
-			preparedStatement.setBoolean(4, data.isDisponibile());
-			preparedStatement.setBytes(5, data.getImg1());
-			preparedStatement.setBytes(6, data.getImg2());
-
-			preparedStatement.executeUpdate();
-
-		} finally {
 			try {
-				if (preparedStatement != null)
-					preparedStatement.close();
+				connection = dataSource.getConnection();
+				preparedStatement = connection.prepareStatement(insertSQL);
+				preparedStatement.setString(1, data.getNome());
+				preparedStatement.setString(2, data.getDescrizione());
+				preparedStatement.setInt(3, data.getCosto());
+				preparedStatement.setBoolean(4, data.isDisponibile());
+				preparedStatement.setBytes(5, data.getImg1());
+				preparedStatement.setBytes(6, data.getImg2());
+
+				preparedStatement.executeUpdate();
+
 			} finally {
-				if (connection != null)
-					connection.close();
+				try {
+					if (preparedStatement != null)
+						preparedStatement.close();
+				} finally {
+					if (connection != null)
+						connection.close();
+				}
+			}
+		}else {
+			
+
+			String alterSQL = "UPDATE " + ServizioDAO.NOME_TABELLA
+					+ " SET costo = ?, descrizione = ?, disponibile = ?, img1 = ? WHERE nome = ?";
+			
+			try {
+				connection = dataSource.getConnection();
+				preparedStatement = connection.prepareStatement(alterSQL);
+				preparedStatement.setInt(1, data.getCosto());
+				preparedStatement.setBytes(4, data.getImg1());
+				preparedStatement.setBoolean(3, true);
+				preparedStatement.setString(2, data.getDescrizione());
+				preparedStatement.setString(5, data.getNome());
+				preparedStatement.executeUpdate();
+			}finally {
+				try {
+					if (preparedStatement != null)
+						preparedStatement.close();
+				} finally {
+					if(connection != null)
+						connection.close();
+				}
 			}
 		}
+		
+		
 		
 	}
 
@@ -181,8 +210,8 @@ public class ServizioDAO implements BeanDAO<Servizio, String>{
 		try {
 			connection = dataSource.getConnection();
 			preparedStatement = connection.prepareStatement(alterSQL);
-			preparedStatement.setBoolean(0, disponibilita);
-			preparedStatement.setString(1, nome);
+			preparedStatement.setBoolean(1, disponibilita);
+			preparedStatement.setString(2, nome);
 			
 			result = preparedStatement.executeUpdate();
 		}finally {

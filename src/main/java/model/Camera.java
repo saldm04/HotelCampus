@@ -25,7 +25,7 @@ public class Camera implements Serializable{
 		this.costo = 0;
 		this.tipo = "";
 		this.descrizione = "";
-		this.disponibile = false;
+		this.disponibile = true;
 		this.img1 = null;
 		this.img2 = null;
 		this.img3 = null;
