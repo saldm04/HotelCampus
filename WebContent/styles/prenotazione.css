@@ -52,6 +52,10 @@ input[type="date"] {
  	font-weight: bold;
 }
 
+.camereMainContainter{
+	margin-bottom:50px;
+}
+
 .cameraContainer {
 	margin: auto;
     width: 100%;
@@ -99,6 +103,20 @@ input[type="date"] {
     font-weight: bold;
     color: rgb(88,88,88);
     font-size: clamp(20px, 1.3vw, 100px);
+}
+
+#addCartForm{
+	margin-top: 30px;
+}
+
+.avvisoCamereContainer{
+	margin-bottom: 120px;
+}
+
+.avvisoCamere{
+	color: #a26f5c;
+	text-align: center;
+	font-size: clamp(25px, 3vw, 50px);	
 }
 
 @media screen and (max-width: 950px){

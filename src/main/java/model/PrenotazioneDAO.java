@@ -83,7 +83,7 @@ public class PrenotazioneDAO implements BeanDAO<Prenotazione, Integer>{
 
 		Prenotazione bean = new Prenotazione();
 
-		String selectSQL = "SELECT * FROM " + PrenotazioneDAO.NOME_TABELLA + " WHERE id = ?";
+		String selectSQL = "SELECT * FROM " + PrenotazioneDAO.NOME_TABELLA + " WHERE idPrenotazione = ?";
 
 		try {
 		

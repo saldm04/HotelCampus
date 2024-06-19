@@ -24,7 +24,7 @@ public class ServizioDAO implements BeanDAO<Servizio, String>{
 	public synchronized void doSave(Servizio data) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-
+		
 		String insertSQL = "INSERT INTO " + ServizioDAO.NOME_TABELLA
 				+ " (nome, descrizione, costo, disponibile, img1, img2) VALUES (?, ?, ?, ?, ?, ?)";
 
@@ -181,8 +181,8 @@ public class ServizioDAO implements BeanDAO<Servizio, String>{
 		try {
 			connection = dataSource.getConnection();
 			preparedStatement = connection.prepareStatement(alterSQL);
-			preparedStatement.setBoolean(0, disponibilita);
-			preparedStatement.setString(1, nome);
+			preparedStatement.setBoolean(1, disponibilita);
+			preparedStatement.setString(2, nome);
 			
 			result = preparedStatement.executeUpdate();
 		}finally {

@@ -38,3 +38,7 @@ hr {
 	font-size: clamp(15px, 1.6vw, 200px);
 	color: grey;
 }
+
+.testoDiBenvenuto{
+	margin-bottom:50px;
+}
