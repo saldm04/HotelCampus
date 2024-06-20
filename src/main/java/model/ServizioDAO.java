@@ -25,7 +25,6 @@ public class ServizioDAO implements BeanDAO<Servizio, String>{
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		
-		
 		if(doRetrieveByKey(data.getNome()).getNome().equals("") ){
 			String insertSQL = "INSERT INTO " + ServizioDAO.NOME_TABELLA
 					+ " (nome, descrizione, costo, disponibile, img1, img2) VALUES (?, ?, ?, ?, ?, ?)";

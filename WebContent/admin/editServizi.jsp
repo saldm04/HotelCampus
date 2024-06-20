@@ -22,8 +22,9 @@
  <section class="editServizi">
  
  	<div class=" aggiungiServizio " id="addServizio">
- 	 <div class="information" onclick="showMenu()"><p>Clicca qui per aggiungere un nuovo servizio</p> <img src="https://img.icons8.com/?size=100&id=1501&format=png&color=0272FF"></div>
+ 	 <div class="information" onclick="showMenuServizi()"><p>Clicca qui per aggiungere un nuovo servizio</p> <img src="https://img.icons8.com/?size=100&id=1501&format=png&color=0272FF"></div>
  	 <div class="serviziForm">
+ 	 	<div class="close"><p>Inserisci dati Servizio:</p> <img src="https://img.icons8.com/?size=100&id=3062&format=png&color=FF0202" onclick="showMenuServizi()"></div>
  	 	<form action="<%=request.getContextPath()%>/admin/EditServizi" enctype="multipart/form-data" method="post">
  	 		<input type="hidden" name="action" value="addServizio">
 			<input type="file" name="foto1" value=""  accept="image/png, image/jpeg" required="required">	
@@ -63,28 +64,5 @@
 	 </section>	
  </section>
 
-
-<script type="text/javascript">
-
-let addMenuIsClick = false;
-
-
-function showMenu(){
-	
-	const addMenu = document.getElementById("addServizio");
-	
-	if(burgerMenuIsClick){
-		addMenuIsClick = false;
-		addMenu.className = "formAnimation aggiungiServizio";
-			
-			
-	
-	}else{
-		burgerMenuIsClick = true;
-		addMenu.className = "aggiungiServizio";
-	}
-	
-}
-</script>
 </body>
 </html>

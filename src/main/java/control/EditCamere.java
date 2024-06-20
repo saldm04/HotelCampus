@@ -44,13 +44,85 @@ public class EditCamere extends HttpServlet {
 		
 		if(request.getParameter("action") != null) {
 			if(request.getParameter("action").equals("addCamera")) {
+				System.out.println("sono qui");
+				Camera cameraSave = new Camera();
+				Integer numeroCamera = Integer.parseInt(request.getParameter("numeroCamera"));
+				Integer numeroOspiti = Integer.parseInt(request.getParameter("numeroMaxOspiti"));
+				Integer quadratura = Integer.parseInt(request.getParameter("quadratura"));
+				Integer costo = Integer.parseInt(request.getParameter("costo"));
+				String tipologia = request.getParameter("tipologia");
 				
-		    
-	
+				
+				int i = 1;
+				
+				for (Part part : request.getParts()) {
+					String fileName = part.getSubmittedFileName();
+					if (fileName != null && !fileName.equals("")) {
+							if(i == 1) {
+								cameraSave.setImg1(part.getInputStream().readAllBytes());
+								i++;
+							}else {
+								cameraSave.setImg2(part.getInputStream().readAllBytes());
+							}
+					}
+				}
+				
+				if(numeroCamera == null || numeroCamera == 0) {
+					errors.add("Il campo Numero Camera non può essere vuoto!");
+				}
+		        if(numeroOspiti == null || numeroOspiti == 0) {
+		        	errors.add("Il campo Numero Ospiti non può essere vuoto!");
+				}
+		        if(quadratura == null || quadratura == 0) {
+		        	errors.add("Il campo quadratura non può essere vuoto!");
+		        }
+		        if(costo == null || costo == 0) {
+		        	errors.add("Il campo costo non può essere vuoto!");
+		        }
+		        if(tipologia == null || tipologia.trim().equals(""))
+		        	errors.add("il campo tipologia non può essere vuoto");
+		        
+		        
+		        tipologia = tipologia.toLowerCase();
+		        
+		 
+		        
+		        if(!tipologia.equals("deluxe") && !tipologia.equals("exclusive") && !tipologia.equals("standard") && !tipologia.equals("luxury"))
+		        	errors.add("la tipologia inserita non è valida");
+		
+		        
+		        if (!errors.isEmpty()) {
+		        	request.setAttribute("errors", errors);
+		        	rd.forward(request, response);
+		        	return;
+		        }
+		        
+		       
+		      
+		        
+		        cameraSave.setCosto(costo);
+		        cameraSave.setDisponibile(true);
+		        cameraSave.setNumero(numeroCamera);
+		        cameraSave.setNumeroMaxOspiti(numeroOspiti);
+		        cameraSave.setQuadratura(quadratura);
+		        cameraSave.setTipo(tipologia);
+		        
+		        try {
+					camereDAO.doSave(cameraSave);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
 			}
 			
 			if(request.getParameter("action").equals("delete")) {
-				
+				try {
+					camereDAO.setDisponibile(Integer.parseInt(request.getParameter("numero")), false);
+				} catch (NumberFormatException | SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 		
