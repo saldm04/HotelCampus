@@ -44,7 +44,6 @@ public class EditCamere extends HttpServlet {
 		
 		if(request.getParameter("action") != null) {
 			if(request.getParameter("action").equals("addCamera")) {
-				System.out.println("sono qui");
 				Camera cameraSave = new Camera();
 				Integer numeroCamera = Integer.parseInt(request.getParameter("numeroCamera"));
 				Integer numeroOspiti = Integer.parseInt(request.getParameter("numeroMaxOspiti"));

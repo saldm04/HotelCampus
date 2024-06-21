@@ -1,13 +1,14 @@
 .carrelloVuoto {
-	width: 100%;
-    min-height: 50vh;
-    margin-top: 200px;
+	width: 90%;
+	margin: auto;
+    margin-top: 30vh;
+    margin-bottom: 50px;
     text-align: center;
 }
 
 .carrelloVuoto h1{
 	color: #a26f5c;
-	font-size: clamp(35px, 3vw, 50px);	
+	font-size: clamp(35px, 3vw, 50px);
 }
 
 .carrelloVuoto p{
@@ -25,6 +26,11 @@
 	text-align: center;
 }
 
+#containerTabella p{
+	color: #A26F5C;
+	font-size: clamp(18px, 1.5vw, 3vw);
+}
+
 table{
 	width:100%;
 	border-collapse: collapse;
@@ -32,10 +38,6 @@ table{
 
 #tabellaCamere{
 	margin-bottom: 40px;
-}
-
-.rigaIntestazione{
-	
 }
 
 table th{
@@ -69,13 +71,34 @@ input[type="submit"]{
 	margin:auto;
 }
 
-#tabellaServizi img{
-	width: 20px;
-}
-
-.containerQtServizi{
+.containerImgTabella{
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	
+}
+
+table img{
+	width: 20px;
+}
+
+table a{
+	height: 20px;
+}
+
+.errorCarrello{
+	width:90%;
+	margin:auto;
+	margin-bottom: 40vh;
+	text-align: center;
+}
+
+.errorCarrello h1{
+	color: #ff0000;
+	font-size: clamp(25px, 2.5vw, 50px);
+}
+
+.errorCarrello p{
+	color: #ff0000;
+	font-size: clamp(20px, 1.5vw, 50px);	
 }

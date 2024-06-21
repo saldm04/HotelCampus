@@ -2,13 +2,14 @@ package model;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class Prenotazione implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
 	private int id;
-	private Date dataPrenotazione;
+	private Timestamp dataPrenotazione;
 	private Date dataInizio;
 	private Date dataFine;
 	private int importo;
@@ -28,7 +29,7 @@ public class Prenotazione implements Serializable{
 		this.id = id;
 	}
 
-	public void setDataPrenotazione(Date dataPrenotazione) {
+	public void setDataPrenotazione(Timestamp dataPrenotazione) {
 		this.dataPrenotazione = dataPrenotazione;
 	}
 
@@ -53,7 +54,7 @@ public class Prenotazione implements Serializable{
 		return id;
 	}
 
-	public Date getDataPrenotazione() {
+	public Timestamp getDataPrenotazione() {
 		return dataPrenotazione;
 	}
 

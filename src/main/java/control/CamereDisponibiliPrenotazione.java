@@ -38,6 +38,8 @@ public class CamereDisponibiliPrenotazione extends HttpServlet {
 			camere.removeIf(c -> c.isDisponibile()==false);
 			request.setAttribute("camereDisponibili", camere);
 			request.setAttribute("ricercaEffettuata", false);
+			String maxOspiti = cameraDAO.getMaxNumeroOspiti();
+			request.setAttribute("maxAttributeValueOspiti", maxOspiti);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -126,6 +128,12 @@ public class CamereDisponibiliPrenotazione extends HttpServlet {
 		
         request.setAttribute("camereDisponibili", camere);
         request.setAttribute("ricercaEffettuata", true);
+        try {
+			request.setAttribute("maxAttributeValueOspiti", cameraDAO.getMaxNumeroOspiti());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         
 		rd.forward(request, response);
 	}

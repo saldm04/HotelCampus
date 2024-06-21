@@ -1,3 +1,4 @@
+<%@page import="java.util.Enumeration"%>
 <%@page import="java.util.ArrayList, model.Camera, model.Servizio"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -5,7 +6,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<link type="text/css" rel="stylesheet" href="styles/carrello.css">
+	<link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/styles/carrello.css">
 	<meta name="viewport" content="initial-scale=1, width=device-width">
 	<script src="scripts/carrelloNumeroServizi.js"></script>
 	<title>Carrello</title>
@@ -21,6 +22,11 @@
 			Integer totaleServizi = 0;
 			
 			if(camere==null || camere.isEmpty()){
+				if(servizi!=null){
+					for(Servizio servizio : servizi){
+						sessione.setAttribute("att"+servizio.getNome().replaceAll("\\s+", ""), "0");
+					}
+				}
 				%>
 				<div class="carrelloVuoto">
 					<h1>Il carrello è vuoto</h1>
@@ -29,7 +35,14 @@
 						servizi da noi offerti, per migliorare la tua esperienza.
 					</p>
 				</div>
-				<%
+				<div class="errorCarrello">
+				<%if(request.getAttribute("erroreAcquisto")!=null){%>
+						<h1>La prenotazione non è andata a buon fine</h1>
+						<p><%=request.getAttribute("erroreAcquisto")%></p>
+						<%request.removeAttribute("erroreAcquisto");%>
+				<%}%>
+				</div>
+			<%
 			}else if(!camere.isEmpty()){
 			%>
 				<form method="post" action="<%=request.getContextPath()%>/common/Acquista" id="formAcquista">
@@ -45,6 +58,7 @@
 							<th>Quadratura</th>
 							<th>Tipologia</th>
 							<th>Costo per notte</th>
+							<th>Rimuovi dal carrello</th>
 						</tr>
 						<% 
 						for(Camera camera : camere){
@@ -56,7 +70,12 @@
 							<td><%=camera.getNumeroMaxOspiti()%></td>	
 							<td><%=camera.getQuadratura()%> mq</td>	
 							<td><%=camera.getTipo()%></td>	
-							<td><%=camera.getCosto()%> €</td>	
+							<td><%=camera.getCosto()%> €</td>
+							<td><div class="containerImgTabella">
+								<a href="GestisciCarrello?camera=<%=camera.getNumero()%>">
+								<img alt="Rimuovi dal carrello" src="images/simboloelimina.png"/>
+								</a>
+							</div></td>	
 						</tr>
 						<%
 						}
@@ -76,9 +95,11 @@
 						<% 
 						for(Servizio servizio : servizi){
 							String valueInSessione = (String) sessione.getAttribute("att"+servizio.getNome().replaceAll("\\s+", ""));
-							if(valueInSessione==null){
+							if(valueInSessione==null ){
 								valueInSessione="0";
 								sessione.setAttribute("att"+servizio.getNome().replaceAll("\\s+", ""), "0");
+							}else if(Integer.parseInt(valueInSessione)>numeroMassimoTotaleOspiti){
+								valueInSessione = numeroMassimoTotaleOspiti.toString();
 							}
 							totaleServizi += Integer.parseInt(valueInSessione)*servizio.getCosto();
 						%>
@@ -86,10 +107,10 @@
 							<td><%=servizio.getNome()%></td>	
 							<td><%=servizio.getCosto()%> €</td>
 							<td>
-								<div class="containerQtServizi">
-								<a href="AggiungiAlCarrello?op=aggiungi&servizio=att<%=servizio.getNome().replaceAll("\\s+", "")%>"><img alt="Aggiungi servizio" src="images/simbolopiu.png"></a>
+								<div class="containerImgTabella">
+								<a href="GestisciCarrello?op=aggiungi&servizio=att<%=servizio.getNome().replaceAll("\\s+", "")%>"><img alt="Aggiungi servizio" src="images/simbolopiu.png"></a>
 								<input type="number" value="<%=valueInSessione%>" name="<%=servizio.getNome().replaceAll("\\s+", "")%>" readonly>
-								<a href="AggiungiAlCarrello?op=rimuovi&servizio=att<%=servizio.getNome().replaceAll("\\s+", "")%>"><img alt="Rimuovi servizio" src="images/simbolomeno.png"></a>
+								<a href="GestisciCarrello?op=rimuovi&servizio=att<%=servizio.getNome().replaceAll("\\s+", "")%>"><img alt="Rimuovi servizio" src="images/simbolomeno.png"></a>
 								</div>
 							</td>
 						</tr>

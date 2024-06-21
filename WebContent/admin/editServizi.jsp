@@ -29,7 +29,7 @@
  	 		<input type="hidden" name="action" value="addServizio">
 			<input type="file" name="foto1" value=""  accept="image/png, image/jpeg" required="required">	
 			<input type="text" name="nome" value="" required="required" placeholder="nome servizio">
-			<textarea name="descrizione" value="" required="required" rows="5" > </textarea>
+			<textarea name="descrizione" value="" maxlength="600" required="required" rows="5" > </textarea>
 			<input type="number" min="1" name="costo" value="" required="required" placeholder="costo">
 			<input type="submit" value="Conferma"><input type="reset" value="Ripristina">
 		</form>

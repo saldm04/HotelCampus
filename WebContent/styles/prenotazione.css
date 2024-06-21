@@ -110,6 +110,8 @@ input[type="date"] {
 }
 
 .avvisoCamereContainer{
+	margin: auto;
+	width:90%;
 	margin-bottom: 120px;
 }
 

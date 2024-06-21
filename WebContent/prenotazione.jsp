@@ -21,7 +21,8 @@
         
         List<Camera> camere = (List<Camera>) request.getAttribute("camereDisponibili");
         Boolean ricercaEffettuata = (Boolean) request.getAttribute("ricercaEffettuata");
-        if(camere==null){
+        String maxAttributeValueOspiti = (String) request.getAttribute("maxAttributeValueOspiti");
+        if(camere==null || maxAttributeValueOspiti==null || ricercaEffettuata==null){
         	response.sendRedirect("CamereDisponibiliPrenotazione");
 			return;
         }
@@ -43,7 +44,7 @@
 					<label for="checkindate">Check in: <input type="date" id="checkindate" name="checkindate" min=<%=todayStr%> oninput="checkSelectedDate(this)" required/></label>
 					<label for="checkoutdate">Check out: <input type="date" id="checkoutdate" name="checkoutdate" required disabled/></label>
 				<%} %>
-			<label for="numOspiti">Numero di ospiti: <input type="number" name="numOspiti" min="1" max="4" required/></label>
+			<label for="numOspiti">Numero di ospiti: <input type="number" name="numOspiti" min="1" max=<%=maxAttributeValueOspiti%> required/></label>
 			<input type="submit" value="Verifica disponibilità">
 		</form>
 	</div>
@@ -69,7 +70,7 @@
 					<h1>N°:</h1><span><%=camera.getNumero()%></span>
 					<h1>Costo per notte:</h1><span><%=camera.getCosto()%></span>
 					<%if(ricercaEffettuata){%>
-						<form method="post" action="AggiungiAlCarrello" id="addCartForm">
+						<form method="post" action="GestisciCarrello" id="addCartForm">
 							<input type="hidden" name="numeroCamera" value="<%=camera.getNumero()%>"/>
 							<input type="submit" value="Aggiungi al carrello"/>
 						</form>
@@ -84,8 +85,8 @@
 	<%
 		}else if(camere.isEmpty()){
 			%>	<div class="avvisoCamereContainer">
-					<h1 class="avvisoCamere">La vostra ricerca non ha prodotto risultati</h1>
-					<h1 class="avvisoCamere">Tutte le camere sono prenotate!</h1>
+					<h1 class="avvisoCamere">La vostra ricerca non ha prodotto risultati.</h1>
+					<h1 class="avvisoCamere">Non sono disponibili camere che soddisfano i vostri criteri di ricerca.</h1>
 				</div>
 			<%
 		}

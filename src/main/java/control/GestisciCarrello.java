@@ -21,25 +21,34 @@ import model.ServizioDAO;
 /**
  * Servlet implementation class AggiungiAlCarrello
  */
-@WebServlet("/AggiungiAlCarrello")
-public class AggiungiAlCarrello extends HttpServlet {
+@WebServlet("/GestisciCarrello")
+public class GestisciCarrello extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String op = request.getParameter("op");
 		String servizio = request.getParameter("servizio");
+		String camera = request.getParameter("camera");
 		HttpSession sessione = request.getSession();
 		RequestDispatcher rd = request.getRequestDispatcher("carrello.jsp");
 		Integer numeroMassimoTotaleOspiti = (Integer) sessione.getAttribute("numeroMassimoTotaleOspiti");
 		
-		if(servizio != null && op != null) {
+		if(servizio != null && op != null && camera==null){
 			Integer value = Integer.parseInt((String) sessione.getAttribute(servizio));
-			if(op.equals("aggiungi") && value<numeroMassimoTotaleOspiti){
-				value++;
-			}else if(op.equals("rimuovi") && value>0){
-				value--;
+			if(value!=null) {
+				if(op.equals("aggiungi") && value<numeroMassimoTotaleOspiti){
+					value++;
+				}else if(op.equals("rimuovi") && value>0){
+					value--;
+				}
+				sessione.setAttribute(servizio, value.toString());
 			}
-			sessione.setAttribute(servizio, value.toString());
+		}else if(camera!=null && servizio == null && op == null){
+			ArrayList<Camera> camere = (ArrayList<Camera>) sessione.getAttribute("CarrelloCamere");
+			if(camere!=null){
+				camere.removeIf(c -> c.getNumero() == Integer.parseInt(camera));
+				sessione.setAttribute("CarrelloCamere", camere);
+			}
 		}
 		
 		rd.forward(request, response);

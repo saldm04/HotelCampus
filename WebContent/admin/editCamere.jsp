@@ -25,8 +25,8 @@
 			 <div class="close"><p>Inserisci dati camera:</p> <img src="https://img.icons8.com/?size=100&id=3062&format=png&color=FF0202" onclick="showMenuCamere()"></div>
 			 <form action="<%=request.getContextPath()%>/admin/EditCamere" enctype="multipart/form-data" method="post">
  	 			<input type="hidden" name="action" value="addCamera">
- 	 		    <span><label for="foto1">Prima immagine: </label><input type="file" name="foto1"   accept="image/png, image/jpeg" required="required"></span>
-				<span><label for="foto2">Seconda immagine: </label><input type="file" name="foto2"  accept="image/png, image/jpeg" required="required"></span>
+ 	 		    <span><label for="foto1">Prima immagine: </label><input type="file" name="foto1" accept="image/png, image/jpeg" required="required"></span>
+				<span><label for="foto2">Seconda immagine (facoltativa): </label><input type="file" name="foto2" accept="image/png, image/jpeg"></span>
 				<input type="number" min="1" name="numeroCamera" value="" required="required" placeholder="Numero camera">
 				<input type="number" min="1" name="numeroMaxOspiti" value="" required="required" placeholder="Numero Ospiti">
 				<input type="number" min="1" name="quadratura" value="" required="required" placeholder="Quadratura">
