@@ -33,7 +33,7 @@
 		</div>
 		
 		<div class="login">
-			<a href="#"><img alt="Cart" src="images/cart.png"></a>
+			<a href="<%=request.getContextPath()%>/carrello.jsp"><img alt="Cart" src="images/cart.png"></a>
 			
 			<%if(user==null){%>
 				<a href="login.jsp">login</a>

@@ -1,6 +1,6 @@
 <%@page import="java.util.Iterator"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="java.util.Date, java.text.SimpleDateFormat, model.Camera, java.util.List"%>
+<%@ page import="java.util.Date, java.text.SimpleDateFormat, model.Camera, java.util.*"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,8 +29,20 @@
 	
 	<div class="formContainer">
 		<form method="post" id="dateForm" action="CamereDisponibiliPrenotazione">
-			<label for="checkindate">Check in: <input type="date" id="checkindate" name="checkindate" min=<%=todayStr%> oninput="checkSelectedDate(this)" required/></label>
-			<label for="checkoutdate">Check out: <input type="date" id="checkoutdate" name="checkoutdate" required disabled/></label>
+			<%   
+	        	ArrayList<Camera> camereCarrello = (ArrayList<Camera>) request.getSession().getAttribute("CarrelloCamere");
+	        	if(camereCarrello!=null && !camereCarrello.isEmpty()){
+				%>
+					<label for="checkindate">Check in: <input type="date" value="<%=request.getSession().getAttribute("dataInizioPrenotazione")%>" id="checkindate"  min=<%=todayStr%> oninput="checkSelectedDate(this)" required disabled/></label>
+					<label for="checkoutdate">Check out: <input type="date" value="<%=request.getSession().getAttribute("dataFinePrenotazione")%>" id="checkoutdate" required disabled/></label>
+					<input type="hidden" name="checkindate" value="<%=request.getSession().getAttribute("dataInizioPrenotazione")%>">
+					<input type="hidden" name="checkoutdate" value="<%=request.getSession().getAttribute("dataFinePrenotazione")%>">
+				<%
+				}else{
+				%>
+					<label for="checkindate">Check in: <input type="date" id="checkindate" name="checkindate" min=<%=todayStr%> oninput="checkSelectedDate(this)" required/></label>
+					<label for="checkoutdate">Check out: <input type="date" id="checkoutdate" name="checkoutdate" required disabled/></label>
+				<%} %>
 			<label for="numOspiti">Numero di ospiti: <input type="number" name="numOspiti" min="1" max="4" required/></label>
 			<input type="submit" value="Verifica disponibilità">
 		</form>
@@ -49,15 +61,16 @@
 					<img alt="Immagine camera 1" src="./GetPicture?beanType=camera&id=<%=camera.getNumero()%>&numberImg=1">
 				</div>
 				<div class="info">
-					<h1>Tipologia camera: </h1><span><%=camera.getTipo()%></span>
-					<h1>Quadratura: </h1><span><%=camera.getQuadratura()%></span>
-					<h1>Numero massimo di ospiti: </h1><span><%=camera.getNumeroMaxOspiti()%></span>
+					<h1>Tipologia camera:</h1><span><%=camera.getTipo()%></span>
+					<h1>Quadratura:</h1><span><%=camera.getQuadratura()%> mq</span>
+					<h1>Numero massimo di ospiti:</h1><span><%=camera.getNumeroMaxOspiti()%></span>
 				</div>
 				<div class="costo">
-					<h1>Costo per notte: </h1><span><%=camera.getCosto()%> €</span>
+					<h1>N°:</h1><span><%=camera.getNumero()%></span>
+					<h1>Costo per notte:</h1><span><%=camera.getCosto()%></span>
 					<%if(ricercaEffettuata){%>
 						<form method="post" action="AggiungiAlCarrello" id="addCartForm">
-							<input type="hidden" value=<%=camera.getNumero()%>/>
+							<input type="hidden" name="numeroCamera" value="<%=camera.getNumero()%>"/>
 							<input type="submit" value="Aggiungi al carrello"/>
 						</form>
 					<%}%>
