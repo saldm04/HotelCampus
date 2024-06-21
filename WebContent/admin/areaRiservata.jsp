@@ -41,6 +41,6 @@ pageEncoding="UTF-8"%>
 </section>
 
 <%@ include file="../footer.jsp" %>
-    
+<script type="text/javascript" src="scripts/areaRiservataAdmin.js"></script>
 </body>
 </html>

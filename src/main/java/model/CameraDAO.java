@@ -25,29 +25,58 @@ public class CameraDAO implements BeanDAO<Camera, Integer>{
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		
-		String insertSQL = "INSERT INTO "+ CameraDAO.NOME_TABELLA + 
-				" (numero, numeroMaxOspiti, quadratura, costo, tipo, "
-				+ "img1, img2, disponibile) VALUES (?,?,?,?,?,?,?,?)";
-		try{
-			connection = dataSource.getConnection();
-			preparedStatement = connection.prepareStatement(insertSQL);
-			preparedStatement.setInt(1, data.getNumero());
-			preparedStatement.setInt(2, data.getNumeroMaxOspiti());
-			preparedStatement.setInt(3, data.getQuadratura());
-			preparedStatement.setInt(4, data.getCosto());
-			preparedStatement.setString(5, data.getTipo());
-			preparedStatement.setBytes(6, data.getImg1());
-			preparedStatement.setBytes(7, data.getImg2());
-			preparedStatement.setBoolean(10, data.isDisponibile());
+		if(doRetrieveByKey(data.getNumero()).getNumero() == 0 ){
+		
+			String insertSQL = "INSERT INTO "+ CameraDAO.NOME_TABELLA + 
+					" (numero, numeroMaxOspiti, quadratura, costo, tipo, "
+					+ "img1, img2, disponibile) VALUES (?,?,?,?,?,?,?,?)";
+			try{
+				connection = dataSource.getConnection();
+				preparedStatement = connection.prepareStatement(insertSQL);
+				preparedStatement.setInt(1, data.getNumero());
+				preparedStatement.setInt(2, data.getNumeroMaxOspiti());
+				preparedStatement.setInt(3, data.getQuadratura());
+				preparedStatement.setInt(4, data.getCosto());
+				preparedStatement.setString(5, data.getTipo());
+				preparedStatement.setBytes(6, data.getImg1());
+				preparedStatement.setBytes(7, data.getImg2());
+				preparedStatement.setBoolean(8, data.isDisponibile());
 			
-			preparedStatement.executeUpdate();
-		} finally {
-			try {
-				if (preparedStatement != null)
-					preparedStatement.close();
+				preparedStatement.executeUpdate();
 			} finally {
-				if (connection != null)
-					connection.close();
+				try {
+					if (preparedStatement != null)
+						preparedStatement.close();
+				} finally {
+					if (connection != null)
+						connection.close();
+				}
+			}
+		}else {
+			
+			String alterSQL = "UPDATE " + CameraDAO.NOME_TABELLA
+					+ " SET numeroMaxOspiti = ?, costo = ? ,quadratura = ?, img1 = ?, img2 = ?, disponibile = ?, tipo = ? WHERE numero = ?";
+			
+			try {
+				connection = dataSource.getConnection();
+				preparedStatement = connection.prepareStatement(alterSQL);
+				preparedStatement.setInt(1, data.getNumeroMaxOspiti());
+				preparedStatement.setInt(2, data.getCosto());
+				preparedStatement.setInt(3, data.getQuadratura());
+				preparedStatement.setBytes(4, data.getImg1());
+				preparedStatement.setBytes(5, data.getImg2());
+				preparedStatement.setBoolean(6, true);
+				preparedStatement.setString(7, data.getTipo());
+				preparedStatement.setInt(8, data.getNumero());
+				preparedStatement.executeUpdate();
+			}finally {
+				try {
+					if (preparedStatement != null)
+						preparedStatement.close();
+				} finally {
+					if(connection != null)
+						connection.close();
+				}
 			}
 		}
 	}
@@ -176,7 +205,7 @@ public class CameraDAO implements BeanDAO<Camera, Integer>{
 		PreparedStatement preparedStatement = null;
 
 		String alterSQL = "UPDATE " + CameraDAO.NOME_TABELLA
-				+ " SET disponibile = ? WHERE nome = ?";
+				+ " SET disponibile = ? WHERE numero = ?";
 		
 		int result = 0;
 		

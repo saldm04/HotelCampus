@@ -1,0 +1,238 @@
+@charset "UTF-8";
+
+.editCamere{
+	width:100%;
+	height: 100%;
+	overflow-x: scroll; 
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: left;
+}
+
+.aggiungiCamera{
+	margin-top: 40px;
+    width: 80%;
+    height: max-content;
+    border: solid 1px blue;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;	
+}
+
+.information {
+    color: grey;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    border-radius: 14px;
+    justify-content: space-between;
+    font-size: clamp(16px, 1.25vw, 200px);
+    padding: 0px 20px;
+}
+
+.information:hover {
+    background-color: #dffbff;
+}
+
+.editCamere .aggiungiCamera .information:hover {
+    cursor: pointer;
+}
+
+.editCamere .aggiungiCamera .information img {
+    display: flex;
+    width: clamp(20px, 2vw, 200px);
+    height: clamp(20px, 2vw, 200px);
+
+}
+
+.aggiungiCamera .camereForm {
+	
+	display: none;
+}
+
+.formAnimation .information {
+    display: none;
+}
+
+.formAnimation .camereForm {
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: fit-content;
+    width: 100%;
+    opacity: 1;
+}
+
+.camereForm .close{
+	color: grey;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    border-radius: 14px;
+    justify-content: space-between;
+    font-size: clamp(16px, 1.25vw, 200px);
+    margin: 0px 0px;
+}
+
+.camereForm .close p{
+	margin-left: 20px;
+}
+.camereForm .close img:hover{
+	cursor: pointer;
+}
+
+.camereForm .close img{
+	margin-right: 20px;
+    width: clamp(20px, 2vw, 200px);
+    height: clamp(20px, 2vw, 200px);
+}
+
+.editCamere form {
+    padding: 0px 0px 30px 0px;
+    width: 90%;
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+    row-gap: 10px;
+    flex-wrap: wrap;
+}
+
+.editCamere form input[type="file"] {
+	background-color: white;
+    margin-top: 20px;
+    color: grey;
+    text-align: center;
+    font-size: 0.9rem;
+    height: 2rem;
+    flex: auto;
+}
+
+
+.editCamere form input[type="number"] {
+    width: 30%;
+
+    color: grey;
+
+    background-color: rgb(255, 255, 255);
+    border: 2px solid rgb(88, 88, 88);
+    border-radius: 15px;
+    text-align: center;
+    font-size: 0.9rem;
+    height: 1.7rem;
+    flex: auto;
+}
+
+.editCamere form input[type="submit"],
+input[type="reset"] {
+    width: 30%;
+    color: grey;
+    background-color: rgb(255, 255, 255);
+    border: 2px solid rgb(88, 88, 88);
+    border-radius: 15px;
+    text-align: center;
+    font-size: 0.9rem;
+    height: 1.9rem;
+    flex: auto;
+}
+
+.camereForm  select {
+    background-color: rgb(255, 255, 255);
+    border: 2px solid rgb(88, 88, 88);
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    color: rgb(162, 161, 161);
+    height: 1.844rem;
+    width: 100%;
+    font-size: 0.987rem;
+    text-align-last: center;
+    margin: 0;
+    box-sizing: border-box;
+    appearance: none;
+    cursor: pointer;
+}
+
+
+.camereForm  .alignSelect::after {
+    content: '▼';
+    size: 1px;
+    position: absolute;
+    top: 50%;
+    right: 1.5rem;
+    transform: translateY(-50%);
+    font-size: 0.7rem;
+    color: rgb(88, 88, 88);
+}
+
+.editCamere .eliminaCamere{
+	display: flex;
+    flex-wrap: wrap;
+    width: 80%;
+    height: max-content;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 40px;
+    row-gap: 40px;
+    margin-bottom: 40px;
+}
+
+.editCamere .card {
+    display: flex;
+    flex-direction: row;
+    width: clamp(360px, 100%, 2000px);
+    height: clamp(200px, 15vw, 200px);
+    border: 1px solid #214001;
+    border-radius: 15px;
+}
+
+.editCamere .card img {
+    width: clamp(200px, 15vw, 200px);
+    height: clamp(200px, 15vw, 200px);
+    display: block;
+    object-fit: cover;
+    border-radius: 15px 0px 0px 15px;
+}
+
+.editCamere .card .alignItem{
+    width: 100%;
+    font-size: clamp(16px, 1.25vw, 200px);
+    color: grey;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    justify-content: space-between;
+
+}
+
+.editCamere button {
+    width: clamp(20px, 1.6vw, 200px);
+    height: clamp(20px, 1.6vw, 200px);
+    background-image: url("https://img.icons8.com/?size=100&id=99055&format=png&color=FF0202");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.editCamere .alignButton{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between 
+}
+
+.camereForm form span{
+	
+    width: 100%;
+    color: grey;
+    font-size: clamp(16px, 1.25vw, 200px);
+}
