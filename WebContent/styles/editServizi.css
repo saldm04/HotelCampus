@@ -47,6 +47,7 @@
     border: solid 1px blue;
     border-radius: 15px;
     display: flex;
+    flex-direction: column ;
     align-items: center;
     justify-content: center;
 }
@@ -73,7 +74,7 @@
 .information {
     color: grey;
     display: flex;
-    width: 100%;
+    width: 95.2%;
     height: 100%;
     align-items: center;
     border-radius: 14px;
@@ -249,4 +250,38 @@ form textarea {
     background-color: rgb(255, 255, 255);
     border: 2px solid rgb(88, 88, 88);
     border-radius: 4px;
+}
+
+.warning {
+    border: 1px solid rgb(195, 193, 138);
+    background-color: rgb(246, 244, 181);
+    width: clamp(300px, 40%, 50%);
+    border-radius: 15px;
+    height: fit-content;
+    padding: 1rem 3%;
+    display: flex;
+    align-items: safe;
+    justify-content: space-between;
+}
+
+.warning img {
+    height: 2rem;
+}
+
+.warning span h4 {
+    margin: 0px;
+    font-size: 1.2rem;
+    color: rgb(178, 176, 126);
+    font-weight: bold;
+}
+
+.warning span {
+    padding-left: 20px;
+    height: min-content;
+}
+
+.warning span p {
+    margin-top: 0.4rem;
+    font-size: 1rem;
+    color: rgb(195, 193, 138);
 }

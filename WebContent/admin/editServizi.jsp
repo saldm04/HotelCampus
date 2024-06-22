@@ -1,7 +1,8 @@
+<%@page import="java.security.SecureRandom"%>
 <%@page import="model.Servizio"%>
 <%@page import="java.util.Iterator"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.Collection, model.Utente"%>
+    pageEncoding="UTF-8" import="java.util.Collection, model.Utente, java.util.List, java.math.BigInteger"%>
    
 <!DOCTYPE html>
 <html>
@@ -12,12 +13,19 @@
 </head>
 <body>
 
+<%! private SecureRandom x = new SecureRandom(); 
+	private String csrf = new BigInteger(130, x).toString(32);
+%>
+
 <%
     Collection<Servizio> servizi = (Collection<Servizio>) request.getAttribute("editServizi");
     if (servizi == null) {
         response.sendRedirect(request.getContextPath()+"/admin/EditServizi");
         return;
     }
+    List<String> errors = (List<String>) request.getSession().getAttribute("problemDetectd");
+    
+    request.getSession().setAttribute("csrfToken", csrf);
 %> 
  <section class="editServizi">
  
@@ -27,13 +35,26 @@
  	 	<div class="close"><p>Inserisci dati Servizio:</p> <img src="https://img.icons8.com/?size=100&id=3062&format=png&color=FF0202" onclick="showMenuServizi()"></div>
  	 	<form action="<%=request.getContextPath()%>/admin/EditServizi" enctype="multipart/form-data" method="post">
  	 		<input type="hidden" name="action" value="addServizio">
-			<input type="file" name="foto1" value=""  accept="image/png, image/jpeg" required="required">	
+ 	 		<input type="hidden" name="csrfToken" value="<%=csrf%>">
+			<input type="file" name="foto1" value="" required="required">	
 			<input type="text" name="nome" value="" required="required" placeholder="nome servizio">
 			<textarea name="descrizione" value="" required="required" rows="5" > </textarea>
 			<input type="number" min="1" name="costo" value="" required="required" placeholder="costo">
 			<input type="submit" value="Conferma"><input type="reset" value="Ripristina">
 		</form>
  	 </div>
+ 	 <% if(errors != null){  %>
+      	<div class="warning">
+      	 	<img src="images/warning.png" alt="" />
+      		<span>
+      			<h4>Attenzione</h4>
+      			<p>
+      			<% for (String error: errors){ %>
+					<%=error %> <br>		
+				<% }%><P>
+      		</span>
+      	</div>
+      <% request.getSession().removeAttribute("problemDetectd");} %>
  	</div>
  	
  	<section class="eliminaServizi">
@@ -47,7 +68,7 @@
         <img alt="Immagine servizio 1" src="./GetPicture?beanType=servizio&id=<%=bean.getNome()%>&numberImg=1">
           <div class="alignItem">
             
-            <span>Nome:<%= " "+bean.getNome() %>   <a href="<%= request.getContextPath() %>/admin/EditServizi?action=delete&nome=<%= bean.getNome() %>">
+            <span>Nome:<%= " "+bean.getNome() %>   <a href="<%= request.getContextPath() %>/admin/EditServizi?action=delete&nome=<%= bean.getNome() %>&csrfToken=<%= csrf %>">
         <button type="button"></button>
         </a></span>
             <span>Descrizione:</span>

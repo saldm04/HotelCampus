@@ -1,6 +1,6 @@
-
+<%@page import="java.security.SecureRandom"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.Collection, model.Camera"%>
+    pageEncoding="UTF-8" import="java.util.Collection, model.Camera, java.util.List, java.math.BigInteger"%>
     <%@page import="java.util.Iterator"%>
 <!DOCTYPE html>
 <html>
@@ -10,12 +10,22 @@
  <link rel="stylesheet" href="styles/editCamere.css" type="text/css">
 </head>
 <body>
+
+	<%! 
+		private SecureRandom y = new SecureRandom(); 
+		private String csrf2 = new BigInteger(130, y).toString(32);
+	%>
+	
 	<%
-    Collection<Camera> camere = (Collection<Camera>) request.getAttribute("editCamere");
-    if (camere == null) {
-        response.sendRedirect(request.getContextPath()+"/admin/EditCamere");
-        return;
-    }
+    	Collection<Camera> camere = (Collection<Camera>) request.getAttribute("editCamere");
+    	if (camere == null) {
+        	response.sendRedirect(request.getContextPath()+"/admin/EditCamere");
+        	return;
+    	}
+    	
+    	List<String> errors = (List<String>) request.getSession().getAttribute("problemDetectd");
+        
+        request.getSession().setAttribute("csrfToken", csrf2);
 	%> 
 	
 	<section class="editCamere">
@@ -25,8 +35,9 @@
 			 <div class="close"><p>Inserisci dati camera:</p> <img src="https://img.icons8.com/?size=100&id=3062&format=png&color=FF0202" onclick="showMenuCamere()"></div>
 			 <form action="<%=request.getContextPath()%>/admin/EditCamere" enctype="multipart/form-data" method="post">
  	 			<input type="hidden" name="action" value="addCamera">
+ 	 			<input type="hidden" name="csrfToken" value="<%=csrf2%>">
  	 		    <span><label for="foto1">Prima immagine: </label><input type="file" name="foto1"   accept="image/png, image/jpeg" required="required"></span>
-				<span><label for="foto2">Seconda immagine: </label><input type="file" name="foto2"  accept="image/png, image/jpeg" required="required"></span>
+				<span><label for="foto2">Seconda immagine (opzionale): </label><input type="file" name="foto2"  accept="image/png, image/jpeg" ></span>
 				<input type="number" min="1" name="numeroCamera" value="" required="required" placeholder="Numero camera">
 				<input type="number" min="1" name="numeroMaxOspiti" value="" required="required" placeholder="Numero Ospiti">
 				<input type="number" min="1" name="quadratura" value="" required="required" placeholder="Quadratura">
@@ -40,6 +51,19 @@
 				<input type="submit" value="Conferma"><input type="reset" value="Ripristina">
 			 </form>
 			</div>
+			<% if(errors != null){  %>
+      			<div class="warning">
+      	 			<img src="images/warning.png" alt="" />
+      				<span>
+      					<h4>Attenzione</h4>
+      					<p>
+      					<% for (String error: errors){ %>
+						<%=error %> <br>		
+						<% }%>
+						<P>
+      				</span>
+      			</div>
+      		<% request.getSession().removeAttribute("problemDetectd");} %>
 		</div> 
 		
 		<div class="eliminaCamere">
@@ -52,7 +76,7 @@
         				<div class="card">
         					<img src="./GetPicture?beanType=camera&id=<%=bean.getNumero()%>&numberImg=1">
         					   <div class="alignItem">
-            					<span class="alignButton">Numero:<%= " "+bean.getNumero() %> <a href="<%= request.getContextPath() %>/admin/EditCamere?action=delete&numero=<%= bean.getNumero() %>"><button type="button"></button></a> </span>
+            					<span class="alignButton">Numero:<%= " "+bean.getNumero() %> <a href="<%= request.getContextPath() %>/admin/EditCamere?action=delete&numero=<%= bean.getNumero() %>&csrfToken=<%= csrf2 %>"><button type="button"></button></a> </span>
             					<span>Costo: <%= bean.getCosto() %> €</span>
             					<span>Numero massimo ospiti: <%= bean.getNumeroMaxOspiti() %></span>
             					<span>Tipo: <%= bean.getTipo() %></span>
@@ -67,42 +91,6 @@
 		</div>
 		
 	</section>
-	
-
-	
-	<!-- <section class="editServizi">
- 
- 
- 	
- 	
- 	<section class="eliminaServizi">
-        <%
-            if (camere != null && camere.size() != 0) {
-                Iterator<?> it = camere.iterator();
-                while (it.hasNext()) {
-                    Camera bean = (Camera) it.next();
-        %>
-        <div class="card">
-        <img alt="Immagine servizio 1" src="./GetPicture?beanType=camera&id=<%=bean.getNumero()%>&numberImg=1">
-          <div class="alignItem">
-            
-            <span>Numero:<%= " "+bean.getNumero() %>   <a href="<%= request.getContextPath() %>/admin/EditServizi?action=delete&nome=<%= bean.getNumero() %>">
-            <span>Costo: <%= bean.getCosto() %> €</span>
-            <span>Numero massimo ospiti: <%= bean.getNumeroMaxOspiti() %></span>
-            <span>tipo: <%= bean.getTipo() %></span>
-            <span>quadratura: <%= bean.getQuadratura() %></span>
-        
-            
-    
-            </div>
-        </div>
-       
-        <% 
-                }
-            }
-        %>
-	 </section>	
- 	</section> -->
  	
  	
 </body>

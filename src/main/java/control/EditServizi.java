@@ -39,7 +39,16 @@ public class EditServizi extends HttpServlet {
 		ServizioDAO servizio = new ServizioDAO((DataSource) getServletContext().getAttribute("DataSource"));
 		RequestDispatcher rd = request.getRequestDispatcher("/admin/areaRiservata.jsp?edit=servizi");
 		
-		List<String> errors = new ArrayList<>();
+		List<String> errors = (List<String>) request.getAttribute("problemDetectd");
+		
+		
+		
+		if(errors != null && !errors.isEmpty()) {
+			request.removeAttribute("problemDetectd");
+			request.getSession().setAttribute("problemDetectd", errors);
+        	rd.forward(request, response);
+        	return;
+		}
 		
 		if(request.getParameter("action") != null) {
 			if(request.getParameter("action").equals("addServizio")) {
@@ -55,25 +64,6 @@ public class EditServizi extends HttpServlet {
 							servizioSave.setImg1(part.getInputStream().readAllBytes());
 					}
 				}
-				
-				if(nome == null || nome.trim().isEmpty()) {
-					errors.add("Il campo nome non può essere vuoto!");
-				}
-		        if(descrizione == null || descrizione.trim().isEmpty()) {
-		        	errors.add("Il campo descrizione non può essere vuoto!");
-				}
-		        if(costo == null) {
-		        	errors.add("Il campo costo non può essere vuoto!");
-		        }
-		        if(servizioSave.getImg1().length == 0) {
-		        	errors.add("Il campo immagine non può essere vuoto!");
-		        }	
-		        
-		        if (!errors.isEmpty()) {
-		        	request.setAttribute("errors", errors);
-		        	rd.forward(request, response);
-		        	return;
-		        }
 		        
 		        descrizione = descrizione.replace("\n", "<br>");
 		        
