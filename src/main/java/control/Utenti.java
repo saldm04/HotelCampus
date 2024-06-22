@@ -58,11 +58,14 @@ public class Utenti extends HttpServlet {
 			
 				if(admin.isAdmin()) {
 					String email = request.getParameter("email");
-					boolean newAdminStatus = Boolean.parseBoolean(request.getParameter("isAdmin"));
 				
 		            try {
 		              
-		                    utente.doDelete(email);
+		                 utente.doDelete(email);
+		                 if(admin.getEmail().equals(email)){
+		                	 response.sendRedirect(getServletContext().getContextPath()+"/common/Logout");
+		                	 return;
+		                 }
 		                
 		            } catch (SQLException e) {
 		                e.printStackTrace();

@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -26,12 +27,12 @@ public class PrenotazioneDAO implements BeanDAO<Prenotazione, Integer>{
 		PreparedStatement preparedStatement = null;
 		
 		String insertSQL = "INSERT INTO "+ PrenotazioneDAO.NOME_TABELLA +
-				"dataPrenotazione, dataInizio, dataFine, importo, utente"
-				+ "VALUES (?,?,?,?,?)";
+				" (dataPrenotazione, dataInizio, dataFine, importo, utente)"
+				+" VALUES (?,?,?,?,?)";
 		try{
 			connection = dataSource.getConnection();
 			preparedStatement = connection.prepareStatement(insertSQL);
-			preparedStatement.setDate(1, data.getDataPrenotazione());
+			preparedStatement.setTimestamp(1, data.getDataPrenotazione());
 			preparedStatement.setDate(2, data.getDataInizio());
 			preparedStatement.setDate(3, data.getDataFine());
 			preparedStatement.setInt(4, data.getImporto());
@@ -48,6 +49,49 @@ public class PrenotazioneDAO implements BeanDAO<Prenotazione, Integer>{
 			}
 		}
 	}
+	
+	public synchronized int doSaveReturnKey(Prenotazione data) throws SQLException {
+	    Connection connection = null;
+	    PreparedStatement preparedStatement = null;
+	    ResultSet generatedKeys = null;
+
+	    String insertSQL = "INSERT INTO " + PrenotazioneDAO.NOME_TABELLA +
+	            " (dataPrenotazione, dataInizio, dataFine, importo, utente)" +
+	            " VALUES (?,?,?,?,?)";
+
+	    try {
+	        connection = dataSource.getConnection();
+	        preparedStatement = connection.prepareStatement(insertSQL, Statement.RETURN_GENERATED_KEYS);
+	        preparedStatement.setTimestamp(1, data.getDataPrenotazione());
+	        preparedStatement.setDate(2, data.getDataInizio());
+	        preparedStatement.setDate(3, data.getDataFine());
+	        preparedStatement.setInt(4, data.getImporto());
+	        preparedStatement.setString(5, data.getUtente());
+
+	        int affectedRows = preparedStatement.executeUpdate();
+
+	        if (affectedRows == 0) {
+	            throw new SQLException("Creating prenotazione failed, no rows affected.");
+	        }
+
+	        generatedKeys = preparedStatement.getGeneratedKeys();
+	        if (generatedKeys.next()) {
+	            return generatedKeys.getInt(1);
+	        } else {
+	            throw new SQLException("Creating prenotazione failed, no ID obtained.");
+	        }
+	    } finally {
+	        try {
+	            if (generatedKeys != null)
+	                generatedKeys.close();
+	            if (preparedStatement != null)
+	                preparedStatement.close();
+	        } finally {
+	            if (connection != null)
+	                connection.close();
+	        }
+	    }
+	}
 
 	@Override
 	public synchronized boolean doDelete(Integer code) throws SQLException {
@@ -56,7 +100,7 @@ public class PrenotazioneDAO implements BeanDAO<Prenotazione, Integer>{
 
 		int result = 0;
 
-		String deleteSQL = "DELETE FROM " + PrenotazioneDAO.NOME_TABELLA + " WHERE id = ?";
+		String deleteSQL = "DELETE FROM " + PrenotazioneDAO.NOME_TABELLA + " WHERE idPrenotazione = ?";
 		
 		try{
 			connection = dataSource.getConnection();
@@ -95,7 +139,7 @@ public class PrenotazioneDAO implements BeanDAO<Prenotazione, Integer>{
 			
 			while (rs.next()) {
 				bean.setId(rs.getInt("idPrenotazione"));
-				bean.setDataPrenotazione(rs.getDate("dataPrenotazione"));
+				bean.setDataPrenotazione(rs.getTimestamp("dataPrenotazione"));
 				bean.setDataInizio(rs.getDate("dataInizio"));
 				bean.setDataFine(rs.getDate("dataFine"));
 				bean.setImporto(rs.getInt("importo"));
@@ -142,7 +186,7 @@ public class PrenotazioneDAO implements BeanDAO<Prenotazione, Integer>{
 				Prenotazione bean = new Prenotazione();
 				
 				bean.setId(rs.getInt("idPrenotazione"));
-				bean.setDataPrenotazione(rs.getDate("dataPrenotazione"));
+				bean.setDataPrenotazione(rs.getTimestamp("dataPrenotazione"));
 				bean.setDataInizio(rs.getDate("dataInizio"));
 				bean.setDataFine(rs.getDate("dataFine"));
 				bean.setImporto(rs.getInt("importo"));

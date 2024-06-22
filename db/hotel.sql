@@ -48,11 +48,11 @@ CREATE TABLE `camera_prenotata` (
   `camera` int NOT NULL,
   `prenotazione` int NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `camera` (`camera`),
-  KEY `prenotazione` (`prenotazione`),
-  CONSTRAINT `camera_prenotata_ibfk_1` FOREIGN KEY (`camera`) REFERENCES `camera` (`numero`),
-  CONSTRAINT `camera_prenotata_ibfk_2` FOREIGN KEY (`prenotazione`) REFERENCES `prenotazioni` (`idPrenotazione`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `camera_prenotata_ibfk_1` (`camera`),
+  KEY `camera_prenotata_ibfk_2` (`prenotazione`),
+  CONSTRAINT `camera_prenotata_ibfk_1` FOREIGN KEY (`camera`) REFERENCES `camera` (`numero`) ON DELETE CASCADE ON UPDATE RESTRICT,
+  CONSTRAINT `camera_prenotata_ibfk_2` FOREIGN KEY (`prenotazione`) REFERENCES `prenotazioni` (`idPrenotazione`) ON DELETE CASCADE ON UPDATE RESTRICT
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -71,8 +71,8 @@ CREATE TABLE `prenotazioni` (
   `utente` varchar(40) NOT NULL,
   PRIMARY KEY (`idPrenotazione`),
   KEY `utente` (`utente`),
-  CONSTRAINT `prenotazioni_ibfk_1` FOREIGN KEY (`utente`) REFERENCES `utente` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `prenotazioni_ibfk_1` FOREIGN KEY (`utente`) REFERENCES `utente` (`email`) ON DELETE CASCADE ON UPDATE RESTRICT
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -124,11 +124,11 @@ CREATE TABLE `servizio_prenotato` (
   `servizio` varchar(30) NOT NULL,
   `prenotazione` int NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `servizio` (`servizio`),
-  KEY `prenotazione` (`prenotazione`),
-  CONSTRAINT `servizio_prenotato_ibfk_1` FOREIGN KEY (`servizio`) REFERENCES `servizio` (`nome`),
-  CONSTRAINT `servizio_prenotato_ibfk_2` FOREIGN KEY (`prenotazione`) REFERENCES `prenotazioni` (`idPrenotazione`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `servizio_prenotato_ibfk_1` (`servizio`),
+  KEY `servizio_prenotato_ibfk_2` (`prenotazione`),
+  CONSTRAINT `servizio_prenotato_ibfk_1` FOREIGN KEY (`servizio`) REFERENCES `servizio` (`nome`) ON DELETE CASCADE,
+  CONSTRAINT `servizio_prenotato_ibfk_2` FOREIGN KEY (`prenotazione`) REFERENCES `prenotazioni` (`idPrenotazione`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -159,4 +159,4 @@ CREATE TABLE `utente` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-06-18 15:14:29
+-- Dump completed on 2024-06-22  0:00:59

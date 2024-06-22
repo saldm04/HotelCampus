@@ -10,6 +10,7 @@ import java.util.Collection;
 import java.util.List;
 
 import javax.sql.DataSource;
+import java.sql.Statement;
 
 public class CameraDAO implements BeanDAO<Camera, Integer>{
 
@@ -228,5 +229,31 @@ public class CameraDAO implements BeanDAO<Camera, Integer>{
 		}
 		
 		return (result != 0);
+	}
+	
+	public synchronized String getMaxNumeroOspiti() throws SQLException{
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		String max = null;
+		
+		try {
+			connection = dataSource.getConnection();
+			Statement st = connection.createStatement();
+			ResultSet rs = st.executeQuery("SELECT MAX(numeroMaxOspiti) AS maxNumeroOspiti FROM "+CameraDAO.NOME_TABELLA+" WHERE disponibile=1;");
+			while(rs.next()){
+				Integer maxInt = rs.getInt(1);
+				max = maxInt.toString();
+			}
+		}finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if(connection != null)
+					connection.close();
+			}
+		}
+		
+		return max;
 	}
 }

@@ -38,6 +38,8 @@ public class CamereDisponibiliPrenotazione extends HttpServlet {
 			camere.removeIf(c -> c.isDisponibile()==false);
 			request.setAttribute("camereDisponibili", camere);
 			request.setAttribute("ricercaEffettuata", false);
+			String maxOspiti = cameraDAO.getMaxNumeroOspiti();
+			request.setAttribute("maxAttributeValueOspiti", maxOspiti);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -72,11 +74,12 @@ public class CamereDisponibiliPrenotazione extends HttpServlet {
 		String dataCheckOutString = request.getParameter("checkoutdate");
 		String numeroOspitiString = request.getParameter("numOspiti");
 		
-		if(dataCheckInString.equals("") || dataCheckInString==null ||
-			dataCheckOutString.equals("") || dataCheckOutString==null ||
-			numeroOspitiString.equals("") || numeroOspitiString==null
-			){
+		if(dataCheckInString==null || dataCheckOutString==null ||
+			numeroOspitiString==null || dataCheckInString.equals("")
+			|| dataCheckOutString.equals("") || numeroOspitiString.equals(""))
+		{
 			response.sendRedirect("CamereDisponibiliPrenotazione");
+			return;
 		}
 		
         try {
@@ -90,6 +93,13 @@ public class CamereDisponibiliPrenotazione extends HttpServlet {
         
         if(dataCheckIn.compareTo(dataCheckOut)>=0 || numeroOspiti<=0)
         	response.sendRedirect("CamereDisponibiliPrenotazione");
+        
+        
+        ArrayList<Camera> camereCarrello = (ArrayList<Camera>) request.getSession().getAttribute("CarrelloCamere");
+        if(camereCarrello==null || camereCarrello.isEmpty()){
+        	request.getSession().setAttribute("dataInizioPrenotazione", dataCheckInString);
+        	request.getSession().setAttribute("dataFinePrenotazione", dataCheckOutString);
+        }
         
         Date dataInizio = null;
 		Date dataFine = null;
@@ -109,9 +119,21 @@ public class CamereDisponibiliPrenotazione extends HttpServlet {
         
         final int guests = numeroOspiti;
         camere.removeIf(c -> guests > c.getNumeroMaxOspiti());
+        
+        if(camereCarrello!=null && !camereCarrello.isEmpty()){
+        	for(Camera cameraNelCarrello : camereCarrello){
+        		camere.removeIf(c -> c.getNumero() == cameraNelCarrello.getNumero());
+        	}
+        }
 		
         request.setAttribute("camereDisponibili", camere);
         request.setAttribute("ricercaEffettuata", true);
+        try {
+			request.setAttribute("maxAttributeValueOspiti", cameraDAO.getMaxNumeroOspiti());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         
 		rd.forward(request, response);
 	}
