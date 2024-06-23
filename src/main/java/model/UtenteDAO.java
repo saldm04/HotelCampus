@@ -174,12 +174,13 @@ public class UtenteDAO implements BeanDAO<Utente, String> {
 		return utenti;
 	}
 	
-	 public void updateUtente(Utente utente) throws SQLException {
+	 public int updateUtente(Utente utente) throws SQLException {
 	        String updateSQL = "UPDATE " + NOME_TABELLA + " SET " +
 	                           "nome = ?, cognome = ?, nazionalità = ?, " +
 	                           "dataDiNascita = ?, password = ?, isAdmin = ? " +
 	                           "WHERE email = ?";
-
+	        int value=0;
+	        
 	        try (Connection conn = dataSource.getConnection();
 	             PreparedStatement stmt = conn.prepareStatement(updateSQL)) {
 
@@ -191,52 +192,9 @@ public class UtenteDAO implements BeanDAO<Utente, String> {
 	            stmt.setBoolean(6, utente.isAdmin());
 	            stmt.setString(7, utente.getEmail());
 
-	            stmt.executeUpdate();
+	            value=stmt.executeUpdate();
 	        }
+	        return value;
 	 }
-	 
-	 
-	 public synchronized Collection<Utente> doRetriveWithPagination(Integer limit, Integer page) throws SQLException {
-			Connection connection=null;
-			PreparedStatement preparedStatement = null;
-			
-			Collection<Utente> utenti = new ArrayList<Utente>();
-			
-			
-			String selectSQL = "SELECT * FROM " + UtenteDAO.NOME_TABELLA + " LIMIT " + limit + " OFFSET " + (page*limit);
-			
-			Utente bean = null;
-			
-			try{
-				connection = dataSource.getConnection();
-				preparedStatement = connection.prepareStatement(selectSQL);
-				
-				ResultSet rs = preparedStatement.executeQuery();
-				
-				while(rs.next()) {
-					bean = new Utente();
-					
-					bean.setEmail(rs.getString("email"));
-					bean.setNome(rs.getString("nome"));
-					bean.setCognome(rs.getString("cognome"));
-					bean.setNazionalità(rs.getString("nazionalità"));
-					bean.setDataNascita(rs.getDate("dataDiNascita"));
-					bean.setPassword(rs.getString("password"));
-					bean.setAdmin(rs.getBoolean("isAdmin"));
-					
-					utenti.add(bean);
-				}
-			}finally {
-				try {
-					if (preparedStatement != null)
-						preparedStatement.close();
-				} finally {
-					if(connection != null)
-						connection.close();
-				}
-			}
-			
-			return utenti;
-		}
 
 }

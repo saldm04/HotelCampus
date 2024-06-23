@@ -9,7 +9,7 @@
 	<link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/styles/carrello.css">
 	<meta name="viewport" content="initial-scale=1, width=device-width">
 	<script src="scripts/carrelloNumeroServizi.js"></script>
-	<title>Carrello</title>
+	<title>Hotel Campus</title>
 </head>
 <body>
 	<%@ include file="navigationBar.jsp"%>

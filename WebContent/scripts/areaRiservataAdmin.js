@@ -98,7 +98,7 @@
     
     function validateNome() {
         const nome = document.getElementById("nome");
-        const nomePattern = /^[a-zA-Z\s]+$/;
+        const nomePattern = /^[a-zA-Z]+(?: [a-zA-Z]+)*$/;
         if (nomePattern.test(nome.value)) {
             nome.style.border = "2px solid grey";
             return true;

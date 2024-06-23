@@ -37,7 +37,11 @@ import model.Utente;
 @WebServlet("/common/Acquista")
 public class Acquista extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.sendRedirect(request.getContextPath()+"/homepage.jsp");
+	}
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession sessione = request.getSession();
 		ArrayList<Camera> camereInSessione = (ArrayList<Camera>) sessione.getAttribute("CarrelloCamere");

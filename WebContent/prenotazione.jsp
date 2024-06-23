@@ -7,7 +7,7 @@
 	<link type="text/css" rel="stylesheet" href="styles/prenotazione.css">
 	<meta name="viewport" content="initial-scale=1, width=device-width">
 	<script src="scripts/checkDatePrenotazione.js"></script>
-	<title>Prenota ora</title>
+	<title>Hotel Campus</title>
 </head>
 <body>
 	<% request.setAttribute("in", "prenotaOra"); %>

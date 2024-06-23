@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
- <link rel="stylesheet" href="styles/adminPrenotazioni.css">
+ <link rel="stylesheet" href="styles/areaRiservataPrenotazioni.css">
 </head>
 <body>
 
@@ -18,7 +18,7 @@
         
 	%> 
 	
-	<section class="adminPrenotazioni">
+	<section class="prenotazioni">
 	
 	 	<div class="filtro"> 
 	 		<form action="<%=request.getContextPath()%>/admin/Prenotazioni" method="post" onsubmit="return validateForm()">
@@ -40,7 +40,7 @@
      				<% for (String error: errors){ %>
      			    <%=error %> <br>		
 					<% }%>
-				<P>
+				</p>
       		</span>
       	</div>
     <% request.getSession().removeAttribute("problemDetectd");} %>

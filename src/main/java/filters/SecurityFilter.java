@@ -194,6 +194,33 @@ public class SecurityFilter extends HttpFilter implements Filter {
      	    
         }
         
+        if(servletPath.equals("/common/Prenotazioni")) {
+     	    String dataInizioStr = request.getParameter("checkindate");
+     	    String dataFineStr = request.getParameter("checkoutdate");
+     	   
+     	   if(dataInizioStr != null  && !dataInizioStr.trim().equals(""))
+    	    	if(isSQLInjection(dataInizioStr) || isXSS(dataInizioStr))
+    	    		errors.add("Qualcosa non va con la data di checkIn");
+     	   
+     	  if(dataFineStr != null  && !dataFineStr.trim().equals(""))
+  	    	if(isSQLInjection(dataFineStr) || isXSS(dataFineStr))
+  	    		errors.add("Qualcosa non va con la data di checkOut");
+     	    
+        }
+        
+        if(servletPath.equals("/common/editDatiAccount")){
+        	String oldPass = request.getParameter("oldPass");
+        	String newPass = request.getParameter("newPass");
+        	
+        	if(oldPass == null || oldPass.trim().isEmpty()) {
+            	errors.add("Il campo password non può essere vuoto!");
+    		}
+        	
+        	if(newPass == null || newPass.trim().isEmpty()) {
+            	errors.add("Il campo password non può essere vuoto!");
+    		}
+        }
+        
         if(servletPath.equals("/SignIn")) {
 
         	String email = request.getParameter("email");

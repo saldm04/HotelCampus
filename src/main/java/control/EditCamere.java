@@ -45,7 +45,6 @@ public class EditCamere extends HttpServlet {
 		
 		
 		if(errors != null && !errors.isEmpty()) {
-			errors.stream().forEach(e -> System.out.println(e));
 			request.removeAttribute("problemDetectd");
 			request.getSession().setAttribute("problemDetectd", errors);
         	rd.forward(request, response);

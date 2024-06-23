@@ -61,7 +61,7 @@
       					<% for (String error: errors){ %>
 						<%=error %> <br>		
 						<% }%>
-						<P>
+						</p>
       				</span>
       			</div>
       		<% request.getSession().removeAttribute("problemDetectd");} %>
