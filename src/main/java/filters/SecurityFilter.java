@@ -175,6 +175,24 @@ public class SecurityFilter extends HttpFilter implements Filter {
         	
         }
         
+        if(servletPath.equals("/admin/Prenotazioni")) {
+        	String email = request.getParameter("email");
+     	    String dataInizioStr = request.getParameter("checkindate");
+     	    String dataFineStr = request.getParameter("checkoutdate");
+     	    
+     	    if(email != null  && !email.trim().equals(""))
+     	    	if(isSQLInjection(email) || isXSS(email))
+     	    		errors.add("Qualcosa non va con l'email");
+     	    
+     	   if(dataInizioStr != null  && !dataInizioStr.trim().equals(""))
+    	    	if(isSQLInjection(dataInizioStr) || isXSS(dataInizioStr))
+    	    		errors.add("Qualcosa non va con la data di checkIn");
+     	   
+     	  if(dataFineStr != null  && !dataFineStr.trim().equals(""))
+  	    	if(isSQLInjection(dataFineStr) || isXSS(dataFineStr))
+  	    		errors.add("Qualcosa non va con la data di checkOut");
+     	    
+        }
         
         if(!errors.isEmpty()) {
         	request.setAttribute("problemDetectd", errors);

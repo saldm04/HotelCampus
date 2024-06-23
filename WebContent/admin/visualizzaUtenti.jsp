@@ -8,7 +8,6 @@
 <meta charset="UTF-8">
  <base href="<%=request.getContextPath()%>/" />
  <link rel="stylesheet" href="styles/visualizzaUtenti.css">
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 
@@ -29,49 +28,47 @@
 
 <section class="vUtenti">
 
-<table>
-   <thead>
-    <tr>
-        <th class="sortable">Email</th>
-        <th class="sortable">Nome</th>
-        <th class="sortable">Cognome</th>
-        <th>Nazionalità</th>
-        <th>Data di Nascita</th>
-        <th>Admin</th>
-    </tr>
-</thead>
-    <tbody>
+<ul class="responsive-table">
+	<li class="table-header">
+      <div class="col col-1">Email</div>
+      <div class="col col-2">Nome</div>
+      <div class="col col-3">Cognome</div>
+      <div class="col col-4">Nazionalità</div>
+      <div class="col col-5">Data di Nascita</div>
+      <div class="col col-6">Admin</div>
+      <div class="col col-7"> </div>
+    </li>
         <%
             for (Utente utente : utenti) {
         %>
-            <tr>
-                <td><%= utente.getEmail() %></td>
-                <td><%= utente.getNome() %></td>
-                <td><%= utente.getCognome() %></td>
-                <td><%= utente.getNazionalità()%></td>
-                <td><%= utente.getDataNascita().toString() %>
-                <td>
-                   <form action="<%=request.getContextPath()%>/admin/Utenti" method="post">
+		<li class="table-row">
+			<div class="col col-1" data-label="Email"><%= utente.getEmail() %></div>
+			<div class="col col-2" data-label="Nome"><%= utente.getNome() %></div>
+			<div class="col col-3" data-label="Cognome"><%= utente.getCognome() %></div>
+			<div class="col col-4" data-label="Nazionalità"><%= utente.getNazionalità() %></div>
+			<div class="col col-5" data-label="Data di nascita"><%= utente.getDataNascita().toString() %></div>
+        	<div class="col col-6" data-label="Admin">  
+        		<form action="<%=request.getContextPath()%>/admin/Utenti" method="post">
                    			<input type="hidden" name="csrfToken" value="<%=csrf3%>">
                             <input type="hidden" name="action" value="updateAdminStatus">
                             <input type="hidden" name="email" value="<%= utente.getEmail()%>">
                             <input type="checkbox" name="isAdmin" value="true" <% if (utente.isAdmin()) { %>checked<% } %> onchange="this.form.submit()">
-                   </form>
-                </td>
-                <td>
-                   <form action="<%=request.getContextPath()%>/admin/Utenti" method="post">
+                 </form> 
+            </div>
+            <div class="col col-7" data-label="Elimina"> 
+            	 <form action="<%=request.getContextPath()%>/admin/Utenti" method="post">
                    			<input type="hidden" name="csrfToken" value="<%=csrf3%>">
                             <input type="hidden" name="action" value="delete">
                             <input type="hidden" name="email" value="<%= utente.getEmail()%>">
                             <input class="delete" type="button" onclick = "this.form.submit()">
                    </form>
-                </td>
-            </tr>
+            </div>
+        </li>
         <%
             }
         %>
-    </tbody>
-</table>
+    
+</ul>
 
 </section>
 

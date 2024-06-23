@@ -154,4 +154,41 @@ public class CameraPrenotataDAO implements BeanDAO<CameraPrenotata, Integer>{
 		
 		return camere;
 	}
+	
+	  public Collection<CameraPrenotata> doRetrieveByPrenotazione(int idPrenotazione) throws SQLException {
+	        Connection connection = null;
+	        PreparedStatement preparedStatement = null;
+	        Collection<CameraPrenotata> camere = new ArrayList<CameraPrenotata>();
+
+	        String selectSQL = "SELECT * FROM "+ CameraPrenotataDAO.NOME_TABELLA + " WHERE prenotazione = ?";
+
+	        try {
+	            connection = dataSource.getConnection();
+	            preparedStatement = connection.prepareStatement(selectSQL);
+	            preparedStatement.setInt(1, idPrenotazione);
+
+	            ResultSet rs = preparedStatement.executeQuery();
+
+	            while (rs.next()) {
+	            	
+	            	CameraPrenotata bean = new CameraPrenotata();
+					bean.setId(rs.getInt("id"));
+					bean.setCosto(rs.getInt("costo"));
+					bean.setCamera(rs.getInt("camera"));
+					bean.setPrenotazione(rs.getInt("prenotazione"));
+					
+					camere.add(bean);
+	            }
+	        } finally {
+	            try {
+	                if (preparedStatement != null)
+	                    preparedStatement.close();
+	            } finally {
+	                if (connection != null)
+	                    connection.close();
+	            }
+	        }
+
+	        return camere;
+	    }
 }

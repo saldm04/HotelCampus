@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -205,6 +206,53 @@ public class PrenotazioneDAO implements BeanDAO<Prenotazione, Integer>{
 		}
 		
 		return prenotazioni;
+	}
+	
+	public synchronized Collection<Prenotazione> doRetrieveByFilter(String email, Date dataInizio, Date dataFine) throws SQLException {
+	    Connection connection = null;
+	    PreparedStatement preparedStatement = null;
+
+	    Collection<Prenotazione> prenotazioni = new ArrayList<Prenotazione>();
+
+	    String selectSQL = "SELECT * FROM " + PrenotazioneDAO.NOME_TABELLA + " WHERE dataInizio >= ? AND dataFine <= ?";
+	    if (email != null && !email.isEmpty()) {
+	        selectSQL += " AND utente = ?";
+	    }
+
+	    try {
+	        connection = dataSource.getConnection();
+	        preparedStatement = connection.prepareStatement(selectSQL);
+	        preparedStatement.setDate(1, dataInizio);
+	        preparedStatement.setDate(2, dataFine);
+	        if (email != null && !email.isEmpty()) {
+	            preparedStatement.setString(3, email);
+	        }
+
+	        ResultSet rs = preparedStatement.executeQuery();
+
+	        while (rs.next()) {
+	            Prenotazione bean = new Prenotazione();
+
+	            bean.setId(rs.getInt("idPrenotazione"));
+	            bean.setDataPrenotazione(rs.getTimestamp("dataPrenotazione"));
+	            bean.setDataInizio(rs.getDate("dataInizio"));
+	            bean.setDataFine(rs.getDate("dataFine"));
+	            bean.setImporto(rs.getInt("importo"));
+	            bean.setUtente(rs.getString("utente"));
+
+	            prenotazioni.add(bean);
+	        }
+	    } finally {
+	        try {
+	            if (preparedStatement != null)
+	                preparedStatement.close();
+	        } finally {
+	            if (connection != null)
+	                connection.close();
+	        }
+	    }
+
+	    return prenotazioni;
 	}
 	
 }
