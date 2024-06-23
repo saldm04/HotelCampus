@@ -51,6 +51,7 @@
 					<%=sessione.getAttribute("dataInizioPrenotazione")%> a 
 					<%=sessione.getAttribute("dataFinePrenotazione")%>
 					</p>
+					<div class="table-wrapper">
 					<table id="tabellaCamere">
 						<tr class="rigaIntestazione">
 							<th>Numero di camera</th>
@@ -81,11 +82,13 @@
 						}
 						%>
 					</table>
+					</div>
 			<%
-			}if(servizi!=null && !servizi.isEmpty()){
+			}if(servizi!=null && !servizi.isEmpty() && camere!=null && !camere.isEmpty()){
 				sessione.setAttribute("numeroMassimoTotaleOspiti", numeroMassimoTotaleOspiti);
 			%>		
 					<p>Prenotazione servizi</p>
+					<div class="table-wrapper">
 					<table id="tabellaServizi">
 						<tr class="rigaIntestazione">
 							<th>Nome</th>
@@ -118,12 +121,13 @@
 						}
 						%>
 					</table>
+					</div>
 			<%
 			}
 			Integer totaleCarrello = totaleCamere+totaleServizi;
 			if(camere!=null && !camere.isEmpty()){
 			%>
-			<h1>Totale carrello: <%=totaleCarrello%> €</h1>
+			<h1 id="totale">Totale carrello: <%=totaleCarrello%> €</h1>
 			<input type="hidden" value="<%=totaleCarrello%>" name="totaleCarrello" />
 			<input type="submit" value="Acquista" />
 			</div>

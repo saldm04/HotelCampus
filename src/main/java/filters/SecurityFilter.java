@@ -63,7 +63,6 @@ public class SecurityFilter extends HttpFilter implements Filter {
     				for (Part part : ((HttpServletRequest) request).getParts()) {
     					String fileName = part.getSubmittedFileName();
     					if (fileName != null && !fileName.equals("")) {
-    						System.out.println("sono qui");
     						countFile++;
     						if(!isImageFile(part.getInputStream().readAllBytes())) {
     							errors.add("Il file inserito non è valido");
@@ -190,7 +189,7 @@ public class SecurityFilter extends HttpFilter implements Filter {
         String sessionToken = (String) request.getSession().getAttribute("csrfToken");
         
         if (requestToken == null || !requestToken.equals(sessionToken)) {
-			System.out.println(sessionToken);
+			//System.out.println(sessionToken);
             try {
 				response.sendRedirect(request.getContextPath() + "/homepage.jsp");
 			} catch (IOException e) {
