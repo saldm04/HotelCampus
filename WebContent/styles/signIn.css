@@ -10,7 +10,7 @@ body {
 }
 
 section {
-	margin-top: 70px;
+    margin-top: 70px;
     display: flex;
     align-items: first baseline;
     justify-content: center;
@@ -69,6 +69,7 @@ form {
 }
 
 form input {
+	margin-top: 20px;
     width: clamp(200px, 40%, 50%);
     height: 1.5rem;
     border-radius: 15px;
@@ -83,12 +84,12 @@ fieldset {
     border-radius: 15px;
     width: 80%;
     display: flex;
-	column-gap: 10px;
+    column-gap: 10px;
     flex-wrap: wrap;
 }
 
 fieldset input {
-	margin-top: 20px;
+    margin-top: 20px;
     color: grey;
     margin-top: 20px;
     background-color: rgb(255, 255, 255);
@@ -107,25 +108,25 @@ input[type="date"] {
     justify-content: center;
 }
 
-@media screen and (max-width: 1150px){	
-	fieldset input {
-	    flex: none;
-	    width: 100%;
-	    margin-top: 0px;
-	}
+@media screen and (max-width: 1150px) {
+    fieldset input {
+        flex: none;
+        width: 100%;
+        margin-top: 0px;
+    }
 }
 
 .error {
-	border: 2px solid red;
+    border: 2px solid red;
 }
 
 
-.divErrorSpan{
-	margin: 10px 0px;
+.divErrorSpan {
+    margin: 10px 0px;
 }
 
 .suggerimentiNazione {
-	margin-top:10px;
+    margin-top: 10px;
     max-height: 100px;
     overflow-y: scroll;
     background: white;
@@ -140,4 +141,39 @@ input[type="date"] {
 
 .suggerimento:hover {
     background-color: #f0f0f0;
+}
+
+.warning {
+	margin-top: 20px;
+    border: 1px solid rgb(195, 193, 138);
+    background-color: rgb(246, 244, 181);
+    width: clamp(300px, 40%, 50%);
+    border-radius: 15px;
+    height: fit-content;
+    padding: 1rem 3%;
+    display: flex;
+    align-items: safe;
+    justify-content: space-between;
+}
+
+.warning img {
+    height: 2rem;
+}
+
+.warning span h4 {
+    margin: 0px;
+    font-size: 1.2rem;
+    color: rgb(178, 176, 126);
+    font-weight: bold;
+}
+
+.warning span {
+    padding-left: 20px;
+    height: min-content;
+}
+
+.warning span p {
+    margin-top: 0.4rem;
+    font-size: 1rem;
+    color: rgb(195, 193, 138);
 }

@@ -36,7 +36,7 @@
 			 <form action="<%=request.getContextPath()%>/admin/EditCamere" enctype="multipart/form-data" method="post">
  	 			<input type="hidden" name="action" value="addCamera">
  	 			<input type="hidden" name="csrfToken" value="<%=csrf2%>">
- 	 		    <span><label for="foto1">Prima immagine: </label><input type="file" name="foto1"  required="required"></span>
+ 	 		    <span><label for="foto1">Prima immagine: </label><input type="file" name="foto1"  required="required" accept="image/png, image/jpeg"></span>
 				<span><label for="foto2">Seconda immagine (facoltativa): </label><input type="file" name="foto2" accept="image/png, image/jpeg"></span>
 
 				<input type="number" min="1" name="numeroCamera" value="" required="required" placeholder="Numero camera">

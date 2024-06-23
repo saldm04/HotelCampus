@@ -34,36 +34,95 @@
 			addMenu2IsClick = true;
 			addMenu2.className = "aggiungiCamera";		
 			
-}
-}
+		}
+	}
 
-    $(document).ready(function() {
-        $('th').click(function() {
-            var table = $(this).parents('table').eq(0);
-            var rows = table.find('tr:gt(0)').toArray().sort(comparator($(this).index()));
-
-            this.asc = !this.asc;
-            if (!this.asc) {
-                rows = rows.reverse();
-            }
-            for (var i = 0; i < rows.length; i++) {
-                table.append(rows[i]);
-            }
-        });
-    });
-
-    function comparator(index) {
-        return function(a, b) {
-            var valA = getCellValue(a, index),
-                valB = getCellValue(b, index);
-            return $.isNumeric(valA) && $.isNumeric(valB) ?
-                valA - valB :
-                valA.toString().localeCompare(valB);
-        };
+ 
+      function validateEmail() {
+        const email = document.getElementById("email");
+        const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        if (email.value === "" || emailPattern.test(email.value)) {
+            email.style.border = "2px solid grey";
+            return true;
+        } else {
+            email.style.border = "2px solid red";
+            return false;
+        }
     }
 
-    function getCellValue(row, index) {
-        return $(row).children('td').eq(index).text();
+    function checkSelectedDate(dateElem) {
+        const checkInElem = document.getElementById("checkindate");
+        const checkOutElem = document.getElementById("checkoutdate");
+
+        if (dateElem.id === "checkindate" && checkInElem.value !== "") {
+            checkOutElem.min = getNextDate(checkInElem.value);
+        } else if (dateElem.id === "checkoutdate" && checkOutElem.value !== "") {
+            checkInElem.max = getPreviousDate(checkOutElem.value);
+        }
     }
-	
+
+    function getNextDate(date) {
+        let currentDate = new Date(date);
+        currentDate.setDate(currentDate.getDate() + 1);
+        return currentDate.toISOString().split('T')[0];
+    }
+
+    function getPreviousDate(date) {
+        let currentDate = new Date(date);
+        currentDate.setDate(currentDate.getDate() - 1);
+        return currentDate.toISOString().split('T')[0];
+    }
+
+    function validateDates() {
+        const checkInElem = document.getElementById("checkindate");
+        const checkOutElem = document.getElementById("checkoutdate");
+        const checkInDate = checkInElem.value ? new Date(checkInElem.value) : null;
+        const checkOutDate = checkOutElem.value ? new Date(checkOutElem.value) : null;
+
+        if (checkInDate && checkOutDate && checkInDate >= checkOutDate) {
+            checkInElem.style.border = "2px solid red";
+            checkOutElem.style.border = "2px solid red";
+            return false;
+        } else {
+            checkInElem.style.border = "2px solid grey";
+            checkOutElem.style.border = "2px solid grey";
+            return true;
+        }
+    }
+
+    function validateForm() {
+        const isEmailValid = validateEmail();
+        const areDatesValid = validateDates();
+        return isEmailValid && areDatesValid;
+    }
+    
+    function validateNome() {
+        const nome = document.getElementById("nome");
+        const nomePattern = /^[a-zA-Z\s]+$/;
+        if (nomePattern.test(nome.value)) {
+            nome.style.border = "2px solid grey";
+            return true;
+        } else {
+            nome.style.border = "2px solid red";
+            return false;
+        }
+    }
+
+    function validateDescrizione() {
+        const descrizione = document.getElementById("descrizione");
+        const descrizionePattern = /^[^<>#'"]*$/;
+        if (descrizionePattern.test(descrizione.value)) {
+            descrizione.style.border = "2px solid grey";
+            return true;
+        } else {
+            descrizione.style.border = "2px solid red";
+            return false;
+        }
+    }
+
+    function validateServiceForm() {
+        const isNomeValid = validateNome();
+        const isDescrizioneValid = validateDescrizione();
+        return isNomeValid && isDescrizioneValid;
+    }
 

@@ -154,4 +154,39 @@ public class ServizioPrenotatoDAO implements BeanDAO<ServizioPrenotato, Integer>
 		return servizi;
 	}
 	
+	   public Collection<ServizioPrenotato> doRetrieveByPrenotazione(int idPrenotazione) throws SQLException {
+	        Connection connection = null;
+	        PreparedStatement preparedStatement = null;
+	        Collection<ServizioPrenotato> servizi = new ArrayList<ServizioPrenotato>();
+
+	        String selectSQL = "SELECT * FROM "+ ServizioPrenotatoDAO.NOME_TABELLA + " WHERE prenotazione = ?";
+
+	        try {
+	            connection = dataSource.getConnection();
+	            preparedStatement = connection.prepareStatement(selectSQL);
+	            preparedStatement.setInt(1, idPrenotazione);
+
+	            ResultSet rs = preparedStatement.executeQuery();
+
+	            while (rs.next()) {
+	                ServizioPrenotato bean = new ServizioPrenotato();
+	                bean.setId(rs.getInt("id"));
+					bean.setCosto(rs.getInt("costo"));
+					bean.setServizio(rs.getString("servizio"));
+					bean.setPrenotazione(rs.getInt("prenotazione"));
+	                servizi.add(bean);
+	            }
+	        } finally {
+	            try {
+	                if (preparedStatement != null)
+	                    preparedStatement.close();
+	            } finally {
+	                if (connection != null)
+	                    connection.close();
+	            }
+	        }
+
+	        return servizi;
+	    }
+	
 }

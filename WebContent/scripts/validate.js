@@ -17,6 +17,7 @@ const suggerimentiNazioni = ["albania", "andorra", "armenia", "austria", "azerba
     "slovenia", "spagna", "svezia", "svizzera", "turchia", "ucraina", "regno unito", "città del vaticano", "altro"];
 
 function validate() {
+	
 	let valid = true;	
 	let form = document.getElementById("regForm");
 
