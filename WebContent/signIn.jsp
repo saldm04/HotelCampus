@@ -19,7 +19,7 @@
 			return;
 		}
   	
-		List<String> errors = (List<String>) request.getAttribute("errors");
+		List<String> errors = (List<String>) request.getSession().getAttribute("problemDetectd");
 		
 		// Ottieni la data corrente
         Date today = new Date();
@@ -110,6 +110,20 @@
 	          <span id="errorEmail"></span>
 	          <span id="errorPassword"></span>
           </div>
+          
+          	<% if(errors != null){  %>
+      			<div class="warning">
+      	 			<img src="images/warning.png" alt="" />
+      				<span>
+      					<h4>Attenzione</h4>
+      					<p>
+      					<% for (String error: errors){ %>
+						<%=error %> <br>		
+						<% }%>
+						<P>
+      				</span>
+      			</div>
+      		<% request.getSession().removeAttribute("problemDetectd");} %>
           
           <input type="submit" value="Registrati" onclick="return validate()"/>
         </form>

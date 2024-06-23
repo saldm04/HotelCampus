@@ -139,6 +139,8 @@
 
 
 .warning {
+	margin-top: 20px;
+
     border: 1px solid rgb(195, 193, 138);
     background-color: rgb(246, 244, 181);
     width: clamp(300px, 40%, 50%);

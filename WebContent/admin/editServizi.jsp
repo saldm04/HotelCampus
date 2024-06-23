@@ -33,14 +33,14 @@
  	 <div class="information" onclick="showMenuServizi()"><p>Clicca qui per aggiungere un nuovo servizio</p> <img src="https://img.icons8.com/?size=100&id=1501&format=png&color=0272FF"></div>
  	 <div class="serviziForm">
  	 	<div class="close"><p>Inserisci dati Servizio:</p> <img src="https://img.icons8.com/?size=100&id=3062&format=png&color=FF0202" onclick="showMenuServizi()"></div>
- 	 	<form action="<%=request.getContextPath()%>/admin/EditServizi" enctype="multipart/form-data" method="post">
- 	 		<input type="hidden" name="action" value="addServizio">
- 	 		<input type="hidden" name="csrfToken" value="<%=csrf%>">
-			<input type="file" name="foto1" value="" required="required">	
-			<input type="text" name="nome" value="" required="required" placeholder="nome servizio">
-			<textarea name="descrizione" value="" maxlength="600" required="required" rows="5" > </textarea>
-			<input type="number" min="1" name="costo" value="" required="required" placeholder="costo">
-			<input type="submit" value="Conferma"><input type="reset" value="Ripristina">
+ 	 	<form action="<%=request.getContextPath()%>/admin/EditServizi" enctype="multipart/form-data" method="post" onsubmit="return validateServiceForm()">
+    		<input type="hidden" name="action" value="addServizio">
+   		 	<input type="hidden" name="csrfToken" value="<%=csrf%>">
+   			<input type="file" name="foto1" value="" required="required" accept="image/png, image/jpeg">
+    		<input type="text" id="nome" name="nome" value="" required="required" placeholder="nome servizio" onblur="validateNome()">
+    		<textarea id="descrizione" name="descrizione" value="" maxlength="600" required="required" rows="5" onblur="validateDescrizione()"> </textarea>
+    		<input type="number" min="1" name="costo" value="" required="required" placeholder="costo">
+    		<input type="submit" value="Conferma"><input type="reset" value="Ripristina">
 		</form>
  	 </div>
  	 <% if(errors != null){  %>

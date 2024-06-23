@@ -21,13 +21,13 @@
 	<section class="adminPrenotazioni">
 	
 	 	<div class="filtro"> 
-	 		<form action="<%=request.getContextPath()%>/admin/Prenotazioni" method="post">
-				<input type="email" id="email"  name="email" value="" placeholder="Email"  onblur="validateEmail()">
-				<div>
-					<label for="checkindate">Check in: <input type="date" id="checkindate" name="checkindate"  oninput="checkSelectedDate(this)" value=""/></label>
-					<label for="checkoutdate">Check out: <input type="date" id="checkoutdate" name="checkoutdate"   oninput="checkSelectedDate(this)" value=""/></label>
-				</div>
-				<input type="submit" value="Filtra">
+	 		<form action="<%=request.getContextPath()%>/admin/Prenotazioni" method="post" onsubmit="return validateForm()">
+    			<input type="email" id="email" name="email" value="" placeholder="Email" onblur="validateEmail()">
+    			<div>
+        		<label for="checkindate">Check in: <input type="date" id="checkindate" name="checkindate" oninput="checkSelectedDate(this)" value=""/></label>
+        		<label for="checkoutdate">Check out: <input type="date" id="checkoutdate" name="checkoutdate" oninput="checkSelectedDate(this)" value=""/></label>
+    			</div>
+    			<input type="submit" value="Filtra">
 			</form>
 	 	</div>
 	 	
@@ -101,52 +101,6 @@
 				<span class="information">Per iniziare a visualizzare le prenotazioni attiva almeno un filtro</span>
 			<%}%>
 	</div>
-	
-	
-    
     </section>
-	
-	<script>
-		function validateEmail() {
-			const email = document.getElementById("email");
-			const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-			if (!emailPattern.test(email.value)) {
-				email.classList.add("error");
-			} else {
-				email.classList.remove("error");
-			}
-		}
-
-		function checkSelectedDate(dateElem) {
-			const checkInElem = document.getElementById("checkindate");
-			const checkOutElem = document.getElementById("checkoutdate");
-
-			if (dateElem.id === "checkindate") {
-				checkOutElem.min = getNextDate(checkInElem.value);
-			} else if (dateElem.id === "checkoutdate") {
-				checkInElem.max = getPreviousDate(checkOutElem.value);
-			}
-		}
-
-		function getNextDate(date) {
-			let currentDate = new Date(date);
-
-		    currentDate.setDate(currentDate.getDate() + 1);
-
-	    	let nextDate = currentDate.toISOString().split('T')[0];
-
-	    	return nextDate;
-		}
-
-		function getPreviousDate(date) {
-			let currentDate = new Date(date);
-
-		    currentDate.setDate(currentDate.getDate() - 1);
-
-	    	let prevDate = currentDate.toISOString().split('T')[0];
-
-	    	return prevDate;
-		}
-	</script>
 </body>
 </html>

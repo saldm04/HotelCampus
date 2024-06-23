@@ -34,34 +34,20 @@ public class SignIn extends HttpServlet {
 		String dataNascita = request.getParameter("dataNascita");
 		String nazionalita = request.getParameter("nazionalita");
 		
-		List<String> errors = new ArrayList<>();
     	RequestDispatcher dispatcherToLoginPage = request.getRequestDispatcher("signIn.jsp");
 		
     	
     	
-		if(email == null || email.trim().isEmpty()) {
-			errors.add("Il campo email non può essere vuoto!");
-		}
-        if(password == null || password.trim().isEmpty()) {
-        	errors.add("Il campo password non può essere vuoto!");
-		}
-        if(nome == null || nome.trim().isEmpty()) {
-        	errors.add("Il campo nome non può essere vuoto!");
-		}
-        if(cognome == null || cognome.trim().isEmpty()) {
-        	errors.add("Il campo cognome non può essere vuoto!");
-		}
-        if(dataNascita == null || dataNascita.trim().isEmpty() ) {
-        	errors.add("Il campo dataNascita non può essere vuoto!");
-		}
-        if(nazionalita == null || nazionalita.trim().isEmpty()) {
-        	errors.add("Il campo nazionalità non può essere vuoto!");
-		}
-        if (!errors.isEmpty()) {
-        	request.setAttribute("errors", errors);
-        	dispatcherToLoginPage.forward(request, response);
+    	List<String> errors = (List<String>) request.getAttribute("problemDetectd");
+		
+		
+		
+		if(errors != null && !errors.isEmpty()) {
+			request.removeAttribute("problemDetectd");
+			request.getSession().setAttribute("problemDetectd", errors);
+			dispatcherToLoginPage.forward(request, response);
         	return;
-        }
+		}
         
         email = email.trim();
         password = toHash(password.trim());

@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -192,6 +193,66 @@ public class SecurityFilter extends HttpFilter implements Filter {
   	    	if(isSQLInjection(dataFineStr) || isXSS(dataFineStr))
   	    		errors.add("Qualcosa non va con la data di checkOut");
      	    
+        }
+        
+        if(servletPath.equals("/SignIn")) {
+
+        	String email = request.getParameter("email");
+    		String password = request.getParameter("password");
+    		String nome = request.getParameter("nome");
+    		String cognome = request.getParameter("cognome");
+    		String dataNascita = request.getParameter("dataNascita");
+    		String nazionalita = request.getParameter("nazionalita");
+    		
+        	if(email == null || email.trim().isEmpty()) {
+    			errors.add("Il campo email non può essere vuoto!");
+    		}else {
+    			if(isXSS(email))
+    				errors.add("la mail inserita non rispecchia i parametri richiesti");
+    		}
+        	
+            if(password == null || password.trim().isEmpty()) {
+            	errors.add("Il campo password non può essere vuoto!");
+    		}else {
+    			if(isXSS(password))
+    				errors.add("la password inserita non rispecchia i parametri richiesti");
+    		}
+            if(nome == null || nome.trim().isEmpty()) {
+            	errors.add("Il campo nome non può essere vuoto!");
+    		}else {
+    			if(isXSS(nome))
+    				errors.add("il nome inserito non rispecchia i parametri richiesti");
+    		}
+            if(cognome == null || cognome.trim().isEmpty()) {
+            	errors.add("Il campo cognome non può essere vuoto!");
+    		}else {
+    			if(isXSS(cognome))
+    				errors.add("il cognome inserito non rispecchia i parametri richiesti");
+    		}
+            if(dataNascita == null || dataNascita.trim().isEmpty() ) {
+            	errors.add("Il campo dataNascita non può essere vuoto!");
+    		}else {
+    			if(isXSS(dataNascita))
+    				errors.add("la data inserita non rispecchia i parametri richiesti");
+    		}
+            
+        	List<String> nazioniEuropee = Arrays.asList(
+        		    "Albania", "Andorra", "Armenia", "Austria", "Azerbaigian", "Bielorussia", "Belgio",
+        		    "Bosnia ed Erzegovina", "Bulgaria", "Croazia", "Cipro", "Repubblica Ceca", "Danimarca",
+        		    "Estonia", "Finlandia", "Francia", "Georgia", "Germania", "Grecia", "Ungheria", "Islanda",
+        		    "Irlanda", "Italia", "Kazakistan", "Kosovo", "Lettonia", "Liechtenstein", "Lituania",
+        		    "Lussemburgo", "Malta", "Moldavia", "Monaco", "Montenegro", "Paesi Bassi", "Macedonia del Nord",
+        		    "Norvegia", "Polonia", "Portogallo", "Romania", "Russia", "San Marino", "Serbia", "Slovacchia",
+        		    "Slovenia", "Spagna", "Svezia", "Svizzera", "Turchia", "Ucraina", "Regno Unito", "Città del Vaticano", "Altro"
+        		);
+        	
+            if(nazionalita == null || nazionalita.trim().isEmpty()) {
+            	errors.add("Il campo nazionalità non può essere vuoto!");
+    		}else {
+    			 if(!nazioniEuropee.contains(nazionalita.trim())){
+    	                errors.add("La nazionalità specificata non è valida!");
+    	         }
+    		}
         }
         
         if(!errors.isEmpty()) {
