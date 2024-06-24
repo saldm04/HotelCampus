@@ -71,7 +71,7 @@
                                     if (camere != null) {
                                         for (CameraPrenotata camera : camere) {
                                 %>
-                                            <li>Numero Camera: <%= camera.getCamera() %>, Costo: <%= camera.getCosto() %></li>
+                                            <li>Numero Camera: <%= camera.getCamera() %>, Tipo: <%= camera.getTipo() %>, Costo: <%= camera.getCosto() %></li>
                                 <%
                                         }
                                     }
@@ -98,8 +98,12 @@
 			
 			<%  } %>
 			  </div>
-			<%}else{%>
-				<span class="information">Per iniziare a visualizzare le prenotazioni attiva almeno un filtro</span>
+			<%}else{ 
+				if(prenotazioni != null && prenotazioni.isEmpty()){%>
+					<span class="information">La ricerca non ha prodotto risultati</span>
+				<%}else{%>
+					<span class="information">Per iniziare a visualizzare le prenotazioni attiva almeno un filtro</span>
+				<%}%>	
 			<%}%>
 	</div>
     </section>

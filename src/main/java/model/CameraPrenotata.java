@@ -10,12 +10,22 @@ public class CameraPrenotata implements Serializable{
 	private int costo;
 	private int camera;
 	private int prenotazione;
+	private String tipo;
 	
 	public CameraPrenotata(){
 		this.id=0;
 		this.costo=0;
 		this.camera=0;
 		this.prenotazione=0;
+		this.tipo="";
+	}
+	
+	public String getTipo() {
+		return tipo;
+	}
+	
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
 
 	public int getId() {
