@@ -175,11 +175,15 @@ public class SecurityFilter extends HttpFilter implements Filter {
         	
         }
         
+        /*==========================Verfica Visualizza Prenotazioni ADMIN==========================*/
         if(servletPath.equals("/admin/Prenotazioni")) {
         	String email = request.getParameter("email");
      	    String dataInizioStr = request.getParameter("checkindate");
      	    String dataFineStr = request.getParameter("checkoutdate");
      	    
+     	    if((email == null  || email.trim().equals("")) && (dataInizioStr == null  || dataInizioStr.trim().equals("")) && (dataFineStr == null  || dataFineStr.trim().equals("")))
+     	    	errors.add("Almeno un filtro deve essere attivo");
+     	    	
      	    if(email != null  && !email.trim().equals(""))
      	    	if(isSQLInjection(email) || isXSS(email))
      	    		errors.add("Qualcosa non va con l'email");

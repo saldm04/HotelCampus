@@ -124,6 +124,7 @@ public class Acquista extends HttpServlet {
 					cameraPrenotata.setCamera(cameraDatabase.getNumero());
 					cameraPrenotata.setPrenotazione(idPrenotazione);
 					cameraPrenotata.setCosto(cameraDatabase.getCosto());
+					cameraPrenotata.setTipo(cameraDatabase.getTipo());
 					cameraPrenotataDAO.doSave(cameraPrenotata);
 				}
 			}

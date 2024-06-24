@@ -84,7 +84,7 @@ public class AdminPrenotazioni extends HttpServlet {
 	           Map<Integer, Collection<CameraPrenotata>> camereMap = new HashMap<Integer, Collection<CameraPrenotata>>();
 	           Map<Integer, Collection<ServizioPrenotato>> serviziMap = new HashMap<Integer, Collection<ServizioPrenotato>>();
 
-	            for (Prenotazione prenotazione : prenotazioni) {
+	           for (Prenotazione prenotazione : prenotazioni) {
 	                int idPrenotazione = prenotazione.getId();
 	                Collection<CameraPrenotata> camere = cameraPrenotataDAO.doRetrieveByPrenotazione(idPrenotazione);
 	                Collection<ServizioPrenotato> servizi = servizioPrenotatoDAO.doRetrieveByPrenotazione(idPrenotazione);
@@ -92,10 +92,10 @@ public class AdminPrenotazioni extends HttpServlet {
 	                
 	                camereMap.put(idPrenotazione, camere);
 	                serviziMap.put(idPrenotazione, servizi);
-	            }
+	           }
 	            
 	       
-                
+	           
 
 	            request.setAttribute("prenotazioni", prenotazioni);
 	            request.setAttribute("camereMap", camereMap);

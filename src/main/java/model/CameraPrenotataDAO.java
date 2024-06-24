@@ -26,14 +26,14 @@ public class CameraPrenotataDAO implements BeanDAO<CameraPrenotata, Integer>{
 		PreparedStatement preparedStatement = null;
 		
 		String insertSQL = "INSERT INTO "+ CameraPrenotataDAO.NOME_TABELLA +
-				" (costo, camera, prenotazione) VALUES (?,?,?)";
+				" (costo, camera, prenotazione, tipo) VALUES (?,?,?,?)";
 		try{
 			connection = dataSource.getConnection();
 			preparedStatement = connection.prepareStatement(insertSQL);
 			preparedStatement.setInt(1, data.getCosto());
 			preparedStatement.setInt(2, data.getCamera());
 			preparedStatement.setInt(3, data.getPrenotazione());
-			
+			preparedStatement.setString(4, data.getTipo());
 			preparedStatement.executeUpdate();
 		} finally {
 			try {
@@ -95,6 +95,7 @@ public class CameraPrenotataDAO implements BeanDAO<CameraPrenotata, Integer>{
 				bean.setCosto(rs.getInt("costo"));
 				bean.setCamera(rs.getInt("camera"));
 				bean.setPrenotazione(rs.getInt("prenotazione"));
+				bean.setTipo(rs.getString("tipo"));
 			}
 
 		}finally {
@@ -139,7 +140,7 @@ public class CameraPrenotataDAO implements BeanDAO<CameraPrenotata, Integer>{
 				bean.setCosto(rs.getInt("costo"));
 				bean.setCamera(rs.getInt("camera"));
 				bean.setPrenotazione(rs.getInt("prenotazione"));
-				
+				bean.setTipo(rs.getString("tipo"));
 				camere.add(bean);
 			}
 		}finally {
@@ -176,7 +177,7 @@ public class CameraPrenotataDAO implements BeanDAO<CameraPrenotata, Integer>{
 					bean.setCosto(rs.getInt("costo"));
 					bean.setCamera(rs.getInt("camera"));
 					bean.setPrenotazione(rs.getInt("prenotazione"));
-					
+					bean.setTipo(rs.getString("tipo"));
 					camere.add(bean);
 	            }
 	        } finally {

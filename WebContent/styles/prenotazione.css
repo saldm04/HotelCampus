@@ -10,13 +10,29 @@
 }
 
 #dateForm{
-	width: 80%;
+    width: 70%;
+    column-gap: 20px;
 	flex-wrap:wrap;
 	display: flex;
 	align-items: center;
-	justify-content: space-around;
+	justify-content: space-between;
+    
+    @media all and (max-width: 1190px){
+        width: 80%;
+        justify-content: center;
+    }
+     @media all and (max-width: 812px){
+        width: 80%;
+        justify-content: space-between;
+    }
 }
-
+form label{
+    min-width: 203px;
+    max-width: max-content;
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+}
 form input {
     color: grey;
     background-color: rgb(255, 255, 255);
@@ -27,6 +43,7 @@ form input {
     height: 2rem;
     margin-top: 5px;
     padding: 5px;
+    flex:auto;
 }
 
 form input[type="submit"] {
@@ -39,11 +56,20 @@ form input[type="submit"] {
 	padding: 10px;
     display: flex;
     align-items: center;
+    text-align: center;
+    max-width: max-content;
+    flex: auto;
+}
+
+form input[type="submit"]:hover {
+  scale: 1.05;
+  cursor: pointer;
 }
 
 input[type="date"] {
     display: flex;
     justify-content: center;
+    flex: auto;
 }
 
 .formContainer label{
@@ -96,13 +122,13 @@ input[type="date"] {
 .cameraContainer div h1 {
     display: inline-block;
     color: #50731d;
-    font-size: clamp(20px, 1.6vw, 200px);
+    font-size: clamp(15px, 1.4vw, 200px);
 }
 
 .cameraContainer div span {
     font-weight: bold;
     color: rgb(88,88,88);
-    font-size: clamp(20px, 1.3vw, 100px);
+    font-size: clamp(14.5px, 1.3vw, 200px);
 }
 
 #addCartForm{
@@ -139,13 +165,7 @@ input[type="date"] {
 	    max-width: 80%; 
 	}
 	
-	#dateForm{
-		flex-wrap:wrap;
-		display: flex;
-		flex-direction: column;
-		row-gap: 25px;
-	}
-	
+
 	.formContainer{
 		height: auto;
 	}
