@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
  <base href="<%=request.getContextPath()%>/" />
  <link rel="stylesheet" href="styles/visualizzaUtenti.css">
+ <link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/styles/fontFamily.css">
 </head>
 <body>
 

@@ -7,6 +7,7 @@
 	<meta charset="UTF-8">
 	<title>Hotel Campus</title>
 	<link rel="stylesheet" href="styles/servizi.css" type="text/css">
+	<link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/styles/fontFamily.css">
 	<meta name="viewport" content="initial-scale=1, width=device-width">
 </head>
 <body>

@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
  <link rel="stylesheet" href="styles/areaRiservataPrenotazioni.css">
+ <link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/styles/fontFamily.css">
 </head>
 <body>
 

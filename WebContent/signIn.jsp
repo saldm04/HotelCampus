@@ -6,6 +6,7 @@
   <head>
     <meta charset="UTF-8" />
 	<link rel="stylesheet" href="styles/signIn.css" type="text/css">
+	<link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/styles/fontFamily.css">
 	<meta name="viewport" content="initial-scale=1, width=device-width">
 	<script src="scripts/validate.js"></script>
   </head>

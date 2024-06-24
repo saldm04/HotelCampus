@@ -9,6 +9,7 @@ pageEncoding="UTF-8"%>
     <title>Hotel Campus</title>
     <meta name="viewport" content="initial-scale=1, width=device-width">
     <link rel="stylesheet" href="styles/areaRiservata.css">
+    <link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/styles/fontFamily.css">
 </head>
 <body>
     <% 
@@ -41,6 +42,6 @@ pageEncoding="UTF-8"%>
 </section>
 
 <%@ include file="../footer.jsp" %>
-<script type="text/javascript" src="scripts/areaRiservataAdmin.js"></script>
+<script type="text/javascript" src="scripts/areaRiservata.js"></script>
 </body>
 </html>

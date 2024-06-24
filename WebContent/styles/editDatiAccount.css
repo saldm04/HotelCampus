@@ -1,7 +1,75 @@
 @charset "UTF-8";
 
+.mainContainer{
+	margin:40px;
+}
+
+section .password{
+	width: 100%;
+	display: flex;
+    flex-direction: column;
+}
+
+.password form{
+	display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+section h1{
+	color: #50731D;
+	font-size: clamp(25px, 2vw, 50px);
+}
+
+section p{
+	color: #6a84439f;
+	font-weight: bold;
+	font-size: clamp(18px, 1.2vw, 22px);
+}
+
+.password .form-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.password label{
+	margin-right: 10px;
+	width: 160px;
+	font-size: clamp(17px, 1vw, 20px);
+}
+
+.password input[type="submit"] {
+    align-self: flex-start;
+    height: 2.5rem;
+    border-radius: 15px;
+    border: 0px;
+    font-size: 0.987rem;
+    background-color: rgb(37, 121, 255);
+    color: white;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+input[type="password"]{
+	width: 200px;
+	color: grey;
+    background-color: rgb(255, 255, 255);
+    border: 2px solid rgb(88, 88, 88);
+    border-radius: 15px;
+    text-align: center;
+    font-size: 1rem;
+    height: 2rem;
+}
+
+#errorPassword{
+	margin-top: 10px;
+	font-size: clamp(16px, 1vw, 20px);
+}
+
 .warning {
-	margin-top: 20px;
     border: 1px solid rgb(195, 193, 138);
     background-color: rgb(246, 244, 181);
     width: clamp(300px, 40%, 50%);

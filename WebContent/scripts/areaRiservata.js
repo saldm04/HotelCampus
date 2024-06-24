@@ -126,3 +126,18 @@
         return isNomeValid && isDescrizioneValid;
     }
 
+
+function validateChangePassword(oldPass, newPass, span){
+	const message = "La password deve contere: almeno 8 caratteri, una lettera, una cifra<br/>";
+	const pattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+	
+	if(!oldPass.value.match(pattern) || !newPass.value.match(pattern)){
+		span.innerHTML = message;
+		span.style.color = "red";
+		return false;
+	}
+	span.style.color = "black";
+	span.innerHTML = "";
+	return true;
+}
+

@@ -5,6 +5,7 @@
 <html>
 <head>
 	<link type="text/css" rel="stylesheet" href="styles/prenotazione.css">
+	<link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/styles/fontFamily.css">
 	<meta name="viewport" content="initial-scale=1, width=device-width">
 	<script src="scripts/checkDatePrenotazione.js"></script>
 	<title>Hotel Campus</title>

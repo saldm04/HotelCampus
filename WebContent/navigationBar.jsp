@@ -28,7 +28,6 @@
 				<li class="underlineAnimation" id="home"><a href="homepage.jsp" >Home</a></li>
 				<li class="underlineAnimation" id="prenotaOra"><a href="prenotazione.jsp">Prenota ora</a></li>
 				<li class="underlineAnimation" id="servizi"><a href="servizi.jsp" >Servizi</a></li>
-				<li class="underlineAnimation" id="recensioni"><a href="#" >Recensioni</a></li>
 			</ul>
 		</div>
 		

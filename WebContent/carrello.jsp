@@ -7,6 +7,7 @@
 <head>
 	<meta charset="UTF-8">
 	<link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/styles/carrello.css">
+	<link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/styles/fontFamily.css">
 	<meta name="viewport" content="initial-scale=1, width=device-width">
 	<script src="scripts/carrelloNumeroServizi.js"></script>
 	<title>Hotel Campus</title>

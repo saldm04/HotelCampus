@@ -6,7 +6,7 @@
 	<meta charset="UTF-8">
 	<base href="<%=request.getContextPath()%>/" />
 	<link rel="stylesheet" href="styles/editDatiAccount.css" type="text/css">
-	<script src="scripts/validate.js"></script>
+	<link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/styles/fontFamily.css">
 </head>
 <body>
 	<%
@@ -26,15 +26,23 @@
 			<p>Data di nascita: <%=account.getDataNascita()%></p>
 		</section>
 		<section class="password">
-			<h1>Modifica password</h1>
-			<form action="common/editDatiAccount" method="post">
-				<label for="oldPass"><input type="password" name="oldPass" id="oldPass" required
-				onchange="validateFormElem(this, passwordPattern, document.getElementById('errorPassword'), passwordErrorMessage)"></label>
-				<label for="newPass"><input type="password" name="newPass" id="newPass" required
-				onchange="validateFormElem(this, passwordPattern, document.getElementById('errorPassword'), passwordErrorMessage)"></label>
-				<input type="submit" value="Modifica password">
-			</form>
-			<span id="errorPassword"></span>
+		    <h1>Modifica password</h1>
+		    <form action="common/editDatiAccount" method="post">
+		        <div class="form-group">
+		            <label for="oldPass">Vecchia password: </label>
+		            <input type="password" name="oldPass" id="oldPass" required
+		                   onchange="validateChangePassword(this, document.getElementById('newPass'), document.getElementById('errorPassword'))">
+		        </div>
+		        <div class="form-group">
+		            <label for="newPass">Nuova password: </label>
+		            <input type="password" name="newPass" id="newPass" required
+		                   onchange="validateChangePassword(document.getElementById('oldPass'), this, document.getElementById('errorPassword'))">
+		        </div>
+		        <div class="form-group">
+		            <input type="submit" value="Modifica password">
+		        </div>
+		    </form>
+		    <span id="errorPassword"></span>
 		</section>
 		<%if(esitoPositivo!=null){%>
 		<p class="esitoPositivo"><%=esitoPositivo%></p>
