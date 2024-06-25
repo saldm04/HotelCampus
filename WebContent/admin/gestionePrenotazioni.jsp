@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.Collection, model.Prenotazione, java.util.List, java.util.Map, model.CameraPrenotata, model.ServizioPrenotato"%>
-    <%@page import="java.util.Iterator"%>
+    <%@page import="java.util.Iterator, java.security.SecureRandom, java.math.BigInteger"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,13 +10,17 @@
 </head>
 <body>
 
+	<%! private SecureRandom r = new SecureRandom(); 
+		private String csrf5 = new BigInteger(130, r).toString(32);
+	%>
+
 	<%
 		Collection<Prenotazione> prenotazioni = (Collection<Prenotazione>) request.getAttribute("prenotazioni");
     	Map<Integer, Collection<CameraPrenotata>> camereMap = (Map<Integer, Collection<CameraPrenotata>>) request.getAttribute("camereMap");
     	Map<Integer, Collection<ServizioPrenotato>> serviziMap = (Map<Integer, Collection<ServizioPrenotato>>) request.getAttribute("serviziMap");
 		
     	List<String> errors = (List<String>) request.getSession().getAttribute("problemDetectd");
-        
+    	request.getSession().setAttribute("csrfToken", csrf5);
 	%> 
 	
 	<section class="prenotazioni">
@@ -61,6 +65,9 @@
 			
 				<div class="card">
         			<ul>
+        				<span class="alignButton"><a href="<%= request.getContextPath() %>/admin/Prenotazioni?action=delete&id=<%= bean.getId()%>&csrfToken=<%= csrf5 %>">
+        				<button type="button"></button>
+        				</a></span>
         				<li class="align1"><span><b>Data prenotazione:</b> <%=bean.getDataPrenotazione()%></span><span><b>Utente:</b> <%=bean.getUtente()%></span></li>
         				<li class="align1"><span><b>Inizio pernottamento:</b> <%=bean.getDataInizio() %></span> <span><b>Fine pernottamento:</b> <%= bean.getDataFine() %></span></li>
         				<li class="align1"><span><b>Importo totale speso:</b> <%=bean.getImporto()%></span></li>
@@ -93,7 +100,9 @@
                                     <%}%>
                             </ul>
                         </li>
-        			</ul>	
+                        
+        			</ul>
+        			
         		</div>
 			
 			<%  } %>

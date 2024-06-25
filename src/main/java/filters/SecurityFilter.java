@@ -177,6 +177,16 @@ public class SecurityFilter extends HttpFilter implements Filter {
         
         /*==========================Verfica Visualizza Prenotazioni ADMIN==========================*/
         if(servletPath.equals("/admin/Prenotazioni")) {
+        	
+        	if(request.getParameter("action") != null && request.getParameter("action").equals("delete")) {
+        		try {
+        			Integer id = Integer.parseInt(request.getParameter("id")); 
+        		}catch(NumberFormatException e){
+        			errors.add("Qualcosa è andato storto");
+        		}
+        		checkCSRF(httpRequest, httpResponse);
+        	}else {
+        	
         	String email = request.getParameter("email");
      	    String dataInizioStr = request.getParameter("checkindate");
      	    String dataFineStr = request.getParameter("checkoutdate");
@@ -195,7 +205,7 @@ public class SecurityFilter extends HttpFilter implements Filter {
      	  if(dataFineStr != null  && !dataFineStr.trim().equals(""))
   	    	if(isSQLInjection(dataFineStr) || isXSS(dataFineStr))
   	    		errors.add("Qualcosa non va con la data di checkOut");
-     	    
+        	}  
         }
         
         if(servletPath.equals("/common/Prenotazioni")) {
@@ -283,6 +293,7 @@ public class SecurityFilter extends HttpFilter implements Filter {
     	                errors.add("La nazionalità specificata non è valida!");
     	         }
     		}
+            
         }
         
         if(!errors.isEmpty()) {

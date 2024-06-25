@@ -60,15 +60,11 @@
 		%>
 			<div class="cameraContainer">
 				<div class="immagini">
-					<img alt="Immagine camera 1" src="./GetPicture?beanType=camera&id=<%=camera.getNumero()%>&numberImg=1">
+					<a href="<%=request.getContextPath()%>/getCameraByID?cameraId=<%=camera.getNumero()%>"><img alt="Immagine camera 1" src="./GetPicture?beanType=camera&id=<%=camera.getNumero()%>&numberImg=1"></a>
 				</div>
 				<div class="info">
 					<h1>Tipologia camera:</h1><span><%=camera.getTipo()%></span>
-					<h1>Quadratura:</h1><span><%=camera.getQuadratura()%> mq</span>
 					<h1>Numero massimo di ospiti:</h1><span><%=camera.getNumeroMaxOspiti()%></span>
-				</div>
-				<div class="costo">
-					<h1>N°:</h1><span><%=camera.getNumero()%></span>
 					<h1>Costo per notte:</h1><span><%=camera.getCosto()%></span>
 					<%if(ricercaEffettuata){%>
 						<form method="post" action="GestisciCarrello" id="addCartForm">

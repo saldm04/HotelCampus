@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="model.Utente"%>
+    <%@page import="java.util.ArrayList, model.Camera"%>
 <!DOCTYPE html>
 
 <html>
@@ -21,9 +22,14 @@
 %>
 
 <body onload="switchElement('<%=x%>')">
+
+	<%
+		ArrayList<Camera> camere2 = (ArrayList<Camera>) request.getSession().getAttribute("CarrelloCamere");
+	%>
 	<nav>
 		<div class="logo"><img src="images/logo.png" alt="Logo"></div>
 		<div class="menu">
+			
 			<ul id="menu__content" class="menustandard">	
 				<li class="underlineAnimation" id="home"><a href="homepage.jsp" >Home</a></li>
 				<li class="underlineAnimation" id="prenotaOra"><a href="prenotazione.jsp">Prenota ora</a></li>
@@ -32,8 +38,12 @@
 		</div>
 		
 		<div class="login">
-			<a href="<%=request.getContextPath()%>/carrello.jsp"><img alt="Cart" src="images/cart.png"></a>
-			
+		
+			<%if(camere2 == null || camere2.isEmpty()){ %>
+				<a href="<%=request.getContextPath()%>/carrello.jsp"><img alt="Cart" src="images/cart.png"></a>
+			<%}else{ %>
+				<a href="<%=request.getContextPath()%>/carrello.jsp"><img alt="Cart" src="images/cartAlert.png"></a>
+			<%} %>
 			<%if(user==null){%>
 				<a href="login.jsp">login</a>
 			<%}else{%>
@@ -44,15 +54,18 @@
 				<%} %>	
 				<a href="<%=request.getContextPath()%>/common/Logout">logout</a>
 			<%} %>
+			
 			<div id="burger__menu" onclick="showMenu()" class="">
+				
                 <i class="ri-menu-line burger__menu__view" ></i>
                 <i class="ri-close-line burger__menu__close" ></i>
         </div>
 		</div>
 		
-		
+	
+	
 	</nav>
 	
-
+	 <div id="oscuraSfondo" class="oscuraSfondo"></div>
 </body>
 </html>

@@ -11,7 +11,8 @@
 	<script src="scripts/homepageScript.js"></script>
 </head>
 <body>
-	<% request.setAttribute("in", "home"); %>
+	<% request.setAttribute("in", "home"); 
+	%>
 	<%@ include file="navigationBar.jsp"%>
 	
 	<section class="banner">
