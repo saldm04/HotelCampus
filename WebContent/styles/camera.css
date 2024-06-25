@@ -1,0 +1,145 @@
+@charset "UTF-8";
+
+.camera {
+	width: 100vw;
+	margin-top: 100px;
+	height: max-content;
+	flex-direction: column;
+	display: flex;
+	align-items: center;
+}
+
+.camera img {
+	object-fit: cover;
+	height: 350px;
+	border-radius: 15px;
+	margin-bottom: 30px;
+}
+
+.primaryInformation{
+	width: 80%;
+	display: flex;
+	align-items: top;
+	justify-content: space-between;
+	column-gap: 20px;
+	
+	@media screen and (max-width:1114px){
+	
+		flex-direction: column;
+		
+		
+		.alignInformation{
+			width: 100%;
+			
+			display: flex;
+			flex-wrap:wrap;
+
+		}
+		
+		.alignInformation div{
+			width: 50%;
+			height: max-content;
+			display: flex;
+			align-items: center;
+			justify-content: left;
+			column-gap: 20px;
+			row-gap: 20px;
+		}
+		
+	}
+	
+	@media screen and (max-width:565px){
+		.alignInformation{
+			width: 100%;
+			display: flex;
+			flex-direction: column;
+			flex-wrap:wrap;
+		}
+		
+		.alignInformation div{
+			width: 100%;
+		}
+		
+	}
+}
+
+.alignInformation{
+	width: max-content;
+	height: max-content;
+
+}
+.alignInformation div{
+	width: 100%;
+	height: max-content;
+	display: flex;
+	align-items: center;
+	justify-content: left;
+	column-gap: 20px;
+	
+	
+}
+
+.alignInformation div h1{
+	display: inline-block;
+    color: #50731d;
+    font-size: clamp(15px, 1.4vw, 200px);
+	
+}
+
+.alignInformation div span{
+	font-weight: bold;
+    color: rgb(88,88,88);
+    font-size: clamp(14.5px, 1.3vw, 200px);
+	
+}
+
+
+.secondaryInformation{
+	margin: 50px 0px;
+	width: 80%;
+	display: flex;
+	align-items: top;
+	justify-content: space-between;
+	column-gap: 20px;
+	
+	@media screen and (max-width:1114px){
+	
+		flex-direction: column;
+		
+		row-gap: 20px;
+		
+		margin-top: 15px;
+		
+		.secondaryInformation img{
+		 width: 100%;
+  		 height: auto;
+		}
+		
+		.secondaryInformation div{
+			width: 100%;
+			text-align:center;
+		}
+		
+		
+	}
+}
+
+.secondaryInformation div{
+	min-width: 400px;
+		
+}
+
+.secondaryInformation img{
+   height: 350px;
+}
+
+.secondaryInformation div p{
+	text-align:left;
+    color: rgb(88,88,88);
+    font-size: clamp(14.5px, 1.3vw, 200px);
+    
+    @media screen and (max-width:1114px){
+    	text-align: justify;
+    }
+    
+}

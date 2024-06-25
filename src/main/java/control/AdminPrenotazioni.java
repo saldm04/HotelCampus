@@ -58,6 +58,14 @@ public class AdminPrenotazioni extends HttpServlet {
         	return;
 		}
 		
+		if(request.getParameter("action") != null && request.getParameter("action").equals("delete")) {
+			try {
+				prenotazioneDAO.doDelete(Integer.parseInt(request.getParameter("id")));
+			} catch (NumberFormatException | SQLException e) {
+				e.printStackTrace();
+			}
+		}else {
+		
 		Date dataInizio = null;
 		Date dataFine = null;
 		
@@ -104,6 +112,7 @@ public class AdminPrenotazioni extends HttpServlet {
 	    	e.printStackTrace();
 	    }
 		
+		}
 	    
 		
 		

@@ -249,6 +249,15 @@ input[type="reset"] {
     flex: auto;
 }
 
+form input[type="submit"]:hover {
+    background-color: #dffbff;
+    cursor: pointer;
+}
+
+form input[type="reset"]:hover {
+    background-color: #dffbff;
+    cursor: pointer;
+}
 
 form textarea {
     font-size: 0.9rem;

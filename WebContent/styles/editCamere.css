@@ -138,7 +138,7 @@
 }
 
 .editCamere form input[type="submit"],
-input[type="reset"] {
+.editCamere form input[type="reset"] {
     width: 30%;
     color: grey;
     background-color: rgb(255, 255, 255);
@@ -148,6 +148,13 @@ input[type="reset"] {
     font-size: 0.9rem;
     height: 1.9rem;
     flex: auto;
+}
+
+
+.editCamere form input[type="submit"]:hover,
+.editCamere form input[type="reset"]:hover {
+    background-color: #dffbff;
+    cursor: pointer;
 }
 
 .camereForm  select {

@@ -152,6 +152,28 @@
     justify-content: space-between;
 }
 
+.card .alignButton{
+	width:100%;
+	display:flex;
+	align-items:center;
+	justify-content: right;
+}
+
+.card button {
+    width: clamp(20px, 1.6vw, 200px);
+    height: clamp(20px, 1.6vw, 200px);
+    background-image: url("https://img.icons8.com/?size=100&id=99055&format=png&color=FF0202");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 0;
+    margin-right: 20px;
+}
+
 .warning img {
     height: 2rem;
 }
