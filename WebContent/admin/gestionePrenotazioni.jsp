@@ -29,7 +29,7 @@
 	 		<form action="<%=request.getContextPath()%>/admin/Prenotazioni" method="post" onsubmit="return validateForm()">
     			<input type="email" id="email" name="email" value="" placeholder="Email" onblur="validateEmail()">
     			<div>
-        		<label for="checkindate">Check in: <input type="date" id="checkindate" name="checkindate" oninput="checkSelectedDate(this)" value=""/></label>
+        		<label for="checkindate">Check in: <input class="formDate" type="date" id="checkindate" name="checkindate" oninput="checkSelectedDate(this)" value=""/></label>
         		<label for="checkoutdate">Check out: <input type="date" id="checkoutdate" name="checkoutdate" oninput="checkSelectedDate(this)" value=""/></label>
     			</div>
     			<input type="submit" value="Filtra">

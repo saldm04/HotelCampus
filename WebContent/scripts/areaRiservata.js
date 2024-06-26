@@ -110,7 +110,7 @@
 
     function validateDescrizione() {
         const descrizione = document.getElementById("descrizione");
-        const descrizionePattern = /^[^<>#'"]*$/;
+        const descrizionePattern = /^[^<>#"]*$/;
         if (descrizionePattern.test(descrizione.value)) {
             descrizione.style.border = "2px solid grey";
             return true;

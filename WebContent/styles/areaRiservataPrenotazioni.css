@@ -18,6 +18,11 @@
     display: flex;
     align-items: center;
     justify-content: space-around; 
+    
+    @media screen and (max-width: 584px){
+    	transform: scale(0.8);
+    	width:90%;
+    }
 }
 
 .prenotazioni .visualizzaPrenotazioni{
@@ -78,6 +83,7 @@
     column-gap: 10px;
     display: flex;
     justify-content: space-around;
+    
 }
 
 .prenotazioni .information{

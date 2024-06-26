@@ -38,6 +38,10 @@ public class EditServizi extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ServizioDAO servizio = new ServizioDAO((DataSource) getServletContext().getAttribute("DataSource"));
 		RequestDispatcher rd = request.getRequestDispatcher("/admin/areaRiservata.jsp?edit=servizi");
+	
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
+
 		
 		List<String> errors = (List<String>) request.getAttribute("problemDetectd");
 		
@@ -55,9 +59,11 @@ public class EditServizi extends HttpServlet {
 				
 				Servizio servizioSave = new Servizio();
 				String nome = request.getParameter("nome");
-				String descrizione = request.getParameter("descrizione");
+				String descrizione =  request.getParameter("descrizione");
 				Integer costo = Integer.parseInt(request.getParameter("costo"));
 		
+				System.out.println(descrizione);
+				
 				for (Part part : request.getParts()) {
 					String fileName = part.getSubmittedFileName();
 					if (fileName != null && !fileName.equals("")) {

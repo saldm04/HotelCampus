@@ -11,7 +11,7 @@
 
 </head>
 <body>
-	<%@ include file="navigationBar.jsp"%>
+	
 	
 	<% 
 		Camera camera = (Camera)request.getAttribute("camera");
@@ -23,6 +23,7 @@
 	
 	<section class="camera">
 	
+		<img class="hotelImg" src="images/logo.png" alt="Hotel Campus">
 		
 		<div class="primaryInformation">
 			<img alt="Immagine camera 1" src="./GetPicture?beanType=camera&id=<%=camera.getNumero()%>&numberImg=1">
@@ -54,5 +55,11 @@
 	</section>
 	
 	<%@ include file="footer.jsp"%>
+	
+	<script>
+	 	function handleError(img) {
+	            img.style.display = 'none';
+	 	}
+	</script>
 </body>
 </html>

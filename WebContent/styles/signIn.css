@@ -79,6 +79,17 @@ form input {
     color: white;
 }
 
+form input[type="submit"]{
+	width: clamp(104px, 20%, 10000px);
+	height: 2rem;
+  	align-self: center;
+}
+
+form input[type="submit"]:hover{
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
 fieldset {
     border: 1px solid rgb(37, 121, 255);
     border-radius: 15px;

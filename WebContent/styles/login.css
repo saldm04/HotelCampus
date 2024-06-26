@@ -71,9 +71,15 @@ form input {
     color: white;
 }
 
-form input:hover {
-    width: 42%;
-    border: 2px solid rgb(63, 166, 255);
+form input[type="submit"]{
+	width: 35%;
+	height: 2rem;
+  	align-self: center;
+}
+
+form input[type="submit"]:hover{
+    transform: scale(1.05);
+    cursor: pointer;
 }
 
 #username,

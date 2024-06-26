@@ -42,9 +42,6 @@ function showMenu(){
 	
 }
 
-//funzione generale per non mostare nulla in caso di immagine non trovata
- function handleError(img) {
-            img.style.display = 'none'; // Nasconde l'immagine
- }
+
 
 
