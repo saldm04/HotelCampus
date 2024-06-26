@@ -8,6 +8,7 @@
 	<link rel="stylesheet" href="styles/homepage.css" type="text/css">
 	<link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/styles/fontFamily.css">
 	<meta name="viewport" content="initial-scale=1, width=device-width">
+	<script src="scripts/homepageScript.js"></script>
 </head>
 <body>
 	<% request.setAttribute("in", "home"); 
@@ -89,18 +90,6 @@
     		</div>
   		</div>
 	</section>
-	
-	<script>
-		function successivo(){
-			let items = document.querySelectorAll('.item')
-		    document.querySelector('.slide').appendChild(items[0])
-		} 
-		
-		function precedente(){
-			 let items = document.querySelectorAll('.item')
-			 document.querySelector('.slide').prepend(items[items.length - 1])
-		}
-	</script>
 	
 	<%@ include file="footer.jsp"%>
 </body>

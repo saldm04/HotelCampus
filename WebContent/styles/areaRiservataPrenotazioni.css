@@ -180,6 +180,10 @@
     margin-right: 20px;
 }
 
+.card span{
+	width:100%;
+}
+
 .warning img {
     height: 2rem;
 }

@@ -47,12 +47,13 @@ CREATE TABLE `camera_prenotata` (
   `costo` int NOT NULL,
   `camera` int NOT NULL,
   `prenotazione` int NOT NULL,
+  `tipo` enum('standard','luxury','deluxe','exclusive') NOT NULL,
   PRIMARY KEY (`id`),
   KEY `camera_prenotata_ibfk_1` (`camera`),
   KEY `camera_prenotata_ibfk_2` (`prenotazione`),
   CONSTRAINT `camera_prenotata_ibfk_1` FOREIGN KEY (`camera`) REFERENCES `camera` (`numero`) ON DELETE CASCADE ON UPDATE RESTRICT,
   CONSTRAINT `camera_prenotata_ibfk_2` FOREIGN KEY (`prenotazione`) REFERENCES `prenotazioni` (`idPrenotazione`) ON DELETE CASCADE ON UPDATE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -72,25 +73,7 @@ CREATE TABLE `prenotazioni` (
   PRIMARY KEY (`idPrenotazione`),
   KEY `utente` (`utente`),
   CONSTRAINT `prenotazioni_ibfk_1` FOREIGN KEY (`utente`) REFERENCES `utente` (`email`) ON DELETE CASCADE ON UPDATE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `recensione`
---
-
-DROP TABLE IF EXISTS `recensione`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `recensione` (
-  `codRecensione` int NOT NULL AUTO_INCREMENT,
-  `descrizione` varchar(300) DEFAULT NULL,
-  `voto` enum('1','2','3','4','5') NOT NULL,
-  `utente` varchar(40) NOT NULL,
-  PRIMARY KEY (`codRecensione`),
-  KEY `recensione_ibfk_1` (`utente`),
-  CONSTRAINT `recensione_ibfk_1` FOREIGN KEY (`utente`) REFERENCES `utente` (`email`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -128,7 +111,7 @@ CREATE TABLE `servizio_prenotato` (
   KEY `servizio_prenotato_ibfk_2` (`prenotazione`),
   CONSTRAINT `servizio_prenotato_ibfk_1` FOREIGN KEY (`servizio`) REFERENCES `servizio` (`nome`) ON DELETE CASCADE,
   CONSTRAINT `servizio_prenotato_ibfk_2` FOREIGN KEY (`prenotazione`) REFERENCES `prenotazioni` (`idPrenotazione`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -159,4 +142,4 @@ CREATE TABLE `utente` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-06-22  0:00:59
+-- Dump completed on 2024-06-25 10:50:26
