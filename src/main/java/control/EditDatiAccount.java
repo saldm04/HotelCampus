@@ -16,10 +16,10 @@ import model.Utente;
 import model.UtenteDAO;
 
 /**
- * Servlet implementation class editDatiAccount
+ * Servlet implementation class EditDatiAccount
  */
 @WebServlet("/common/editDatiAccount")
-public class editDatiAccount extends HttpServlet {
+public class EditDatiAccount extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
