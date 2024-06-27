@@ -27,7 +27,7 @@
 		</section>
 		<section class="password">
 		    <h1>Modifica password</h1>
-		    <form action="common/editDatiAccount" method="post">
+		    <form action="<%=request.getContextPath()%>/common/editDatiAccount" method="post">
 		        <div class="form-group">
 		            <label for="oldPass">Vecchia password: </label>
 		            <input type="password" name="oldPass" id="oldPass" required
@@ -39,7 +39,7 @@
 		                   onchange="validateChangePassword(document.getElementById('oldPass'), this, document.getElementById('errorPassword'))">
 		        </div>
 		        <div class="form-group">
-		            <input type="submit" value="Modifica password">
+		            <input type="submit" value="Modifica password" onclick="return validateChangePassword(document.getElementById('oldPass'), document.getElementById('newPass'), document.getElementById('errorPassword'))">
 		        </div>
 		    </form>
 		    <span id="errorPassword"></span>

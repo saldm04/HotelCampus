@@ -3,6 +3,8 @@ package control;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -24,38 +26,56 @@ public class EditDatiAccount extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		UtenteDAO utenteDAO = new UtenteDAO((DataSource) getServletContext().getAttribute("DataSource"));
+		
 		String oldPass = request.getParameter("oldPass");
 		String newPass = request.getParameter("newPass");
 		Utente user = (Utente) request.getSession().getAttribute("utente");
 		Utente newUser = new Utente();
 		RequestDispatcher rd = request.getRequestDispatcher("/common/areaRiservata.jsp?edit=dati");
 		
-		if(user.getPassword().equals(toHash(oldPass))) {
-			newUser.setEmail(user.getEmail());
-			newUser.setNome(user.getNome());
-			newUser.setCognome(user.getCognome());
-			newUser.setDataNascita(user.getDataNascita());
-			newUser.setAdmin(user.isAdmin());
-			newUser.setNazionalità(user.getNazionalità());
-			String pass = toHash(newPass);
-			newUser.setPassword(pass);
-			user.setPassword(pass);
-		}
-		int value=0;
-		try {
-			value=utenteDAO.updateUtente(newUser);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		if(value==1){
-			request.setAttribute("esitoPositivo",
-					"La password è stata modificata con successo");
-		}else{
-			request.setAttribute("esitoNegativo",
-					"La password non è stata modificata");
-		}
+		if(oldPass != null && newPass != null && user != null) {
+			
+			String regex = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$";
+			Pattern pattern = Pattern.compile(regex);
+			Matcher matcher = pattern.matcher(newPass);
+			
+			if (matcher.matches()) {
 		
+				if(user.getPassword().equals(toHash(oldPass))) {
+					newUser.setEmail(user.getEmail());
+					newUser.setNome(user.getNome());
+					newUser.setCognome(user.getCognome());
+					newUser.setDataNascita(user.getDataNascita());
+					newUser.setAdmin(user.isAdmin());
+					newUser.setNazionalità(user.getNazionalità());
+					String pass = toHash(newPass);
+					newUser.setPassword(pass);
+					user.setPassword(pass);
+				}
+				int value=0;
+				try {
+					value=utenteDAO.updateUtente(newUser);
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				if(value==1){
+					request.setAttribute("esitoPositivo",
+							"La password è stata modificata con successo");
+				}else{
+					request.setAttribute("esitoNegativo",
+							"La password non è stata modificata");
+				}
+				
+			}else {
+				request.setAttribute("esitoNegativo",
+						"La password non soddisfa i requisiti richiesti");
+			}
+			
+		}else {
+			request.setAttribute("esitoNegativo",
+					"Qualcosa è andato storto,\nriprova inserendo tutti i dati richiesti");
+		}
+			
 		rd.forward(request, response);
 	}
 	

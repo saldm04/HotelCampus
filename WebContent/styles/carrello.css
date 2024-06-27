@@ -66,19 +66,27 @@ table td{
 }
 
 input[type="submit"]{
-	width:100px;
-	height: 2.2rem;
+	margin-top: 40px;
+  	width: clamp(104px, 10%, 10000px);
+   	height: 2rem;
+   	align-self: center;
     border-radius: 15px;
     border: 0px;
-    font-size: 0.8rem;
+    font-size: 0.987rem;
     background-color: rgb(37, 121, 255);
     color: white;
-    padding: 10px;
-    display: flex;
-    text-align: center;
-    align-items: center;
-    margin: auto;
-    margin-top: 40px;
+}
+
+input[type="submit"]:hover{
+	cursor:pointer;
+	transform: scale(1.05);
+}
+
+.alignAcquistaButton{
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between; 
 }
 
 input[type="number"]::-webkit-outer-spin-button,

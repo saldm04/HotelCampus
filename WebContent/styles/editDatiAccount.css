@@ -53,6 +53,11 @@ section p{
     text-align: center;
 }
 
+.password input[type="submit"]:hover {
+   cursor: pointer;
+   transform: scale(1.05);
+}
+
 input[type="password"]{
 	width: 200px;
 	color: grey;

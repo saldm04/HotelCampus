@@ -128,9 +128,9 @@
 			Integer totaleCarrello = totaleCamere+totaleServizi;
 			if(camere!=null && !camere.isEmpty()){
 			%>
-			<h1 id="totale">Totale carrello: <%=totaleCarrello%> €</h1>
+			<div class="alignAcquistaButton"><h1 id="totale">Totale carrello: <%=totaleCarrello%> €</h1>
 			<input type="hidden" value="<%=totaleCarrello%>" name="totaleCarrello" />
-			<input type="submit" value="Acquista" />
+			<input type="submit" value="Acquista" /></div>
 			</div>
 			</form>
 			<%}%>
