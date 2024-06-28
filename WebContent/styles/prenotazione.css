@@ -9,35 +9,6 @@
 	height: 100px;
 }
 
-#dateForm{
-    width: 70%;
-    column-gap: 20px;
-	flex-wrap:wrap;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-    
-    @media screen and (max-width: 1260px){
-        width: 80%;
-        justify-content: center;
-    }
-     @media screen and (max-width: 887px){
-     	row-gap: 20px;
-        width: 80%;
-        justify-content: space-between;
-    }
-    
-     @media screen and (max-width: 600px){
-     	row-gap: 20px;
-     	width: 100%;
-        transform: scale(0.80);
-    }
-    
-     @media screen and (max-width: 480px){
-     	row-gap: 20px;
-     	flex-direction: column;
-    }
-}
 form label{
     min-width: 203px;
     max-width: max-content;
@@ -88,6 +59,15 @@ input[type="date"] {
 	color: #50731d;
  	font-size: clamp(15px, 1.2vw, 200px);
  	font-weight: bold;
+}
+
+#dateForm{
+    width: 80%;
+    column-gap: 20px;
+	flex-wrap:wrap;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 }
 
 .camereMainContainter{
@@ -171,8 +151,22 @@ input[type="date"] {
 	font-size: clamp(25px, 3vw, 50px);	
 }
 
-@media screen and (max-width: 950px){
+@media screen and (max-width: 1150px){
 	
+	#dateForm{
+	    width: 60%;
+	    row-gap: 20px;
+		flex-wrap:wrap;
+		display: flex;
+		align-items: center;
+	}
+	
+	.formContainer{
+		height: 150px;
+	}	
+}
+
+@media screen and (max-width: 950px){
 	
 	.cameraContainer .immagini img {
     	height: 200px;
@@ -186,10 +180,23 @@ input[type="date"] {
 	.cameraContainer .costo {
 	    max-width: 80%; 
 	}
-	
-
-	.formContainer{
-		height: auto;
-	}
 }
 
+@media screen and (max-width: 820px){
+	
+	#dateForm{
+	    width: 80%;
+	    row-gap: 20px;
+		flex-wrap:wrap;
+		display: flex;
+		align-items: center;
+		flex-direction: column;
+		scale: 0.90;
+	}
+	
+	.formContainer{
+		height: auto;
+		margin-bottom:20px;
+		margin-top: 100px;
+	}	
+}

@@ -1,7 +1,12 @@
 @charset "UTF-8";
 
+body{
+	margin:0px;
+	padding:0px;
+}
+
 .camera {
-	width: 100vw;
+	width: 100%;
 	height: max-content;
 	flex-direction: column;
 	display: flex;

@@ -29,14 +29,14 @@ public class Login extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String username = request.getParameter("username");
+		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		List<String> errors = new ArrayList<>();
     	RequestDispatcher dispatcherToLoginPage = request.getRequestDispatcher("login.jsp");
 
 		
-		if(username == null || username.trim().isEmpty()) {
-			errors.add("Il campo username non può essere vuoto!");
+		if(email == null || email.trim().isEmpty()) {
+			errors.add("Il campo email non può essere vuoto!");
 		}
         if(password == null || password.trim().isEmpty()) {
         	errors.add("Il campo password non può essere vuoto!");
@@ -47,14 +47,14 @@ public class Login extends HttpServlet {
         	return;
         }
         
-        username = username.trim();
+        email = email.trim();
         password = toHash(password.trim());
        
 		
         UtenteDAO account = new UtenteDAO((DataSource) getServletContext().getAttribute("DataSource"));
         Utente user = null;
 		try {
-			user = account.doRetrieveByKey(username);
+			user = account.doRetrieveByKey(email);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -69,7 +69,7 @@ public class Login extends HttpServlet {
 			request.getSession().setAttribute("utente", user);
 			response.sendRedirect("homepage.jsp");
 		}else{
-			errors.add("Username o password non validi!");
+			errors.add("Email o password non validi!");
 			request.setAttribute("errors", errors);
 			dispatcherToLoginPage.forward(request, response);
 		}

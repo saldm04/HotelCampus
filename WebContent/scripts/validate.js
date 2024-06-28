@@ -53,6 +53,23 @@ function validate() {
 	return valid;
 }
 
+function validateLogin() {
+	
+	let valid = true;	
+	let form = document.getElementById("formLogin");
+
+	let spanEmail = document.getElementById("errorEmail");
+	if (!validateFormElem(form.email, emailPattern, spanEmail, emailErrorMessage)){
+		valid = false;
+	}
+	let spanPassword = document.getElementById("errorPassword");
+	if (!validateFormElem(form.password, passwordPattern, spanPassword, passwordErrorMessage)){
+		valid = false;
+	}
+	
+	return valid;
+}
+
 function validateFormElem(formElem, pattern, span, message) {
 	if(!formElem.value.match(pattern)){
 		formElem.classList.add("error");
