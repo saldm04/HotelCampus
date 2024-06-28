@@ -136,3 +136,12 @@ form input[type="submit"]:hover{
     font-size: 1rem;
     color: rgb(195, 193, 138);
 }
+
+#errorPassword, #errorEmail{
+	font-size: 1rem;
+}
+
+#errorDiv{
+	margin-bottom:20px;
+	text-align:center;
+}

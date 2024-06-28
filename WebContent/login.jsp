@@ -47,8 +47,10 @@
         />
         <br />
 		
-		<span id="errorEmail"></span>
-		<span id="errorPassword"></span>
+		<div id="errorDiv">
+			<span id="errorEmail"></span>
+			<span id="errorPassword"></span>
+		</div>
 		
         <input type="submit" value="Login" onclick="return validateLogin()"/>
       </form>
