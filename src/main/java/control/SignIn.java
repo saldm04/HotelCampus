@@ -38,11 +38,30 @@ public class SignIn extends HttpServlet {
 		String dataNascita = request.getParameter("dataNascita");
 		String nazionalita = request.getParameter("nazionalita");
 		
+		UtenteDAO account = new UtenteDAO((DataSource) getServletContext().getAttribute("DataSource"));
+	    Utente user = new Utente();
+		
     	RequestDispatcher dispatcherToLoginPage = request.getRequestDispatcher("signIn.jsp");
 		
     	
     	
     	List<String> errors = (List<String>) request.getAttribute("problemDetectd");
+		
+		try {
+			Utente check = account.doRetrieveByKey(email);
+			
+			if(!check.getEmail().equals("")) {
+				if(errors == null) {
+					errors = new ArrayList<>();
+					errors.add("l'email inserita è già associata ad un account</br>Fare il login se avete già effettuato la registrazione");
+				}else {
+					errors.add("l'email inserita è già associata ad un account</br>Fare il login se avete già effettuato la registrazione");
+				}
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		
 		
 		
@@ -60,8 +79,7 @@ public class SignIn extends HttpServlet {
         dataNascita = dataNascita.trim();
         nazionalita = nazionalita.trim();
         
-        UtenteDAO account = new UtenteDAO((DataSource) getServletContext().getAttribute("DataSource"));
-        Utente user = new Utente();
+       
         
 		try {
 			user.setNome(nome);
