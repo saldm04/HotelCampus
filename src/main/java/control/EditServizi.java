@@ -61,8 +61,6 @@ public class EditServizi extends HttpServlet {
 				String nome = request.getParameter("nome");
 				String descrizione =  request.getParameter("descrizione");
 				Integer costo = Integer.parseInt(request.getParameter("costo"));
-		
-				System.out.println(descrizione);
 				
 				for (Part part : request.getParts()) {
 					String fileName = part.getSubmittedFileName();

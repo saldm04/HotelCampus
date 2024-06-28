@@ -7,6 +7,7 @@
 <title>Hotel Campus</title>
 <base href="<%=request.getContextPath()%>/" />
 	<link rel="stylesheet" href="styles/camera.css" type="text/css">
+	<script src="scripts/dettagliCamera.js"></script>
 <meta charset="UTF-8">
 
 </head>
@@ -55,11 +56,6 @@
 	</section>
 	
 	<%@ include file="footer.jsp"%>
-	
-	<script>
-	 	function handleError(img) {
-	            img.style.display = 'none';
-	 	}
-	</script>
+
 </body>
 </html>
