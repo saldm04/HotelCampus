@@ -61,8 +61,9 @@
 
 .areaRiservata .editArea {
     overflow-y: scroll;
-    width: 74%;
+    width: 75%;
     height: calc(100vh - 70px);
+  
 }
 
 @media screen and (max-width: 835px) {
@@ -85,7 +86,7 @@
     }
 
     .areaRiservata .editArea {
-        min-height: calc(100vh - 250px); 
+        min-height: calc(100vh - 250px);
         width: 100%;
         height: max-content;
     }

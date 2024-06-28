@@ -10,24 +10,22 @@
 }
 
 #dateForm{
-    width: 70%;
+    width: 90%;
     column-gap: 20px;
 	flex-wrap:wrap;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
     
-    @media screen and (max-width: 1260px){
-        width: 80%;
-        justify-content: center;
-    }
-     @media screen and (max-width: 887px){
+  
+     @media screen and (max-width: 1260px){
+     	width: 80%;
      	row-gap: 20px;
-        width: 80%;
         justify-content: space-between;
     }
     
-     @media screen and (max-width: 600px){
+     @media screen and (max-width: 700px){
+     	backgorund-color: red;
      	row-gap: 20px;
      	width: 100%;
         transform: scale(0.80);

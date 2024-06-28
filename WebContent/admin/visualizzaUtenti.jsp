@@ -43,7 +43,7 @@
             for (Utente utente : utenti) {
         %>
 		<li class="table-row">
-			<div class="col col-1" data-label="Email"><%= utente.getEmail() %></div>
+			<div class="col col-1" data-label="Email"><a href="<%= request.getContextPath() %>/admin/Prenotazioni?email=<%= utente.getEmail()%>"><%= utente.getEmail() %></a></div>
 			<div class="col col-2" data-label="Nome"><%= utente.getNome() %></div>
 			<div class="col col-3" data-label="Cognome"><%= utente.getCognome() %></div>
 			<div class="col col-4" data-label="Nazionalità"><%= utente.getNazionalità() %></div>
@@ -52,7 +52,7 @@
         		<form action="<%=request.getContextPath()%>/admin/Utenti" method="post">
                    			<input type="hidden" name="csrfToken" value="<%=csrf3%>">
                             <input type="hidden" name="action" value="updateAdminStatus">
-                            <input type="hidden" name="email" value="<%= utente.getEmail()%>">
+                            <input type="hidden" name="email" value="<%= utente.getEmail()%>"></input>
                             <input type="checkbox" name="isAdmin" value="true" <% if (utente.isAdmin()) { %>checked<% } %> onchange="this.form.submit()">
                  </form> 
             </div>
@@ -72,6 +72,7 @@
 </ul>
 
 </section>
+	
 
 </body>
 </html>

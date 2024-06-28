@@ -1,5 +1,4 @@
-const nomeCognomeNazionalitaPattern = /^[a-zA-Z]+(?: [a-zA-Z]+)*$/;
-//const emailPattern = /^\S+@\S+\.\S+$/;
+const nomeCognomeNazionalitaPattern = /^[\p{L}]+(?: [\p{L}]+)*$/u;
 const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
 
